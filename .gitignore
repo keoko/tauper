@@ -32,3 +32,5 @@ passa_paraula-*.tar
 npm-debug.log
 /assets/node_modules/
 
+.direnv/
+passa_paraula_dev*
