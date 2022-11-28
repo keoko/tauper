@@ -34,3 +34,5 @@ npm-debug.log
 
 .direnv/
 passa_paraula_dev*
+.devenv*
+devenv.local.nix
