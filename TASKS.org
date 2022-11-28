@@ -1,0 +1,15 @@
+#+title: Tasks
+* Tasks
+** TODO learn about presence
+** TODO ECS
+* Concepts
+** Game
+** Player
+** Score
+** Turn
+** Player Team
+** Word
+** Timer?
+
+* References
+**

@@ -1,0 +1,5 @@
+#+title: Journal
+* 2022
+** 2022/Nov
+*** 2022/Nov/28
+**** TODO learn about phoenix presence
