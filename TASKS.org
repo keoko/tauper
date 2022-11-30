@@ -1,6 +1,12 @@
 #+title: Tasks
 * Tasks
-** TODO learn about presence
+** DONE learn about presence
+** DONE learn about channels
+** TODO create game
+** TODO join game
+** TODO start game
+** TODO end game
+
 ** TODO ECS
 * Concepts
 ** Game
