@@ -2,7 +2,11 @@
 * Tasks
 ** DONE learn about presence
 ** DONE learn about channels
-** TODO create game
+** TODO create game resource
+** TODO game changeset
+** TODO game code unique index / constraint?
+** TODO generate game code when creating game
+** TODO add authentication to create new games?
 ** TODO join game
 ** TODO start game
 ** TODO end game

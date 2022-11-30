@@ -14,5 +14,11 @@ defmodule PassaParaula.Games.Game do
     game
     |> cast(attrs, [:code, :status])
     |> validate_required([:code, :status])
+    |> validate_inclusion(:status, ["started", "not_started", "completed"])
+    |> validate_length(:code, is: 3)
+    |> unsafe_validate_unique([:code], PassaParaula.Repo,
+      message: "another game created with the same code"
+    )
+    |> unique_constraint(:code, name: :identifier_index)
   end
 end
