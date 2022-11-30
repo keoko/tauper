@@ -6,16 +6,18 @@
 ** DONE game changeset
 ** DONE game code unique index / constraint?
 ** DONE generate game code when creating game
-** TODO create new game
-** TODO list participants in game page
-** TODO change header to Passa Paraula
+** DONE create new game
+** DONE list participants in game page
+** TODO list only participants of the game
+** TODO disaable start game if there are no players in the game
+** DONE change header to Passa Paraula
 ** TODO add authentication to create new games?
 ** TODO remove game actions not needed (edit game, etc.)
 ** TODO join game
 ** TODO start game
 ** TODO end game
 ** TODO how to manage sum types / constants?
-
+** TODO elixir state machines gen fsm?
 ** TODO ECS
 * Concepts
 ** Game
