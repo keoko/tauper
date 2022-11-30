@@ -6,10 +6,15 @@
 ** DONE game changeset
 ** DONE game code unique index / constraint?
 ** DONE generate game code when creating game
+** TODO create new game
+** TODO list participants in game page
+** TODO change header to Passa Paraula
 ** TODO add authentication to create new games?
+** TODO remove game actions not needed (edit game, etc.)
 ** TODO join game
 ** TODO start game
 ** TODO end game
+** TODO how to manage sum types / constants?
 
 ** TODO ECS
 * Concepts

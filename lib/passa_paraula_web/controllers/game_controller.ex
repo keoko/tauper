@@ -14,11 +14,26 @@ defmodule PassaParaulaWeb.GameController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def create(conn, %{"game" => game_params}) do
+  # def create(conn, %{"game" => game_params}) do
+  #   case Games.create_game(game_params) do
+  #     {:ok, game} ->
+  #       conn
+  #       |> put_flash(:info, "Game created successfully.")
+  #       |> redirect(to: Routes.game_path(conn, :show, game))
+
+  #     {:error, %Ecto.Changeset{} = changeset} ->
+  #       render(conn, "new.html", changeset: changeset)
+  #   end
+  # end
+
+  def create(conn, _params) do
+    # TODO generate code
+    # TODO pass params code and status "not_started"
+    game_params = %{code: Games.generate_code(), status: "not_started"}
     case Games.create_game(game_params) do
       {:ok, game} ->
         conn
-        |> put_flash(:info, "Game created successfully.")
+        |> put_flash(:info, "Game created successfully with code " <> game_params.code)
         |> redirect(to: Routes.game_path(conn, :show, game))
 
       {:error, %Ecto.Changeset{} = changeset} ->
