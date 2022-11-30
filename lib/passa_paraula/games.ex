@@ -101,4 +101,8 @@ defmodule PassaParaula.Games do
   def change_game(%Game{} = game, attrs \\ %{}) do
     Game.changeset(game, attrs)
   end
+
+  def generate_code do
+    :rand.uniform(999) |> Integer.to_string() |> String.pad_leading(3, "0")
+  end
 end
