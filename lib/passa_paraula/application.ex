@@ -15,9 +15,10 @@ defmodule PassaParaula.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: PassaParaula.PubSub},
       # Start the Endpoint (http/https)
-      PassaParaulaWeb.Endpoint
+      PassaParaulaWeb.Endpoint,
       # Start a worker by calling: PassaParaula.Worker.start_link(arg)
       # {PassaParaula.Worker, arg}
+      PassaParaulaWeb.Presence,
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
