@@ -6,3 +6,6 @@ PassaParaula is a multiplayer game implemented in Elixir.
   * Learn Phoenix Presence
   * Learn LiveView
   * Learn how to deploy Elixir apps in fly.io
+
+## Pre-requisites
+  * direnv
