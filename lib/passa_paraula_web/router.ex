@@ -20,6 +20,7 @@ defmodule PassaParaulaWeb.Router do
     get "/", PageController, :index
 
     resources "/games", GameController
+    post "/games/join", GameController, :join
   end
 
   # Other scopes may use custom stacks.

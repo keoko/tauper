@@ -14,6 +14,21 @@ defmodule PassaParaulaWeb.GameController do
     render(conn, "new.html", changeset: changeset)
   end
 
+  def join(conn, %{"game" => %{"code" => code}}) do
+    game = Games.get_game_by_code(code)
+
+    case game do
+      nil ->
+        conn
+        |> put_flash(:error, "Invalid game code. Please try another code.")
+        |> redirect(to: Routes.page_path(conn, :index))
+
+      _ ->
+        conn
+        |> redirect(to: Routes.game_path(conn, :show, game))
+    end
+  end
+
   # def create(conn, %{"game" => game_params}) do
   #   case Games.create_game(game_params) do
   #     {:ok, game} ->
@@ -30,6 +45,7 @@ defmodule PassaParaulaWeb.GameController do
     # TODO generate code
     # TODO pass params code and status "not_started"
     game_params = %{code: Games.generate_code(), status: "not_started"}
+
     case Games.create_game(game_params) do
       {:ok, game} ->
         conn
