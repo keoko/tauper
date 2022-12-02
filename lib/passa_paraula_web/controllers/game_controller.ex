@@ -1,5 +1,6 @@
 defmodule PassaParaulaWeb.GameController do
   use PassaParaulaWeb, :controller
+  import Phoenix.LiveView.Controller
 
   alias PassaParaula.Games
   alias PassaParaula.Games.Game
@@ -59,7 +60,12 @@ defmodule PassaParaulaWeb.GameController do
 
   def show(conn, %{"id" => id}) do
     game = Games.get_game!(id)
-    render(conn, "show.html", game: game)
+    # render(conn, "show.html", game: game)
+    live_render(conn, PassaParaulaWeb.CounterLive,
+      session: %{
+        "game_code" => game.code
+      }
+    )
   end
 
   def edit(conn, %{"id" => id}) do
