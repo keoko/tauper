@@ -4,6 +4,7 @@ defmodule PassaParaulaWeb.GameController do
 
   alias PassaParaula.Games
   alias PassaParaula.Games.Game
+  alias Ecto.Changeset
 
   def index(conn, _params) do
     games = Games.list_games()
@@ -15,18 +16,50 @@ defmodule PassaParaulaWeb.GameController do
     render(conn, "new.html", changeset: changeset)
   end
 
-  def join(conn, %{"game" => %{"code" => code}}) do
-    game = Games.get_game_by_code(code)
+  def change_join_game_request(attrs \\ %{}) do
+    types = %{
+      game_code: :string,
+      player_name: :string
+    }
 
-    case game do
-      nil ->
-        conn
-        |> put_flash(:error, "Invalid game code. Please try another code.")
-        |> redirect(to: Routes.page_path(conn, :index))
+    # apply_action(:insert) needed to display error messages in the form
+    {%{}, types}
+    |> Changeset.cast(attrs, Map.keys(types))
+    |> Changeset.validate_required([:game_code, :player_name])
+    |> Changeset.validate_length(:game_code, min: 3, max: 3)
+    |> Changeset.validate_length(:player_name, min: 1, max: 10)
+  end
 
-      _ ->
-        conn
-        |> redirect(to: Routes.game_path(conn, :show, game))
+  def new_join(conn, params) do
+    changeset = change_join_game_request(params)
+    render(conn, "new_join.html", changeset: changeset)
+  end
+
+  def join(conn, %{"join_game_params" => %{"game_code" => code} = params}) do
+    changeset =
+      params
+      |> change_join_game_request
+      # apply_action(:insert) to force showing error messages in schemaless ecto validation
+      |> Changeset.apply_action(:insert)
+
+    case changeset do
+      {:error, %Changeset{} = changeset} ->
+        render(conn, "new_join.html", changeset: changeset)
+
+      {:ok, _fields} ->
+        game = Games.get_game_by_code(code)
+        dbg()
+
+        case game do
+          %PassaParaula.Games.Game{} ->
+            conn
+            |> redirect(to: Routes.game_path(conn, :show, game))
+
+          nil ->
+            conn
+            |> put_flash(:error, "Invalid game code. Please try another code.")
+            |> render(conn, "new_join.html", changeset: changeset)
+        end
     end
   end
 

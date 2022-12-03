@@ -3,9 +3,11 @@ defmodule PassaParaulaWeb.PageController do
   import Phoenix.LiveView.Controller
   alias PassaParaula.Games
   alias PassaParaula.Games.Game
+  alias Ecto.Changeset
+  alias PassaParaulaWeb.GameController
 
-  def index(conn, _params) do
-    changeset = Games.change_game(%Game{})
+  def index(conn, params) do
+    changeset = GameController.change_join_game_request(params)
     render(conn, "index.html", changeset: changeset)
   end
 

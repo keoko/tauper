@@ -1,5 +1,10 @@
 #+title: Journal
 * 2022
+** 2022/Dec
+*** 2022/Dec/02
+**** TODO add player name field when joining a game
+**** DONE join a game
 ** 2022/Nov
 *** 2022/Nov/28
-**** TODO learn about phoenix presence
+**** DONE learn about phoenix presence
+**** DONE learn about phoenix channels
