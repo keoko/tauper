@@ -37,3 +37,11 @@
 ** maps with key strings or atoms?
 ** keyword lists and maps are confusing
 ** keywords and atoms are confusing
+
+* LiveView
+** upload files
+** secure liveviews
+** TODO component liveviews
+** SEO-friendly
+** optimised data transfer
+** TODO does it add extra load to the system? manage all websocket connections?
