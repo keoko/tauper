@@ -22,6 +22,8 @@ defmodule PassaParaulaWeb.Router do
     get "/games/join", GameController, :new_join
     post "/games/join", GameController, :join
     resources "/games", GameController
+
+    live "/guess", WrongLive
   end
 
   # Other scopes may use custom stacks.
