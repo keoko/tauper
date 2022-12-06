@@ -1,6 +1,6 @@
 defmodule PassaParaulaWeb.GameController do
   use PassaParaulaWeb, :controller
-  import Phoenix.LiveView.Controller
+  import Phoenix.Controller
 
   alias PassaParaula.Games
   alias PassaParaula.Games.Game
@@ -46,14 +46,18 @@ defmodule PassaParaulaWeb.GameController do
       {:error, %Changeset{} = changeset} ->
         render(conn, "new_join.html", changeset: changeset)
 
-      {:ok, _fields} ->
+      {:ok, fields} ->
         game = Games.get_game_by_code(code)
-        dbg()
 
         case game do
           %PassaParaula.Games.Game{} ->
             conn
-            |> redirect(to: Routes.game_path(conn, :show, game))
+            |> renew_session()
+            |> put_session(:current_player_name, fields.player_name)
+            |> put_session(:current_game_code, fields.game_code)
+            |> redirect(to: Routes.game_path(conn, :show, game.id))
+
+          # |> redirect(to: Routes.game_path(conn, :show, game))
 
           nil ->
             conn
@@ -93,12 +97,12 @@ defmodule PassaParaulaWeb.GameController do
 
   def show(conn, %{"id" => id}) do
     game = Games.get_game!(id)
-    # render(conn, "show.html", game: game)
-    live_render(conn, PassaParaulaWeb.CounterLive,
-      session: %{
-        "game_code" => game.code
-      }
-    )
+    render(conn, "show.html", game: game)
+    # live_render(conn, PassaParaulaWeb.CounterLive,
+    #   session: %{
+    #     "game_code" => game.code
+    #   }
+    # )
   end
 
   def edit(conn, %{"id" => id}) do
@@ -128,5 +132,26 @@ defmodule PassaParaulaWeb.GameController do
     conn
     |> put_flash(:info, "Game deleted successfully.")
     |> redirect(to: Routes.game_path(conn, :index))
+  end
+
+  # This function renews the session ID and erases the whole
+  # session to avoid fixation attacks. If there is any data
+  # in the session you may want to preserve after log in/log out,
+  # you must explicitly fetch the session data before clearing
+  # and then immediately set it after clearing, for example:
+  #
+  #     defp renew_session(conn) do
+  #       preferred_locale = get_session(conn, :preferred_locale)
+  #
+  #       conn
+  #       |> configure_session(renew: true)
+  #       |> clear_session()
+  #       |> put_session(:preferred_locale, preferred_locale)
+  #     end
+  #
+  defp renew_session(conn) do
+    conn
+    |> configure_session(renew: true)
+    |> clear_session()
   end
 end

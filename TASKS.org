@@ -8,12 +8,23 @@
 ** DONE generate game code when creating game
 ** DONE create new game
 ** DONE list participants in game page
+** TODO 1 session - 1 game
+** TODO on_mount
+** TODO how to connect iex to list the presence list of users
+** DONE how to pass game-id through the live route
+** TODO how to move render function to a live template
+** TODO how to login a player
+** TODO do we have different topics per game?
+** TODO do we have a live view page or a live view compoent?
+** TODO how sessions work in liveview
+** TODO what is the difference between a request session and liveview session
+** TODO what is live_socket_id
 ** TODO list only participants of the game
-** TODO disaable start game if there are no players in the game
+** TODO disable start game if there are no players in the game
 ** DONE change header to Passa Paraula
 ** TODO add authentication to create new games?
 ** TODO remove game actions not needed (edit game, etc.)
-** TODO join game
+** DONE join game
 ** TODO start game
 ** TODO end game
 ** TODO how to manage sum types / constants?
