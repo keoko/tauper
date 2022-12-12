@@ -7,14 +7,14 @@
 # General application configuration
 import Config
 
-config :passa_paraula,
-  ecto_repos: [PassaParaula.Repo]
+config :tauper,
+  ecto_repos: [Tauper.Repo]
 
 # Configures the endpoint
-config :passa_paraula, PassaParaulaWeb.Endpoint,
+config :tauper, TauperWeb.Endpoint,
   url: [host: "localhost"],
-  render_errors: [view: PassaParaulaWeb.ErrorView, accepts: ~w(html json), layout: false],
-  pubsub_server: PassaParaula.PubSub,
+  render_errors: [view: TauperWeb.ErrorView, accepts: ~w(html json), layout: false],
+  pubsub_server: Tauper.PubSub,
   live_view: [signing_salt: "oktM+EPO"]
 
 # Configures the mailer
@@ -24,7 +24,7 @@ config :passa_paraula, PassaParaulaWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :passa_paraula, PassaParaula.Mailer, adapter: Swoosh.Adapters.Local
+config :tauper, Tauper.Mailer, adapter: Swoosh.Adapters.Local
 
 # Swoosh API client is needed for adapters other than SMTP.
 config :swoosh, :api_client, false

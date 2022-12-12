@@ -1,4 +1,4 @@
-defmodule PassaParaulaWeb.ConnCase do
+defmodule TauperWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -11,7 +11,7 @@ defmodule PassaParaulaWeb.ConnCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use PassaParaulaWeb.ConnCase, async: true`, although
+  by setting `use TauperWeb.ConnCase, async: true`, although
   this option is not recommended for other databases.
   """
 
@@ -22,17 +22,17 @@ defmodule PassaParaulaWeb.ConnCase do
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
-      import PassaParaulaWeb.ConnCase
+      import TauperWeb.ConnCase
 
-      alias PassaParaulaWeb.Router.Helpers, as: Routes
+      alias TauperWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint PassaParaulaWeb.Endpoint
+      @endpoint TauperWeb.Endpoint
     end
   end
 
   setup tags do
-    PassaParaula.DataCase.setup_sandbox(tags)
+    Tauper.DataCase.setup_sandbox(tags)
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 
@@ -46,7 +46,7 @@ defmodule PassaParaulaWeb.ConnCase do
   """
 
   # def register_and_log_in_user(%{conn: conn}) do
-  #   user = PassaParaula.AccountsFixtures.user_fixture()
+  #   user = Tauper.AccountsFixtures.user_fixture()
   #   %{conn: log_in_user(conn, user), user: user}
   # end
 
@@ -56,7 +56,7 @@ defmodule PassaParaulaWeb.ConnCase do
   It returns an updated `conn`.
   """
   # def log_in_user(conn, user) do
-  #   token = PassaParaula.Accounts.generate_user_session_token(user)
+  #   token = Tauper.Accounts.generate_user_session_token(user)
 
   #   conn
   #   |> Phoenix.ConnTest.init_test_session(%{})

@@ -1,9 +1,9 @@
-defmodule PassaParaula.MixProject do
+defmodule Tauper.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :passa_paraula,
+      app: :tauper,
       version: "0.1.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -19,7 +19,7 @@ defmodule PassaParaula.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {PassaParaula.Application, []},
+      mod: {Tauper.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

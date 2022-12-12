@@ -20,7 +20,7 @@ erl_crash.dump
 *.ez
 
 # Ignore package tarball (built via "mix hex.build").
-passa_paraula-*.tar
+tauper-*.tar
 
 # Ignore assets that are produced by build tools.
 /priv/static/assets/
@@ -33,6 +33,6 @@ npm-debug.log
 /assets/node_modules/
 
 .direnv/
-passa_paraula_dev*
+tauper_dev*
 .devenv*
 devenv.local.nix

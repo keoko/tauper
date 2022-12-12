@@ -1,5 +1,5 @@
-# PassaParaula
-PassaParaula is a multiplayer game implemented in Elixir.
+# Tauper
+Tauper is a multiplayer game implemented in Elixir.
 
 ## Goals
   * Learn Elixir/Phoenix

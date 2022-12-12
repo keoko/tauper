@@ -1,4 +1,4 @@
-defmodule PassaParaula.Repo.Migrations.CreateGames do
+defmodule Tauper.Repo.Migrations.CreateGames do
   use Ecto.Migration
 
   def change do

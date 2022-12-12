@@ -1,7 +1,7 @@
-defmodule PassaParaula.GamesFixtures do
+defmodule Tauper.GamesFixtures do
   @moduledoc """
   This module defines test helpers for creating
-  entities via the `PassaParaula.Games` context.
+  entities via the `Tauper.Games` context.
   """
 
   @doc """
@@ -14,7 +14,7 @@ defmodule PassaParaula.GamesFixtures do
         code: "some code",
         status: "some status"
       })
-      |> PassaParaula.Games.create_game()
+      |> Tauper.Games.create_game()
 
     game
   end

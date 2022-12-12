@@ -8,23 +8,23 @@ config :bcrypt_elixir, :log_rounds, 1
 # The MIX_TEST_PARTITION environment variable can be used
 # to provide built-in test partitioning in CI environment.
 # Run `mix help test` for more information.
-config :passa_paraula, PassaParaula.Repo,
+config :tauper, Tauper.Repo,
   username: "postgres",
   password: "postgres",
   hostname: "localhost",
-  database: "passa_paraula_test#{System.get_env("MIX_TEST_PARTITION")}",
+  database: "tauper_test#{System.get_env("MIX_TEST_PARTITION")}",
   pool: Ecto.Adapters.SQL.Sandbox,
   pool_size: 10
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :passa_paraula, PassaParaulaWeb.Endpoint,
+config :tauper, TauperWeb.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
   secret_key_base: "mXQdDgkNnr7KDVisU04ekF1GSIOCHkcq2gxr8EZMeWnmkTUmZvfgp+Xpylea+esK",
   server: false
 
 # In test we don't send emails.
-config :passa_paraula, PassaParaula.Mailer, adapter: Swoosh.Adapters.Test
+config :tauper, Tauper.Mailer, adapter: Swoosh.Adapters.Test
 
 # Print only warnings and errors during test
 config :logger, level: :warn
