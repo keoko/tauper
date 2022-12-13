@@ -1,5 +1,7 @@
 #+title: Tasks
 * Tasks
+** TODO keep players list in the game server? or only in the presence?
+It could be interesting to keep the list of users in the game server to control only allowed users can play.
 ** TODO build questions based on user-provided params (e.g. max number of questions, columns, etc.)
 ** TODO shuffle list of questions
 ** TODO time per question

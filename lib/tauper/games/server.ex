@@ -1,6 +1,8 @@
 defmodule Tauper.Games.Server do
   use GenServer
 
+  @registry :game_registry
+
   # TODO load all elements
   # TODO does it make sense to have it in another file?
   # TODO cnaviar oxidatoin_states per valiencia
@@ -11,28 +13,28 @@ defmodule Tauper.Games.Server do
   }
 
   ## missing client API
-  def start_link(opts \\ []) do
-    GenServer.start_link(__MODULE__, :ok, opts)
+  def start_link(name) do
+    GenServer.start_link(__MODULE__, name, name: via_tuple(name))
   end
 
-  def question(server) do
-    GenServer.call(server, :question)
+  def question(process_name) do
+    call_server(process_name, :question)
   end
 
-  def answer(server, answer, player) do
-    GenServer.call(server, {:answer, answer, player})
+  def answer(process_name, answer, player) do
+    call_server(process_name, {:answer, answer, player})
   end
 
-  def next(server) do
-    GenServer.call(server, :next)
+  def next(process_name) do
+    call_server(process_name, :next)
   end
 
-  def score(server) do
-    GenServer.call(server, :score)
+  def score(process_name) do
+    call_server(process_name, :score)
   end
 
-  def podium(server, num_players \\ 5) do
-    GenServer.call(server, {:podium, num_players})
+  def podium(process_name, num_players \\ 5) do
+    call_server(process_name, {:podium, num_players})
   end
 
   ## Defining GenServer callbacks
@@ -94,7 +96,7 @@ defmodule Tauper.Games.Server do
     state.current_question == Enum.count(state.questions) - 1
   end
 
-  def build_questions(opts \\ []) do
+  def build_questions(_opts \\ []) do
     # TODO build questions based on user-provided options
     question_types = [:symbol, :name, :oxidation_states]
     atomic_numbers = [1, 2, 3]
@@ -173,15 +175,20 @@ defmodule Tauper.Games.Server do
   end
 
   def sort_by_score(m) do
-    Enum.sort_by(m, fn {k, v} -> v end, :desc)
+    Enum.sort_by(m, fn {_k, v} -> v end, :desc)
   end
 
   def has_already_answered(state, player) do
     !is_nil(get_in(state, [:scores, player, state.current_question]))
   end
 
-  # @impl true
-  # def handle_cast({:create, name}, names) do
-  #   {:noreply, Map.put(names, name, "bucket_" <> name)}
-  # end
+  defp via_tuple(name) do
+    {:via, Registry, {@registry, name}}
+  end
+
+  defp call_server(process_name, request) do
+    process_name
+    |> via_tuple()
+    |> GenServer.call(request)
+  end
 end

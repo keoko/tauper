@@ -5,9 +5,13 @@ defmodule Tauper.Application do
 
   use Application
 
+  @game_registry :game_registry
+
   @impl true
   def start(_type, _args) do
     children = [
+      # Start Game Registry
+      {Registry, [keys: :unique, name: @game_registry]},
       # Start the Ecto repository
       Tauper.Repo,
       # Start the Telemetry supervisor
