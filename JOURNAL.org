@@ -1,8 +1,21 @@
 #+title: Journal
 * 2022
 ** 2022/Dec
+*** 2022/Dec/13
+**** TODO registry
+**** TODO dynamic supervisor
+*** 2022/Dec/12
+**** DONE rename project to "tauper"
+**** DONE game logic
+*** 2022/Dec/09
+**** DONE learn about supervisors and dynamic supervisors
+*** 2022/Dec/08
+**** DONE learn about GenServers to build game server
+**** DONE learn about liveview components
+*** 2022/Dec/07
+**** DONE learn about liveview
 *** 2022/Dec/02
-**** TODO add player name field when joining a game
+**** DONE add player name field when joining a game
 **** DONE join a game
 ** 2022/Nov
 *** 2022/Nov/28

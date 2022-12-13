@@ -1,5 +1,10 @@
 #+title: Tasks
 * Tasks
+** TODO build questions based on user-provided params (e.g. max number of questions, columns, etc.)
+** TODO shuffle list of questions
+** TODO time per question
+** TODO if all players have answered the question move to the next one
+** DONE score
 ** DONE learn about presence
 ** DONE learn about channels
 ** DONE create game resource
@@ -8,16 +13,15 @@
 ** DONE generate game code when creating game
 ** DONE create new game
 ** DONE list participants in game page
-** TODO 1 session - 1 game
-** TODO on_mount
+** DONE on_mount
 ** TODO how to connect iex to list the presence list of users
 ** DONE how to pass game-id through the live route
 ** TODO how to move render function to a live template
-** TODO how to login a player
-** TODO do we have different topics per game?
-** TODO do we have a live view page or a live view compoent?
-** TODO how sessions work in liveview
-** TODO what is the difference between a request session and liveview session
+** DONE how to login a player
+** TODO do we have different channel topics per game?
+** DONE do we have a live view page or a live view compoent?
+** DONE how sessions work in liveview
+** DONE what is the difference between a request session and liveview session
 ** TODO what is live_socket_id
 ** TODO list only participants of the game
 ** TODO disable start game if there are no players in the game
@@ -40,14 +44,16 @@
 ** Timer?
 
 * References
-**
+** Sasa Juric card game https://www.theerlangelist.com/article/spawn_or_not
+** GenServer, DynamicSupervisor and Registry: The Elixir Triad To Manage Processes https://levelup.gitconnected.com/genserver-dynamicsupervisor-and-registry-the-elixir-triad-to-manage-processes-a65d4c3351c1
+** Multiplayer Go with Elixir's Registry, PubSub and dynamic supervisors https://blog.appsignal.com/2019/08/13/elixir-alchemy-multiplayer-go-with-registry-pubsub-and-dynamic-supervisors.html
 
 * Elixir feeling
 ** no documentation how to manage explicit javascript in phoenix
 ** no clear documentation about liveview
 ** maps with key strings or atoms?
 ** keyword lists and maps are confusing
-** keywords and atoms are confusing
+** keyword lists and atoms are confusing
 
 * LiveView
 ** upload files
@@ -56,3 +62,5 @@
 ** SEO-friendly
 ** optimised data transfer
 ** TODO does it add extra load to the system? manage all websocket connections?
+* Nice to haves
+** i18n
