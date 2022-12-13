@@ -47,6 +47,25 @@ defmodule Tauper.Games.Server do
     {:ok, state}
   end
 
+  @doc """
+  This function will be called by the supervisor to retrieve the specification
+  of the child process.The child process is configured to restart only if it
+  terminates abnormally.
+  """
+  def child_spec(process_name) do
+    %{
+      id: __MODULE__,
+      start: {__MODULE__, :start_link, [process_name]},
+      restart: :transient
+    }
+  end
+
+  def stop(process_name, stop_reason) do
+    # Given the :transient option in the child spec, the GenServer will restart
+    # if any reason other than `:normal` is given.
+    process_name |> via_tuple() |> GenServer.stop(stop_reason)
+  end
+
   @impl true
   def handle_call(:question, _from, state) do
     # TODO handle game status?
