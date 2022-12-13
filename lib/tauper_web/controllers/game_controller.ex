@@ -62,7 +62,7 @@ defmodule TauperWeb.GameController do
           nil ->
             conn
             |> put_flash(:error, "Invalid game code. Please try another code.")
-            |> render(conn, "new_join.html", changeset: changeset)
+            |> render("new_join.html", changeset: changeset)
         end
     end
   end
