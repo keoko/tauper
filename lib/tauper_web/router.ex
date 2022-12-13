@@ -22,8 +22,6 @@ defmodule TauperWeb.Router do
 
     get "/", PageController, :index
 
-    live "/counter", HomeLive
-
     resources "/games", GameController
 
     live_session :default, on_mount: TauperWeb.GameLive do
@@ -85,8 +83,6 @@ defmodule TauperWeb.Router do
 
   # scope "/", TauperWeb do
   #   pipe_through [:browser, :require_authenticated_user]
-
-  #   live "/guess", WrongLive
 
   #   get "/users/settings", UserSettingsController, :edit
   #   put "/users/settings", UserSettingsController, :update
