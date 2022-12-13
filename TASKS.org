@@ -1,5 +1,6 @@
 #+title: Tasks
 * Tasks
+** TODO remove games schema and use gensver instead.
 ** TODO keep players list in the game server? or only in the presence?
 It could be interesting to keep the list of users in the game server to control only allowed users can play.
 ** TODO build questions based on user-provided params (e.g. max number of questions, columns, etc.)
@@ -36,6 +37,7 @@ It could be interesting to keep the list of users in the game server to control 
 ** TODO how to manage sum types / constants?
 ** TODO elixir state machines gen fsm?
 ** TODO ECS
+*
 * Concepts
 ** Game
 ** Player

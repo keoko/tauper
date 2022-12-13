@@ -35,37 +35,65 @@ defmodule TauperWeb.GameController do
     render(conn, "new_join.html", changeset: changeset)
   end
 
-  def join(conn, %{"join_game_params" => %{"game_code" => code} = params}) do
-    changeset =
-      params
-      |> change_join_game_request
-      # apply_action(:insert) to force showing error messages in schemaless ecto validation
-      |> Changeset.apply_action(:insert)
+  defp validate_join_params(params) do
+    params
+    |> change_join_game_request
+    # apply_action(:insert) to force showing error messages in schemaless ecto validation
+    |> Changeset.apply_action(:insert)
+  end
 
-    case changeset do
+  def join(conn, %{"join_game_params" => %{"game_code" => code} = params}) do
+    with {:ok, valid_params} <- validate_join_params(params),
+         %Tauper.Games.Game{} = game <- Games.get_game_by_code(code) do
+      conn
+      |> renew_session()
+      |> put_session(:current_player_name, valid_params.player_name)
+      |> put_session(:current_game_code, valid_params.game_code)
+      |> redirect(to: Routes.game_path(conn, :play, game.id))
+    else
+      nil ->
+        conn
+        |> put_flash(:error, "Invalid game code  '#{code}'. Please try another code.")
+        |> render("new_join.html", changeset: change_join_game_request(params))
+
       {:error, %Changeset{} = changeset} ->
         render(conn, "new_join.html", changeset: changeset)
-
-      {:ok, fields} ->
-        game = Games.get_game_by_code(code)
-
-        case game do
-          %Tauper.Games.Game{} ->
-            conn
-            |> renew_session()
-            |> put_session(:current_player_name, fields.player_name)
-            |> put_session(:current_game_code, fields.game_code)
-            |> redirect(to: Routes.game_path(conn, :play, game.id))
-
-          # |> redirect(to: Routes.game_path(conn, :show, game))
-
-          nil ->
-            conn
-            |> put_flash(:error, "Invalid game code. Please try another code.")
-            |> render("new_join.html", changeset: changeset)
-        end
     end
   end
+
+  # def join(conn, %{"join_game_params" => %{"game_code" => code} = params}) do
+  #   changeset =
+  #     params
+  #     |> change_join_game_request
+  #     # apply_action(:insert) to force showing error messages in schemaless ecto validation
+  #     |> Changeset.apply_action(:insert)
+
+  #   case changeset do
+  #     {:error, %Changeset{} = changeset} ->
+  #       render(conn, "new_join.html", changeset: changeset)
+
+  #     {:ok, fields} ->
+  #       game = Games.get_game_by_code(code)
+
+  #       case game do
+  #         %Tauper.Games.Game{} ->
+  #           conn
+  #           |> renew_session()
+  #           |> put_session(:current_player_name, fields.player_name)
+  #           |> put_session(:current_game_code, fields.game_code)
+  #           |> redirect(to: Routes.game_path(conn, :play, game.id))
+
+  #         # |> redirect(to: Routes.game_path(conn, :show, game))
+
+  #         nil ->
+  #           {_, changeset} = changeset
+
+  #           conn
+  #           |> put_flash(:error, "Invalid game code. Please try another code.")
+  #           |> render("new_join.html", changeset: changeset)
+  #       end
+  #   end
+  # end
 
   # def create(conn, %{"game" => game_params}) do
   #   case Games.create_game(game_params) do
