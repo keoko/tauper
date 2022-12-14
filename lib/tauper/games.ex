@@ -8,6 +8,8 @@ defmodule Tauper.Games do
 
   alias Tauper.Games.{Supervisor, Game, Server}
 
+  @registry :game_registry
+
   @doc """
   Creates a new game with the code game.
 
@@ -39,6 +41,10 @@ defmodule Tauper.Games do
 
   def podium(game_code) do
     Server.podium(game_code)
+  end
+
+  def list_game_codes() do
+    Registry.select(@registry, [{{:"$1", :_, :_}, [], [:"$1"]}])
   end
 
   @doc """
