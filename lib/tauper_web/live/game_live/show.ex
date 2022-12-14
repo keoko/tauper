@@ -3,12 +3,11 @@ defmodule TauperWeb.GameLive.Show do
   alias Tauper.Games
   alias TauperWeb.{Presence, Endpoint}
 
-  @game_topic "games"
-
   @impl true
   def mount(_params, _session, socket) do
     if connected?(socket) do
-      Endpoint.subscribe(@game_topic)
+      code = socket.assigns.game_code
+      Endpoint.subscribe(Presence.topic(code))
     end
 
     {:ok, socket}
@@ -34,7 +33,6 @@ defmodule TauperWeb.GameLive.Show do
   end
 
   def handle_info(%{event: "presence_diff"}, socket) do
-    # def handle_info(event, socket) do
     code = socket.assigns.code
     players = Presence.list_players(code)
 

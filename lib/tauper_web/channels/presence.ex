@@ -6,31 +6,29 @@ defmodule TauperWeb.Presence do
   See the [`Phoenix.Presence`](https://hexdocs.pm/phoenix/Phoenix.Presence.html)
   docs for more details.
   """
-  @game_topic "games"
-
   use Phoenix.Presence,
     otp_app: :tauper,
     pubsub_server: Tauper.PubSub
 
-  def track_player(pid, game_code, player_name) do
+  def track_player(pid, code, player_name) do
     track(
       pid,
-      @game_topic,
-      game_code,
+      topic(code),
+      "players",
       %{players: [%{name: player_name}]}
     )
   end
 
-  def is_player_already_in_game(game_code, player_name) do
-    players = list_players(game_code)
+  def is_player_already_in_game(code, player_name) do
+    players = list_players(code)
     Enum.any?(players, fn x -> x.name == player_name end)
   end
 
-  def list_players(game_code) do
-    foo =
-      list(@game_topic)
-      |> Map.get(game_code)
-      |> extract_players()
+  def list_players(code) do
+    topic(code)
+    |> list
+    |> Map.get("players")
+    |> extract_players()
   end
 
   defp extract_players(%{metas: metas}) do
@@ -49,5 +47,9 @@ defmodule TauperWeb.Presence do
 
   defp players_from_meta_map(meta_map) do
     get_in(meta_map, [:players])
+  end
+
+  def topic(code) do
+    "game:#{code}"
   end
 end

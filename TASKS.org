@@ -5,7 +5,8 @@
 ** DONE move next question to show liveview
 ** DONE different views based on game owner/player
 yes, it should be split in 2 views: one to handle the game by the game owner, and the other one will be the player view.
-** TODO do we have different channel topics per game?
+** TODO do we have to use different channel topics per game?
+it would help to reduce the propagation of unnecessary messages between games
 ** DONE next question does not refresh all users
 ** DONE start game does not refresh all users
 send event when there is any game change?
@@ -85,3 +86,4 @@ create a file in the same liveview folder with name {liveview_name}.html.heex
 ** i18n
 ** ECS
 ** elixir state machines gen fsm?
+** watcher mode: connect to a game just for wantching the game

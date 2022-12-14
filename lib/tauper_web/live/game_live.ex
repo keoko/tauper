@@ -5,8 +5,6 @@ defmodule TauperWeb.GameLive do
   alias TauperWeb.{Endpoint, Presence}
   alias Ecto.Changeset
 
-  @game_topic "games"
-
   def can_player_join_game(player_name, code, session) do
     cond do
       !player_name ->
@@ -61,7 +59,8 @@ defmodule TauperWeb.GameLive do
 
   def mount(_params, _session, socket) do
     if connected?(socket) do
-      Endpoint.subscribe(@game_topic)
+      code = socket.assigns.game_code
+      Endpoint.subscribe(Presence.topic(code))
     end
 
     {:ok, socket}
