@@ -75,7 +75,7 @@ defmodule Tauper.Games.Server do
 
   @impl true
   def handle_call(:start_game, _from, state) do
-    state = %{state | status: :started, current_question: 0}
+    state = %{state | current_question: 0} |> change_status(:started)
     {:reply, status_details(state), state}
   end
 
@@ -122,7 +122,7 @@ defmodule Tauper.Games.Server do
 
   defp next_question(state) do
     if is_last_question(state) do
-      %{state | status: :game_over}
+      change_status(state, :game_over)
     else
       Endpoint.broadcast("games", "next_question", %{})
       %{state | current_question: state.current_question + 1}
@@ -235,5 +235,13 @@ defmodule Tauper.Games.Server do
     state
     |> Map.delete(:questions)
     |> Map.put(:question, Enum.at(state.questions, state.current_question))
+  end
+
+  defp change_status(state, new_status) do
+    if state.status != new_status do
+      Endpoint.broadcast("games", "game_status_changed", %{status: new_status})
+    end
+
+    %{state | status: new_status}
   end
 end

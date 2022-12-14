@@ -105,6 +105,17 @@ defmodule TauperWeb.GameLive do
      |> assign(:question, game.question.sentence)}
   end
 
+  def handle_info(%{event: "game_status_changed"} = data, socket) do
+    game_code = socket.assigns.game_code
+    new_status = data.payload.status
+    podium = if new_status == :game_over, do: Games.podium(game_code), else: []
+
+    {:noreply,
+     socket
+     |> assign(:status, new_status)
+     |> assign(:podium, podium)}
+  end
+
   def change_answer(attrs \\ %{}) do
     types = %{
       answer: :string
