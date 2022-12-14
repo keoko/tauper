@@ -17,6 +17,8 @@
     <div>
         <strong><%= @question %></strong>
     </div>
+
+<button phx-click="next" phx-value-game_code= {@game_code} >Skip Question</button>
 <% end %>
 
 <%= if @status == :game_over do %>
@@ -28,4 +30,6 @@
     <% end %>
     </ul>
   <% end %>
+
+  <%= link "New game", to: Routes.game_path(@socket, :new) %>
 <% end %>

@@ -101,15 +101,6 @@ defmodule TauperWeb.GameLive do
      |> assign(:players, players)}
   end
 
-  def handle_info(%{event: "next_question"}, socket) do
-    game_code = socket.assigns.game_code
-    game = Games.game(game_code)
-
-    {:noreply,
-     socket
-     |> assign(:question, game.question.sentence)}
-  end
-
   def handle_info(%{event: "game_status_changed"} = data, socket) do
     game_code = socket.assigns.game_code
     new_status = data.payload.status
@@ -131,20 +122,6 @@ defmodule TauperWeb.GameLive do
     |> Changeset.cast(attrs, Map.keys(types))
     |> Changeset.validate_required([:answer])
     |> Changeset.validate_length(:answer, min: 1, max: 50)
-  end
-
-  def handle_event("next", _data, socket) do
-    game_code = socket.assigns.game_code
-    game = Games.next_question(game_code)
-
-    podium =
-      case(game.status) do
-        :game_over -> Games.podium(game_code)
-        _ -> []
-      end
-
-    {:noreply,
-     assign(socket, status: game.status, question: game.question.sentence, podium: podium)}
   end
 
   def handle_event("answer", %{"answer-form" => %{"answer" => answer}}, socket) do

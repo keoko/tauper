@@ -1,5 +1,10 @@
 #+title: Tasks
 * Tasks
+** TODO once answered the question, hide question and display message waiting next question
+** TODO move next question to show liveview
+** DONE different views based on game owner/player
+yes, it should be split in 2 views: one to handle the game by the game owner, and the other one will be the player view.
+** TODO do we have different channel topics per game?
 ** DONE next question does not refresh all users
 ** DONE start game does not refresh all users
 send event when there is any game change?
@@ -7,14 +12,15 @@ send event when there is any game change?
 ** DONE start game
 ** DONE next question
 ** DONE game status
-** TODO different views based on game owner/player
 ** DONE remove games schema and use gensver instead.
 ** TODO build questions based on user-provided params (e.g. max number of questions, columns, etc.)
 ** TODO change phoenix header with a tauper game
 ** TODO shuffle list of questions
+** TODO time per question
+** TODO stop game
 ** TODO keep players list in the game server? or only in the presence?
 It could be interesting to keep the list of users in the game server to control only allowed users can play.
-** TODO time per question
+** TODO multiple liveviews or liveview with compoments?
 ** TODO how to handle changed game state to refresh liveviews?
 - send whole game state as response for any request?
 - send only changed state
@@ -22,7 +28,6 @@ It could be interesting to keep the list of users in the game server to control 
 
 ** TODO if all players have answered the question move to the next one
 ** TODO display periodic table with highlighted cell
-** TODO stop game
 ** DONE score
 ** DONE learn about presence
 ** DONE learn about channels
@@ -33,28 +38,21 @@ It could be interesting to keep the list of users in the game server to control 
 ** DONE create new game
 ** DONE list participants in game page
 ** DONE on_mount
-** TODO check accented words
 ** TODO how to connect iex to list the presence list of users
 ** DONE how to pass game-id through the live route
-** TODO how to move render function to a live template
+** DONE how to move render function to a live template
+create a file in the same liveview folder with name {liveview_name}.html.heex
 ** DONE how to login a player
-** TODO do we have different channel topics per game?
 ** DONE do we have a live view page or a live view compoent?
 ** DONE how sessions work in liveview
 ** DONE what is the difference between a request session and liveview session
 ** TODO what is live_socket_id
-** TODO list only participants of the game
+** DONE list only participants of the game
 ** TODO disable start game if there are no players in the game
 ** DONE change header to Passa Paraula
-** TODO add authentication to create new games?
 ** TODO remove game actions not needed (edit game, etc.)
 ** DONE join game
-** TODO start game
-** TODO end game
-** TODO how to manage sum types / constants?
-** TODO elixir state machines gen fsm?
-** TODO ECS
-*
+** DONE start game
 * Concepts
 ** Game
 ** Player
@@ -85,3 +83,5 @@ It could be interesting to keep the list of users in the game server to control 
 ** TODO does it add extra load to the system? manage all websocket connections?
 * Nice to haves
 ** i18n
+** ECS
+** elixir state machines gen fsm?

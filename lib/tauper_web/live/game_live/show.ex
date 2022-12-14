@@ -43,6 +43,15 @@ defmodule TauperWeb.GameLive.Show do
      |> assign(:players, players)}
   end
 
+  def handle_event("next", _data, socket) do
+    code = socket.assigns.code
+    game = Games.next_question(code)
+    podium = if game.status == :game_over, do: Games.podium(code), else: []
+
+    {:noreply,
+     assign(socket, status: game.status, question: game.question.sentence, podium: podium)}
+  end
+
   defp page_title(:show), do: "Show Game"
   defp page_title(:edit), do: "Edit Game"
 end
