@@ -31,6 +31,10 @@ defmodule Tauper.Games do
     Server.game(game_code)
   end
 
+  def lookup(game_code) do
+    Registry.lookup(@registry, game_code)
+  end
+
   def next_question(game_code) do
     Server.next(game_code)
   end

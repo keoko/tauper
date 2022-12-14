@@ -1,0 +1,31 @@
+<h1>Game (<%= @game_code %>)</h1>
+
+<%= if @status == :not_started do %>
+<button phx-click="start" phx-value-game_code= {@game_code} >Start Game</button>
+
+<div>
+    <strong>Players:</strong>
+    <ul>
+    <%= for player <- @players do %>
+        <li><%= player.name %> </li>
+    <% end %>
+    </ul>
+</div>
+<% end %>
+
+<%= if @status == :started do %>
+    <div>
+        <strong><%= @question %></strong>
+    </div>
+<% end %>
+
+<%= if @status == :game_over do %>
+  <%= if @podium do %>
+    <h2>Podium</h2>
+    <ul>
+    <%= for {player_name, score} <- @podium do %>
+      <li><%= player_name %>: <%= score %> points</li>
+    <% end %>
+    </ul>
+  <% end %>
+<% end %>

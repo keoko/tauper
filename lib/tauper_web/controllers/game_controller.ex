@@ -44,14 +44,14 @@ defmodule TauperWeb.GameController do
 
   def join(conn, %{"join_game_params" => %{"game_code" => code} = params}) do
     with {:ok, valid_params} <- validate_join_params(params),
-         %Tauper.Games.Game{} = game <- Games.get_game_by_code(code) do
+         [_pid] = Games.lookup(code) do
       conn
       |> renew_session()
-      |> put_session(:current_player_name, valid_params.player_name)
-      |> put_session(:current_game_code, valid_params.game_code)
-      |> redirect(to: Routes.game_path(conn, :play, game.id))
+      |> put_session(:player_name, valid_params.player_name)
+      |> put_session(:code, valid_params.game_code)
+      |> redirect(to: Routes.game_path(conn, :play, valid_params.game_code))
     else
-      nil ->
+      [] ->
         conn
         |> put_flash(:error, "Invalid game code  '#{code}'. Please try another code.")
         |> render("new_join.html", changeset: change_join_game_request(params))
@@ -74,15 +74,20 @@ defmodule TauperWeb.GameController do
   # end
 
   def create(conn, _params) do
-    game_params = %{code: Games.generate_code(), status: "not_started"}
+    code = Games.generate_code()
+    player_name = "owner"
+    game_params = %{code: code, status: "not_started"}
 
     case Games.create_game(game_params) do
-      {:ok, game} ->
+      {:ok, _pid} ->
         Games.new_game(game_params.code)
 
         conn
+        |> renew_session()
+        |> put_session(:player_name, player_name)
+        |> put_session(:code, code)
         |> put_flash(:info, "Game created successfully with code " <> game_params.code)
-        |> redirect(to: Routes.game_path(conn, :show, game))
+        |> redirect(to: Routes.game_show_path(conn, :show, code))
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)

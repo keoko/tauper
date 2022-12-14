@@ -7,18 +7,25 @@ defmodule TauperWeb.GameLive do
 
   @game_topic "games"
 
-  def can_player_join_game(game, current_player_name, current_game_code) do
+  def can_player_join_game(player_name, code, session) do
     cond do
-      game == nil ->
-        {:error, %{message: "game does not exist"}}
-
-      !current_player_name ->
+      !player_name ->
         {:error, %{message: "missing player name"}}
+
+      code != session["code"] ->
+        {:error,
+         %{
+           message:
+             "Invalid game code. You probably joined to a different game. Please join the game again."
+         }}
+
+      Games.lookup(code) == [] ->
+        {:error, %{message: "game does not exist"}}
 
       # current_game_code != game.code ->
       #   {:error, %{message: "invalid game code"}}
 
-      Presence.is_player_already_in_game(current_game_code, current_player_name) ->
+      Presence.is_player_already_in_game(code, player_name) ->
         {:error, %{message: "player already in game"}}
 
       true ->
@@ -26,19 +33,18 @@ defmodule TauperWeb.GameLive do
     end
   end
 
-  def on_mount(:default, %{"id" => _id} = _params, session, socket) do
-    player_name = session["current_player_name"]
-    game_code = session["current_game_code"]
-    game = Games.game(game_code)
+  def on_mount(:default, %{"code" => code} = _params, session, socket) do
+    player_name = session["player_name"]
 
-    case can_player_join_game(game, player_name, game_code) do
+    case can_player_join_game(player_name, code, session) do
       {:ok, _} ->
+        game = Games.game(code)
+
         {:cont,
          socket
-         |> assign(:game, game)
-         |> assign(:game_code, game_code)
+         |> assign(:game_code, code)
          |> assign(:question, game.question.sentence)
-         |> assign(:podium, Games.podium(game_code))
+         |> assign(:podium, Games.podium(code))
          |> assign(:changeset, change_answer())
          |> assign(:status, game.status)
          |> assign(:player_name, player_name)}
@@ -53,7 +59,7 @@ defmodule TauperWeb.GameLive do
     end
   end
 
-  def mount(_params, session, socket) do
+  def mount(_params, _session, socket) do
     if connected?(socket) do
       Endpoint.subscribe(@game_topic)
     end
@@ -61,11 +67,10 @@ defmodule TauperWeb.GameLive do
     {:ok, socket}
   end
 
-  def handle_params(%{"id" => id}, _, socket) do
-    game_code = socket.assigns.game_code
-    players = Presence.list_players(game_code)
-    current_player_name = socket.assigns.player_name
-    maybe_track_player(game_code, socket, current_player_name)
+  def handle_params(%{"code" => code}, _, socket) do
+    players = Presence.list_players(code)
+    player_name = socket.assigns.player_name
+    maybe_track_player(code, socket, player_name)
 
     {:noreply,
      socket
@@ -126,12 +131,6 @@ defmodule TauperWeb.GameLive do
     |> Changeset.cast(attrs, Map.keys(types))
     |> Changeset.validate_required([:answer])
     |> Changeset.validate_length(:answer, min: 1, max: 50)
-  end
-
-  def handle_event("start", _data, socket) do
-    game_code = socket.assigns.game_code
-    game = Games.start_game(game_code)
-    {:noreply, assign(socket, status: game.status, question: game.question.sentence)}
   end
 
   def handle_event("next", _data, socket) do

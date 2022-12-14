@@ -25,7 +25,8 @@ defmodule TauperWeb.Router do
     resources "/games", GameController
 
     live_session :default, on_mount: TauperWeb.GameLive do
-      live "/play/:id", GameLive, :play
+      live "/game/:code", GameLive.Show, :show
+      live "/play/:code", GameLive, :play
     end
 
     get "/join", GameController, :new_join
