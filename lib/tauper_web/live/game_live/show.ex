@@ -52,6 +52,13 @@ defmodule TauperWeb.GameLive.Show do
      assign(socket, status: game.status, question: game.question.sentence, podium: podium)}
   end
 
+  def handle_event("stop", _data, socket) do
+    code = socket.assigns.code
+    Games.stop_game(code)
+
+    {:noreply, redirect(socket, to: Routes.game_path(socket, :new))}
+  end
+
   defp page_title(:show), do: "Show Game"
   defp page_title(:edit), do: "Edit Game"
 end

@@ -27,6 +27,10 @@ defmodule Tauper.Games do
     Server.start(game_code)
   end
 
+  def stop_game(game_code) do
+    Server.stop(game_code, :normal)
+  end
+
   def game(game_code) do
     Server.game(game_code)
   end

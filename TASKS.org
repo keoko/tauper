@@ -1,7 +1,8 @@
 #+title: Tasks
 * Tasks
+** DONE stop game
 ** TODO once answered the question, hide question and display message waiting next question
-** TODO move next question to show liveview
+** DONE move next question to show liveview
 ** DONE different views based on game owner/player
 yes, it should be split in 2 views: one to handle the game by the game owner, and the other one will be the player view.
 ** TODO do we have different channel topics per game?
@@ -17,7 +18,6 @@ send event when there is any game change?
 ** TODO change phoenix header with a tauper game
 ** TODO shuffle list of questions
 ** TODO time per question
-** TODO stop game
 ** TODO keep players list in the game server? or only in the presence?
 It could be interesting to keep the list of users in the game server to control only allowed users can play.
 ** TODO multiple liveviews or liveview with compoments?
