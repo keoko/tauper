@@ -1,5 +1,6 @@
 defmodule Tauper.Games.Server do
   use GenServer
+  alias TauperWeb.Endpoint
 
   @registry :game_registry
 
@@ -101,7 +102,6 @@ defmodule Tauper.Games.Server do
 
   @impl true
   def handle_call(:next, _from, state) do
-    # TODO handle game status?
     state = next_question(state)
     {:reply, status_details(state), state}
   end
@@ -124,6 +124,7 @@ defmodule Tauper.Games.Server do
     if is_last_question(state) do
       %{state | status: :game_over}
     else
+      Endpoint.broadcast("games", "next_question", %{})
       %{state | current_question: state.current_question + 1}
     end
   end

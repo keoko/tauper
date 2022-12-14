@@ -96,6 +96,15 @@ defmodule TauperWeb.GameLive do
      |> assign(:players, players)}
   end
 
+  def handle_info(%{event: "next_question"}, socket) do
+    game_code = socket.assigns.game_code
+    game = Games.game(game_code)
+
+    {:noreply,
+     socket
+     |> assign(:question, game.question.sentence)}
+  end
+
   def change_answer(attrs \\ %{}) do
     types = %{
       answer: :string
