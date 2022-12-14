@@ -1,7 +1,9 @@
 defmodule TauperWeb.GameLive do
-  use Phoenix.LiveView, layout: {TauperWeb.LayoutView, "live.html"}
+  # use Phoenix.LiveView, layout: {TauperWeb.LayoutView, "live.html"}
+  use TauperWeb, :live_view
   alias Tauper.Games
   alias TauperWeb.{Endpoint, Presence}
+  alias Ecto.Changeset
 
   @game_topic "games"
 
@@ -13,10 +15,10 @@ defmodule TauperWeb.GameLive do
       !current_player_name ->
         {:error, %{message: "missing player name"}}
 
-      current_game_code != game.code ->
-        {:error, %{message: "invalid game code"}}
+      # current_game_code != game.code ->
+      #   {:error, %{message: "invalid game code"}}
 
-      Presence.is_player_already_in_game(game.code, current_player_name) ->
+      Presence.is_player_already_in_game(current_game_code, current_player_name) ->
         {:error, %{message: "player already in game"}}
 
       true ->
@@ -24,21 +26,26 @@ defmodule TauperWeb.GameLive do
     end
   end
 
-  def on_mount(:default, %{"id" => id} = _params, session, socket) do
-    current_player_name = session["current_player_name"]
-    current_game_code = session["current_game_code"]
-    game = Games.get_game(id)
+  def on_mount(:default, %{"id" => _id} = _params, session, socket) do
+    player_name = session["current_player_name"]
+    game_code = session["current_game_code"]
+    game = Games.game(game_code)
 
-    case can_player_join_game(game, current_player_name, current_game_code) do
+    case can_player_join_game(game, player_name, game_code) do
       {:ok, _} ->
         {:cont,
          socket
          |> assign(:game, game)
-         |> assign(:current_player_name, current_player_name)}
+         |> assign(:game_code, game_code)
+         |> assign(:question, game.question.sentence)
+         |> assign(:podium, Games.podium(game_code))
+         |> assign(:changeset, change_answer())
+         |> assign(:status, game.status)
+         |> assign(:player_name, player_name)}
 
       {:error, error} ->
         # add flash message
-        # 
+        #
         {:halt,
          socket
          |> put_flash(:error, error.message)
@@ -55,67 +62,77 @@ defmodule TauperWeb.GameLive do
   end
 
   def handle_params(%{"id" => id}, _, socket) do
-    game = socket.assigns.game
-    players = Presence.list_players(game.code)
-    current_player_name = socket.assigns.current_player_name
-    maybe_track_player(game, socket, current_player_name)
+    game_code = socket.assigns.game_code
+    players = Presence.list_players(game_code)
+    current_player_name = socket.assigns.player_name
+    maybe_track_player(game_code, socket, current_player_name)
 
     {:noreply,
      socket
-     |> assign(:game, game)
      |> assign(:players, players)}
   end
 
-  def render(assigns) do
-    ~H"""
-    <h1>Game</h1>
-
-    <ul>
-
-    <li>
-    <strong>Code:</strong>
-    <%= @game.code %>
-    </li>
-
-    <li>
-    <strong>Status:</strong>
-    <%= @game.status %>
-    </li>
-
-    <li>
-    <strong>Players:</strong>
-        <ul>
-        <%= for player <- @players do %>
-        <li><%= player.name %> </li>
-        <% end %>
-        </ul>
-    </li>
-    </ul>
-
-    <button>Start Game</button>
-    """
-  end
-
+  @spec random_string :: bitstring
   def random_string do
     for _ <- 1..10, into: "", do: <<Enum.random('0123456789abcdef')>>
   end
 
   def maybe_track_player(
-        game,
+        game_code,
         socket,
-        current_player_name
+        player_name
       ) do
     if connected?(socket) do
-      Presence.track_player(self(), game, current_player_name)
+      Presence.track_player(self(), game_code, player_name)
     end
   end
 
   def handle_info(%{event: "presence_diff"}, socket) do
-    game = socket.assigns.game
-    players = Presence.list_players(game.code)
+    game_code = socket.assigns.game_code
+    players = Presence.list_players(game_code)
 
     {:noreply,
      socket
      |> assign(:players, players)}
+  end
+
+  def change_answer(attrs \\ %{}) do
+    types = %{
+      answer: :string
+    }
+
+    # apply_action(:insert) needed to display error messages in the form
+    {%{}, types}
+    |> Changeset.cast(attrs, Map.keys(types))
+    |> Changeset.validate_required([:answer])
+    |> Changeset.validate_length(:answer, min: 1, max: 50)
+  end
+
+  def handle_event("start", _data, socket) do
+    game_code = socket.assigns.game_code
+    game = Games.start_game(game_code)
+    {:noreply, assign(socket, status: game.status, question: game.question.sentence)}
+  end
+
+  def handle_event("next", _data, socket) do
+    game_code = socket.assigns.game_code
+    game = Games.next_question(game_code)
+
+    podium =
+      case(game.status) do
+        :game_over -> Games.podium(game_code)
+        _ -> []
+      end
+
+    {:noreply,
+     assign(socket, status: game.status, question: game.question.sentence, podium: podium)}
+  end
+
+  def handle_event("answer", %{"answer-form" => %{"answer" => answer}}, socket) do
+    game_code = socket.assigns.game_code
+    player_name = socket.assigns.player_name
+    game = Games.answer(game_code, answer, player_name)
+
+    {:noreply, assign(socket, status: game.status, question: game.question.sentence)}
   end
 end

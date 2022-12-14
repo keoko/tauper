@@ -12,11 +12,11 @@ defmodule TauperWeb.Presence do
     otp_app: :tauper,
     pubsub_server: Tauper.PubSub
 
-  def track_player(pid, game, player_name) do
+  def track_player(pid, game_code, player_name) do
     track(
       pid,
       @game_topic,
-      game.code,
+      game_code,
       %{players: [%{name: player_name}]}
     )
   end

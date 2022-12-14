@@ -1,12 +1,23 @@
 #+title: Tasks
 * Tasks
-** TODO remove games schema and use gensver instead.
+** TODO skip question / next question does not refresh all users
+send event when there is any game change?
+** TODO check accented words
+** DONE show podium as last page
+** DONE start game
+** DONE next question
+** DONE game status
+** TODO different views based on game owner/player
+** DONE remove games schema and use gensver instead.
+** TODO build questions based on user-provided params (e.g. max number of questions, columns, etc.)
+** TODO change phoenix header with a tauper game
+** TODO shuffle list of questions
 ** TODO keep players list in the game server? or only in the presence?
 It could be interesting to keep the list of users in the game server to control only allowed users can play.
-** TODO build questions based on user-provided params (e.g. max number of questions, columns, etc.)
-** TODO shuffle list of questions
 ** TODO time per question
 ** TODO if all players have answered the question move to the next one
+** TODO display periodic table with highlighted cell
+** TODO stop game
 ** DONE score
 ** DONE learn about presence
 ** DONE learn about channels

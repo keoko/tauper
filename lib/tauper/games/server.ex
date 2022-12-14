@@ -3,6 +3,8 @@ defmodule Tauper.Games.Server do
 
   @registry :game_registry
 
+  @initial_state %{questions: [], current_question: 0, status: :not_started, score: %{}}
+
   # TODO load all elements
   # TODO does it make sense to have it in another file?
   # TODO cnaviar oxidatoin_states per valiencia
@@ -17,8 +19,12 @@ defmodule Tauper.Games.Server do
     GenServer.start_link(__MODULE__, name, name: via_tuple(name))
   end
 
-  def question(process_name) do
-    call_server(process_name, :question)
+  def start(process_name) do
+    call_server(process_name, :start_game)
+  end
+
+  def game(process_name) do
+    call_server(process_name, :game)
   end
 
   def answer(process_name, answer, player) do
@@ -42,7 +48,7 @@ defmodule Tauper.Games.Server do
   def init(opts \\ []) do
     questions = build_questions(opts)
 
-    state = %{questions: questions, current_question: 0, scores: %{}}
+    state = %{@initial_state | questions: questions}
 
     {:ok, state}
   end
@@ -67,9 +73,15 @@ defmodule Tauper.Games.Server do
   end
 
   @impl true
-  def handle_call(:question, _from, state) do
+  def handle_call(:start_game, _from, state) do
+    state = %{state | status: :started, current_question: 0}
+    {:reply, status_details(state), state}
+  end
+
+  @impl true
+  def handle_call(:game, _from, state) do
     # TODO handle game status?
-    {:reply, get_question(state), state}
+    {:reply, status_details(state), state}
   end
 
   @impl true
@@ -77,12 +89,13 @@ defmodule Tauper.Games.Server do
     question = get_question(state)
 
     if has_already_answered(state, player) do
-      {:reply, %{is_correct: :already_answered, question: question}, state}
+      # {:reply, %{is_correct: :already_answered, question: question}, state}
+      {:reply, status_details(state), state}
     else
       is_correct = is_correct(question, answer)
       state = state |> update_score(player, is_correct)
 
-      {:reply, %{is_correct: is_correct, question: question}, state}
+      {:reply, status_details(state), state}
     end
   end
 
@@ -90,12 +103,12 @@ defmodule Tauper.Games.Server do
   def handle_call(:next, _from, state) do
     # TODO handle game status?
     state = next_question(state)
-    {:reply, %{question: get_question(state)}, state}
+    {:reply, status_details(state), state}
   end
 
   @impl true
   def handle_call(:score, _from, state) do
-    {:reply, state.scores, state}
+    {:reply, state.score, state}
   end
 
   @impl true
@@ -108,7 +121,11 @@ defmodule Tauper.Games.Server do
   end
 
   defp next_question(state) do
-    %{state | current_question: state.current_question + 1}
+    if is_last_question(state) do
+      %{state | status: :game_over}
+    else
+      %{state | current_question: state.current_question + 1}
+    end
   end
 
   def is_last_question(state) do
@@ -117,8 +134,10 @@ defmodule Tauper.Games.Server do
 
   def build_questions(_opts \\ []) do
     # TODO build questions based on user-provided options
-    question_types = [:symbol, :name, :oxidation_states]
-    atomic_numbers = [1, 2, 3]
+    # question_types = [:symbol, :name, :oxidation_states]
+    # atomic_numbers = [1, 2, 3]
+    question_types = [:symbol, :name]
+    atomic_numbers = [1, 2]
 
     questions =
       for question_type <- question_types,
@@ -164,22 +183,22 @@ defmodule Tauper.Games.Server do
 
     state
     |> maybe_init_player_score(player)
-    |> put_in([:scores, player, state.current_question], score)
+    |> put_in([:score, player, state.current_question], score)
   end
 
   def maybe_init_player_score(state, player) do
     list_nils = Stream.repeatedly(fn -> nil end) |> Enum.take(length(state.questions))
-    init_scores = 0..length(list_nils) |> Stream.zip(list_nils) |> Enum.into(%{})
+    init_score = 0..length(list_nils) |> Stream.zip(list_nils) |> Enum.into(%{})
 
-    if get_in(state, [:scores, player]) != nil do
+    if get_in(state, [:score, player]) != nil do
       state
     else
-      update_in(state, [:scores], &Map.put(&1, player, init_scores))
+      update_in(state, [:score], &Map.put(&1, player, init_score))
     end
   end
 
   def calculate_podium(state, num_players) do
-    state.scores
+    state.score
     |> calculate_score
     |> sort_by_score
     |> Enum.take(num_players)
@@ -198,7 +217,7 @@ defmodule Tauper.Games.Server do
   end
 
   def has_already_answered(state, player) do
-    !is_nil(get_in(state, [:scores, player, state.current_question]))
+    !is_nil(get_in(state, [:score, player, state.current_question]))
   end
 
   defp via_tuple(name) do
@@ -209,5 +228,11 @@ defmodule Tauper.Games.Server do
     process_name
     |> via_tuple()
     |> GenServer.call(request)
+  end
+
+  defp status_details(state) do
+    state
+    |> Map.delete(:questions)
+    |> Map.put(:question, Enum.at(state.questions, state.current_question))
   end
 end

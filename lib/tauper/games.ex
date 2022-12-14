@@ -6,7 +6,40 @@ defmodule Tauper.Games do
   import Ecto.Query, warn: false
   alias Tauper.Repo
 
-  alias Tauper.Games.Game
+  alias Tauper.Games.{Supervisor, Game, Server}
+
+  @doc """
+  Creates a new game with the code game.
+
+  It returns an error it the game exists.
+
+  ## Examples
+      iex> new_game("123")
+      [%Game{}, ...]
+  """
+  def new_game(game_code) do
+    Supervisor.start_child(game_code)
+  end
+
+  def start_game(game_code) do
+    Server.start(game_code)
+  end
+
+  def game(game_code) do
+    Server.game(game_code)
+  end
+
+  def next_question(game_code) do
+    Server.next(game_code)
+  end
+
+  def answer(game_code, answer, player) do
+    Server.answer(game_code, answer, player)
+  end
+
+  def podium(game_code) do
+    Server.podium(game_code)
+  end
 
   @doc """
   Returns the list of games.
