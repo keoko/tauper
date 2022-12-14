@@ -1,8 +1,8 @@
 #+title: Tasks
 * Tasks
-** TODO skip question / next question does not refresh all users
+** DONE next question does not refresh all users
+** DONE start game does not refresh all users
 send event when there is any game change?
-** TODO check accented words
 ** DONE show podium as last page
 ** DONE start game
 ** DONE next question
@@ -15,6 +15,11 @@ send event when there is any game change?
 ** TODO keep players list in the game server? or only in the presence?
 It could be interesting to keep the list of users in the game server to control only allowed users can play.
 ** TODO time per question
+** TODO how to handle changed game state to refresh liveviews?
+- send whole game state as response for any request?
+- send only changed state
+- do not send any state. LiveViews will request data if needed based on events received.
+
 ** TODO if all players have answered the question move to the next one
 ** TODO display periodic table with highlighted cell
 ** TODO stop game
@@ -28,6 +33,7 @@ It could be interesting to keep the list of users in the game server to control 
 ** DONE create new game
 ** DONE list participants in game page
 ** DONE on_mount
+** TODO check accented words
 ** TODO how to connect iex to list the presence list of users
 ** DONE how to pass game-id through the live route
 ** TODO how to move render function to a live template
