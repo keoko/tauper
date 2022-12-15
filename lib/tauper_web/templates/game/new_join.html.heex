@@ -1,3 +1,4 @@
+<h2>Join game</h2>
 <.form let={f} for={@changeset} action={Routes.game_path(@conn, :join)} as={"join_game_params"}>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
