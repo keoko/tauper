@@ -1,23 +1,37 @@
 defmodule Tauper.Games.Server do
   use GenServer
-  alias TauperWeb.Endpoint
+  alias TauperWeb.{Endpoint, Presence}
 
   @registry :game_registry
 
-  @initial_state %{questions: [], current_question: 0, status: :not_started, score: %{}}
+  @question_types ["symbol", "name", "oxidation_states"]
+
+  @default_num_questions 20
+
+  @max_num_groups 18
+
+  @initial_state %{
+    code: nil,
+    questions: [],
+    current_question: 0,
+    status: :not_started,
+    score: %{}
+  }
 
   # TODO load all elements
   # TODO does it make sense to have it in another file?
   # TODO cnaviar oxidatoin_states per valiencia
   @elements %{
-    1 => %{symbol: "H", name: "Hidrogen", oxidation_states: [1]},
-    2 => %{symbol: "He", name: "Heli", oxidation_states: [0]},
-    3 => %{symbol: "Li", name: "Liti", oxidation_states: [1]}
+    1 => %{symbol: "H", name: "Hidrogen", oxidation_states: [1], group: 1},
+    2 => %{symbol: "He", name: "Heli", oxidation_states: [0], group: 18},
+    3 => %{symbol: "Li", name: "Liti", oxidation_states: [1], group: 1}
   }
 
   ## missing client API
-  def start_link(name) do
-    GenServer.start_link(__MODULE__, name, name: via_tuple(name))
+  def start_link(opts) do
+    code = Keyword.fetch!(opts, :code)
+    params = Keyword.get(opts, :params, %{}) |> Map.put(:code, code)
+    GenServer.start_link(__MODULE__, params, name: via_tuple(code))
   end
 
   def start(process_name) do
@@ -46,10 +60,10 @@ defmodule Tauper.Games.Server do
 
   ## Defining GenServer callbacks
   @impl true
-  def init(opts \\ []) do
-    questions = build_questions(opts)
+  def init(params \\ []) do
+    questions = build_questions(params)
 
-    state = %{@initial_state | questions: questions}
+    state = %{@initial_state | code: params.code, questions: questions}
 
     {:ok, state}
   end
@@ -124,7 +138,7 @@ defmodule Tauper.Games.Server do
     if is_last_question(state) do
       change_status(state, :game_over)
     else
-      Endpoint.broadcast("games", "next_question", %{})
+      Endpoint.broadcast(Presence.topic(state.code), "next_question", %{})
       %{state | current_question: state.current_question + 1}
     end
   end
@@ -133,28 +147,45 @@ defmodule Tauper.Games.Server do
     state.current_question == Enum.count(state.questions) - 1
   end
 
-  def build_questions(_opts \\ []) do
-    # TODO build questions based on user-provided options
-    # question_types = [:symbol, :name, :oxidation_states]
-    # atomic_numbers = [1, 2, 3]
-    question_types = [:symbol, :name]
-    atomic_numbers = [1, 2]
-
-    questions =
-      for question_type <- question_types,
-          atomic_number <- atomic_numbers,
+  def build_questions(params \\ []) do
+    all_questions =
+      for question_type <- question_types(params),
+          atomic_number <- atomic_numbers(params),
           do: %{type: question_type, atomic_number: atomic_number}
 
-    Enum.map(questions, fn q -> Map.put(q, :sentence, build_sentence(q)) end)
+    all_questions
+    |> shuffle_questions()
+    |> filter_num_questions(params[:num_questions] || @default_num_questions)
+    |> Enum.map(fn q -> Map.put(q, :sentence, build_sentence(q)) end)
+  end
+
+  defp filter_num_questions(questions, num) do
+    Enum.take(questions, num)
+  end
+
+  def question_types(params) do
+    types = params[:question_types] || @question_types
+
+    Enum.reduce(types, [], fn v, acc ->
+      if v in @question_types, do: [v | acc], else: acc
+    end)
+  end
+
+  def atomic_numbers(params) do
+    groups = params[:element_groups] || Enum.to_list(1..@max_num_groups)
+
+    @elements
+    |> Enum.filter(fn {_k, v} -> v.group in groups end)
+    |> Enum.map(fn {k, _v} -> k end)
   end
 
   def build_sentence(question) do
     element = get_element(question.atomic_number)
 
     case question.type do
-      :symbol -> "Quin es el símbol del #{element.name}?"
-      :name -> "Quin es el nom del #{element.symbol}?"
-      :oxidation_states -> "Quin són els estats d'oxidació del #{element.name}?"
+      "symbol" -> "Quin es el símbol del #{element.name}?"
+      "name" -> "Quin es el nom del #{element.symbol}?"
+      "oxidation_states" -> "Quin són els estats d'oxidació del #{element.name}?"
     end
   end
 
@@ -167,9 +198,9 @@ defmodule Tauper.Games.Server do
 
     correct_answer =
       case question.type do
-        :symbol -> element.symbol
-        :name -> element.name
-        :oxidation_states -> element.oxidation_states
+        "symbol" -> element.symbol
+        "name" -> element.name
+        "oxidation_states" -> element.oxidation_states
       end
 
     correct_answer == answer
@@ -239,7 +270,7 @@ defmodule Tauper.Games.Server do
 
   defp change_status(state, new_status) do
     if state.status != new_status do
-      Endpoint.broadcast("games", "game_status_changed", %{status: new_status})
+      Endpoint.broadcast(Presence.topic(state.code), "game_status_changed", %{status: new_status})
     end
 
     %{state | status: new_status}

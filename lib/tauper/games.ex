@@ -16,11 +16,11 @@ defmodule Tauper.Games do
   It returns an error it the game exists.
 
   ## Examples
-      iex> new_game("123")
+  iex> new_game("123", [num_questions: 20, question_types: ["symbol"]])
       [%Game{}, ...]
   """
-  def new_game(game_code) do
-    Supervisor.start_child(game_code)
+  def new_game(game_code, game_params) do
+    Supervisor.start_child(game_code, game_params)
   end
 
   def start_game(game_code) do

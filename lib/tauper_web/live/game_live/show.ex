@@ -41,6 +41,10 @@ defmodule TauperWeb.GameLive.Show do
      |> assign(:players, players)}
   end
 
+  def handle_info(_event, socket) do
+    {:noreply, socket}
+  end
+
   def handle_event("next", _data, socket) do
     code = socket.assigns.code
     game = Games.next_question(code)

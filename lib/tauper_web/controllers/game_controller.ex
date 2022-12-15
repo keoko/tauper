@@ -61,37 +61,62 @@ defmodule TauperWeb.GameController do
     end
   end
 
-  # def create(conn, %{"game" => game_params}) do
-  #   case Games.create_game(game_params) do
-  #     {:ok, game} ->
-  #       conn
-  #       |> put_flash(:info, "Game created successfully.")
-  #       |> redirect(to: Routes.game_path(conn, :show, game))
+  def change_new_game_request(attrs \\ %{}) do
+    types = %{
+      num_questions: :integer,
+      question_types: {:array, :string},
+      element_groups: {:array, :integer}
+    }
 
-  #     {:error, %Ecto.Changeset{} = changeset} ->
-  #       render(conn, "new.html", changeset: changeset)
-  #   end
-  # end
+    # apply_action(:insert) needed to display error messages in the form
+    # TODO how to convert question_types from sting to an atom (enums)?
+    {%{}, types}
+    |> Changeset.cast(attrs, Map.keys(types))
+    |> Changeset.validate_required([:num_questions, :question_types, :element_groups])
+    |> Changeset.validate_number(:num_questions, greater_than: 0)
+  end
 
-  def create(conn, _params) do
-    code = Games.generate_code()
-    player_name = "owner"
-    game_params = %{code: code, status: "not_started"}
+  defp validate_new_params(params) do
+    params
+    |> change_new_game_request
+    # apply_action(:insert) to force showing error messages in schemaless ecto validation
+    |> Changeset.apply_action(:insert)
+  end
 
-    case Games.create_game(game_params) do
-      {:ok, _pid} ->
-        Games.new_game(game_params.code)
-
-        conn
-        |> renew_session()
-        |> put_session(:player_name, player_name)
-        |> put_session(:code, code)
-        |> put_flash(:info, "Game created successfully with code " <> game_params.code)
-        |> redirect(to: Routes.game_show_path(conn, :show, code))
-
+  def create(conn, %{"new_game_form" => params}) do
+    with code = Games.generate_code(),
+         player_name = "owner",
+         {:ok, game_params} <- validate_new_params(params),
+         Games.new_game(code, game_params) do
+      conn
+      |> renew_session()
+      |> put_session(:player_name, player_name)
+      |> put_session(:code, code)
+      |> put_flash(:info, "Game created successfully with code " <> code)
+      |> redirect(to: Routes.game_show_path(conn, :show, code))
+    else
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
+
+    #
+    # player_name = "owner"
+    # game_params = %{code: code, status: "not_started"}
+
+    # case Games.create_game(game_params) do
+    #   {:ok, _pid} ->
+    #     Games.new_game(game_params.code)
+
+    #     conn
+    #     |> renew_session()
+    #     |> put_session(:player_name, player_name)
+    #     |> put_session(:code, code)
+    #     |> put_flash(:info, "Game created successfully with code " <> game_params.code)
+    #     |> redirect(to: Routes.game_show_path(conn, :show, code))
+
+    #   {:error, %Ecto.Changeset{} = changeset} ->
+    #     render(conn, "new.html", changeset: changeset)
+    # end
   end
 
   def show(conn, %{"id" => id}) do

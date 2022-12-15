@@ -21,6 +21,8 @@ send event when there is any game change?
 ** DONE next question
 ** DONE game status
 ** DONE remove games schema and use gensver instead.
+** TODO how to validate schenaless ecto list of type enum
+https://alexgaribay.com/ecto-enum-in-schemaless-changesets/
 ** TODO shuffle list of questions
 ** TODO time per question
 ** TODO keep players list in the game server? or only in the presence?
