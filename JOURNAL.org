@@ -1,9 +1,16 @@
 #+title: Journal
 * 2022
 ** 2022/Dec
+*** 2022/Dec/18
+**** DONE 2022/Dec/17
+question timer
+*** 2022/Dec/17
+**** DONE learn about timers
+*** 2022/Dec/15
+**** DONE split game LV in two: show LV and gme LV
 *** 2022/Dec/13
-**** TODO registry
-**** TODO dynamic supervisor
+**** DONE registry
+**** DONE dynamic supervisor
 *** 2022/Dec/12
 **** DONE rename project to "tauper"
 **** DONE game logic
