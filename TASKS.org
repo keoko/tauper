@@ -1,10 +1,22 @@
 #+title: Tasks
 * Tasks
-** DONE change phoenix header with a tauper game
-** TODO build questions based on user-provided params (e.g. max number of questions, columns, etc.)
-** DONE stop game
+** TODO can we remove "next_question" event?
+It looks like "status_changed" would be enough.
+** DONE stop timer when in paused status
+** DONE skip question
+** TODO show score with 0
+** TODO score with timing
 ** TODO once answered the question, hide question and display message waiting next question
+** DONE timer goes too fast
+I didn't return properly the state in sart_game and there were multiple timers active at the same time.
+** TODO display player score in paused state
+** DONE change phoenix header with a tauper game
+** DONE build questions based on user-provided params (e.g. max number of questions, columns, etc.)
+** DONE stop game
+** DONE time per question
 ** TODO add the rest of elements
+** TODO if all players have answered the question move to the next one
+** TODO display periodic table with highlighted cell
 ** TODO remove game schema
 The game data has been moved to the genserver, so there is no need to keep the game data in DB.
 ** TODO remove game actions not needed (edit game, etc.)
@@ -21,10 +33,7 @@ send event when there is any game change?
 ** DONE next question
 ** DONE game status
 ** DONE remove games schema and use gensver instead.
-** TODO how to validate schenaless ecto list of type enum
-https://alexgaribay.com/ecto-enum-in-schemaless-changesets/
-** TODO shuffle list of questions
-** TODO time per question
+** DONE shuffle list of questions
 ** TODO keep players list in the game server? or only in the presence?
 It could be interesting to keep the list of users in the game server to control only allowed users can play.
 ** TODO multiple liveviews or liveview with compoments?
@@ -33,8 +42,8 @@ It could be interesting to keep the list of users in the game server to control 
 - send only changed state
 - do not send any state. LiveViews will request data if needed based on events received.
 
-** TODO if all players have answered the question move to the next one
-** TODO display periodic table with highlighted cell
+** TODO how to validate schenaless ecto list of type enum
+https://alexgaribay.com/ecto-enum-in-schemaless-changesets/
 ** DONE score
 ** DONE learn about presence
 ** DONE learn about channels
@@ -45,7 +54,7 @@ It could be interesting to keep the list of users in the game server to control 
 ** DONE create new game
 ** DONE list participants in game page
 ** DONE on_mount
-** TODO how to connect iex to list the presence list of users
+** DONE how to connect iex to list the presence list of users
 ** DONE how to pass game-id through the live route
 ** DONE how to move render function to a live template
 create a file in the same liveview folder with name {liveview_name}.html.heex
