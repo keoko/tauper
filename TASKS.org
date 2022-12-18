@@ -103,3 +103,4 @@ create a file in the same liveview folder with name {liveview_name}.html.heex
 ** ECS
 ** elixir state machines gen fsm?
 ** watcher mode: connect to a game just for wantching the game
+** purge zombie games. Kill games live more than 24h
