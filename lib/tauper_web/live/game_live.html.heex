@@ -10,13 +10,14 @@
 </div>
 <div>
 </div>
-<!-- <button phx-click="start" phx-value-game_code= {@game_code} >Start Game</button> -->
 <% end %>
+
 <%= if @status == :started do %>
     <div>
         <strong><%= @question %></strong>
     </div>
 <div>
+    <div>time: <%= @remaining_time %></div>
 <.form
 let={f}
 for={@changeset}
@@ -28,9 +29,11 @@ phx-submit="answer">
 <%= submit "send answer", phx_disable_with: "Sending answer..." %>
 </.form>
 </div>
-
-
 <% end %>
+<%= if @status == :paused do %>
+    TODO: display user scoring
+<% end %>
+
 <%= if @status == :game_over do %>
 <%= if @podium do %>
     <h2>Podium</h2>

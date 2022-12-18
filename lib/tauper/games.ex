@@ -19,7 +19,7 @@ defmodule Tauper.Games do
   iex> new_game("123", [num_questions: 20, question_types: ["symbol"]])
       [%Game{}, ...]
   """
-  def new_game(game_code, game_params) do
+  def new_game(game_code, game_params \\ %{}) do
     Supervisor.start_child(game_code, game_params)
   end
 
@@ -41,6 +41,10 @@ defmodule Tauper.Games do
 
   def next_question(game_code) do
     Server.next(game_code)
+  end
+
+  def skip_question(game_code) do
+    Server.skip(game_code)
   end
 
   def answer(game_code, answer, player) do

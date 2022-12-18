@@ -41,10 +41,14 @@ defmodule TauperWeb.GameLive do
         {:cont,
          socket
          |> assign(:game_code, code)
-         |> assign(:question, game.question.sentence)
+         |> assign(
+           :question,
+           if(!is_nil(game["question"]), do: game.question.sentence, else: nil)
+         )
          |> assign(:podium, Games.podium(code))
          |> assign(:changeset, change_answer())
          |> assign(:status, game.status)
+         |> assign(:remaining_time, game.remaining_time)
          |> assign(:player_name, player_name)}
 
       {:error, error} ->
@@ -121,6 +125,22 @@ defmodule TauperWeb.GameLive do
      socket
      |> assign(:status, game.status)
      |> assign(:question, game.question.sentence)}
+  end
+
+  def handle_info(%{event: "question_tick", payload: payload}, socket) do
+    {:noreply,
+     socket
+     |> assign(:remaining_time, payload.remaining_time)}
+  end
+
+  def handle_info(%{event: "question_timeout"}, socket) do
+    {:noreply,
+     socket
+     |> assign(:remaining_time, "timeout")}
+  end
+
+  def handle_info(_event, socket) do
+    {:noreply, socket}
   end
 
   def change_answer(attrs \\ %{}) do

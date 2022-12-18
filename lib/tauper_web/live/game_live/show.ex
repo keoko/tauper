@@ -26,12 +26,7 @@ defmodule TauperWeb.GameLive.Show do
     }
   end
 
-  def handle_event("start", _data, socket) do
-    code = socket.assigns.code
-    game = Games.start_game(code)
-    {:noreply, assign(socket, status: game.status, question: game.question.sentence)}
-  end
-
+  @impl true
   def handle_info(%{event: "presence_diff"}, socket) do
     code = socket.assigns.code
     players = Presence.list_players(code)
@@ -41,14 +36,49 @@ defmodule TauperWeb.GameLive.Show do
      |> assign(:players, players)}
   end
 
+  def handle_info(%{event: "question_tick", payload: payload}, socket) do
+    {:noreply,
+     socket
+     |> assign(:remaining_time, payload.remaining_time)}
+  end
+
+  def handle_info(%{event: "game_status_changed"} = data, socket) do
+    game_code = socket.assigns.game_code
+    new_status = data.payload.status
+    game = Games.game(game_code)
+    podium = if new_status in [:game_over, :paused], do: Games.podium(game_code), else: []
+
+    {:noreply,
+     socket
+     |> assign(:question, game.question.sentence)
+     |> assign(:status, new_status)
+     |> assign(:podium, podium)}
+  end
+
   def handle_info(_event, socket) do
     {:noreply, socket}
+  end
+
+  @impl true
+  def handle_event("start", _data, socket) do
+    code = socket.assigns.code
+    game = Games.start_game(code)
+    {:noreply, assign(socket, status: game.status, question: game.question.sentence)}
   end
 
   def handle_event("next", _data, socket) do
     code = socket.assigns.code
     game = Games.next_question(code)
-    podium = if game.status == :game_over, do: Games.podium(code), else: []
+    podium = if game.status in [:game_over, :paused], do: Games.podium(code), else: []
+
+    {:noreply,
+     assign(socket, status: game.status, question: game.question.sentence, podium: podium)}
+  end
+
+  def handle_event("skip", _data, socket) do
+    code = socket.assigns.code
+    game = Games.skip_question(code)
+    podium = if game.status in [:game_over, :paused], do: Games.podium(code), else: []
 
     {:noreply,
      assign(socket, status: game.status, question: game.question.sentence, podium: podium)}

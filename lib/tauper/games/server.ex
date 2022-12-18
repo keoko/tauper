@@ -10,12 +10,16 @@ defmodule Tauper.Games.Server do
 
   @max_num_groups 18
 
+  @question_timeout 10
+
   @initial_state %{
     code: nil,
     questions: [],
     current_question: 0,
     status: :not_started,
-    score: %{}
+    score: %{},
+    timer: nil,
+    remaining_time: @question_timeout
   }
 
   # TODO load all elements
@@ -48,6 +52,10 @@ defmodule Tauper.Games.Server do
 
   def next(process_name) do
     call_server(process_name, :next)
+  end
+
+  def skip(process_name) do
+    call_server(process_name, :skip)
   end
 
   def score(process_name) do
@@ -89,13 +97,12 @@ defmodule Tauper.Games.Server do
 
   @impl true
   def handle_call(:start_game, _from, state) do
-    state = %{state | current_question: 0} |> change_status(:started)
+    state = next_question(%{state | current_question: -1})
     {:reply, status_details(state), state}
   end
 
   @impl true
   def handle_call(:game, _from, state) do
-    # TODO handle game status?
     {:reply, status_details(state), state}
   end
 
@@ -117,6 +124,13 @@ defmodule Tauper.Games.Server do
   @impl true
   def handle_call(:next, _from, state) do
     state = next_question(state)
+
+    {:reply, status_details(state), state}
+  end
+
+  def handle_call(:skip, _from, state) do
+    state = change_status(state, :paused)
+
     {:reply, status_details(state), state}
   end
 
@@ -130,6 +144,26 @@ defmodule Tauper.Games.Server do
     {:reply, calculate_podium(state, num_players), state}
   end
 
+  @impl true
+  def handle_info(:tick, state) do
+    remaining_time = state.remaining_time - 1
+
+    if remaining_time < 1 do
+      Endpoint.broadcast(Presence.topic(state.code), "question_timeout", %{})
+      {:noreply, %{state | remaining_time: remaining_time} |> change_status(:paused)}
+    else
+      Endpoint.broadcast(
+        Presence.topic(state.code),
+        "question_tick",
+        %{
+          remaining_time: remaining_time
+        }
+      )
+
+      {:noreply, %{state | remaining_time: remaining_time}}
+    end
+  end
+
   defp get_question(state) do
     Enum.at(state.questions, state.current_question)
   end
@@ -139,7 +173,13 @@ defmodule Tauper.Games.Server do
       change_status(state, :game_over)
     else
       Endpoint.broadcast(Presence.topic(state.code), "next_question", %{})
-      %{state | current_question: state.current_question + 1}
+
+      %{
+        state
+        | current_question: state.current_question + 1,
+          remaining_time: @question_timeout
+      }
+      |> change_status(:started)
     end
   end
 
@@ -271,8 +311,38 @@ defmodule Tauper.Games.Server do
   defp change_status(state, new_status) do
     if state.status != new_status do
       Endpoint.broadcast(Presence.topic(state.code), "game_status_changed", %{status: new_status})
+      %{state | status: new_status} |> update_timer()
+    else
+      state
+    end
+  end
+
+  defp update_timer(state) do
+    case state.status do
+      :started ->
+        start_timer(state)
+
+      :paused ->
+        stop_timer(state)
+
+      :game_over ->
+        stop_timer(state)
+
+      _ ->
+        state
+    end
+  end
+
+  def start_timer(state) do
+    {:ok, timer} = :timer.send_interval(:timer.seconds(1), self(), :tick)
+    %{state | timer: timer}
+  end
+
+  def stop_timer(state) do
+    if !is_nil(state.timer) do
+      {:ok, _cancel} = :timer.cancel(state.timer)
     end
 
-    %{state | status: new_status}
+    %{state | timer: nil}
   end
 end
