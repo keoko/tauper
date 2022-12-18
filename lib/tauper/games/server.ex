@@ -251,7 +251,7 @@ defmodule Tauper.Games.Server do
   end
 
   def update_score(state, player, is_correct) do
-    score = if is_correct, do: 1, else: 0
+    score = if is_correct, do: state.remaining_time, else: 0
 
     state
     |> maybe_init_player_score(player)
