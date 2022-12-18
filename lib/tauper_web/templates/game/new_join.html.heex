@@ -7,11 +7,11 @@
   <% end %>
 
   <%= label f, :game_code %>
-  <%= text_input f, :game_code %>
+  <%= text_input f, :game_code, autocomplete: "off" %>
   <%= error_tag f, :game_code %>
 
   <%= label f, :player_name %>
-  <%= text_input f, :player_name %>
+  <%= text_input f, :player_name, autocomplete: "off" %>
   <%= error_tag f, :player_name %>
   <div>
     <%= submit "Join Game" %>

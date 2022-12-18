@@ -92,7 +92,6 @@ defmodule TauperWeb.GameController do
       |> renew_session()
       |> put_session(:player_name, player_name)
       |> put_session(:code, code)
-      |> put_flash(:info, "Game created successfully with code " <> code)
       |> redirect(to: Routes.game_show_path(conn, :show, code))
     else
       {:error, %Ecto.Changeset{} = changeset} ->

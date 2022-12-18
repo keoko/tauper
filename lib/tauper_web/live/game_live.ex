@@ -49,6 +49,7 @@ defmodule TauperWeb.GameLive do
          |> assign(:changeset, change_answer())
          |> assign(:status, game.status)
          |> assign(:remaining_time, game.remaining_time)
+         |> assign(:player_score_and_position, nil)
          |> assign(:player_name, player_name)}
 
       {:error, error} ->
@@ -106,15 +107,20 @@ defmodule TauperWeb.GameLive do
 
   def handle_info(%{event: "game_status_changed"} = data, socket) do
     game_code = socket.assigns.game_code
+    player_name = socket.assigns.player_name
     new_status = data.payload.status
     game = Games.game(game_code)
-    podium = if new_status == :game_over, do: Games.podium(game_code), else: []
+    podium = if new_status in [:paused, :game_over], do: Games.podium(game_code), else: []
+    player_score_and_position = get_player_score_and_position(player_name, podium)
 
     {:noreply,
      socket
      |> assign(:question, game.question.sentence)
      |> assign(:status, new_status)
-     |> assign(:podium, podium)}
+     |> assign(:podium, podium)
+     |> assign(:answered, false)
+     |> assign(:is_correct, nil)
+     |> assign(:player_score_and_position, player_score_and_position)}
   end
 
   def handle_info(%{event: "next_question"}, socket) do
@@ -158,8 +164,28 @@ defmodule TauperWeb.GameLive do
   def handle_event("answer", %{"answer-form" => %{"answer" => answer}}, socket) do
     game_code = socket.assigns.game_code
     player_name = socket.assigns.player_name
-    game = Games.answer(game_code, answer, player_name)
 
-    {:noreply, assign(socket, status: game.status, question: game.question.sentence)}
+    is_correct =
+      case Games.answer(game_code, answer, player_name) do
+        {:ok, %{is_correct: is_correct}} -> is_correct
+        _ -> nil
+      end
+
+    {:noreply,
+     socket
+     |> assign(:is_correct, is_correct)
+     |> assign(:answered, true)}
+  end
+
+  def get_player_score_and_position(player_name, podium) do
+    player_in_podium =
+      podium
+      |> Enum.with_index(1)
+      |> Enum.find(fn {{name, _score}, _pos} -> name == player_name end)
+
+    case player_in_podium do
+      {{_name, score}, pos} -> %{score: score, position: pos}
+      _ -> nil
+    end
   end
 end

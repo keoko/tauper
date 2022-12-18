@@ -1,6 +1,6 @@
-<h1>Game (<%= @game_code %>)</h1>
-
 <%= if @status == :not_started do %>
+
+<h2>code: <em><%= @game_code %></em></h2>
 <button phx-click="start" phx-value-game_code= {@game_code} >Start Game</button>
 
 <div>

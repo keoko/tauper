@@ -112,12 +112,12 @@ defmodule Tauper.Games.Server do
 
     if has_already_answered(state, player) do
       # {:reply, %{is_correct: :already_answered, question: question}, state}
-      {:reply, status_details(state), state}
+      {:reply, {:error, :already_answered}, state}
     else
       is_correct = is_correct(question, answer)
       state = state |> update_score(player, is_correct)
 
-      {:reply, status_details(state), state}
+      {:reply, {:ok, %{is_correct: is_correct}}, state}
     end
   end
 

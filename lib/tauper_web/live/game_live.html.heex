@@ -1,14 +1,6 @@
-<h1>Game (<%= @game_code %>)</h1>
 <%= if @status == :not_started do %>
 <div>
-<strong>Players:</strong>
-<ul>
-<%= for player <- @players do %>
-<li><%= player.name %> </li>
-<% end %>
-</ul>
-</div>
-<div>
+    Waiting to start the game ...
 </div>
 <% end %>
 
@@ -18,29 +10,33 @@
     </div>
 <div>
     <div>time: <%= @remaining_time %></div>
-<.form
-let={f}
-for={@changeset}
-id="answer-form"
-as="answer-form"
-phx-submit="answer">
-<%= text_input f, :answer %>
-<%= error_tag f, :answer %>
-<%= submit "send answer", phx_disable_with: "Sending answer..." %>
-</.form>
+    <%= if assigns[:answered] do %>
+        <%= if assigns[:is_correct] do %>
+            Your answer is <%=  if @is_correct, do: "correct", else: "wrong" %>.
+        <% else %>
+            Your answer is <%=  if @is_correct, do: "correct", else: "wrong" %>.
+        <% end %>
+    <% else %>
+        <.form
+        let={f}
+        for={@changeset}
+        id="answer-form"
+        as="answer-form"
+        phx-submit="answer">
+        <%= text_input f, :answer, autocomplete: "off" %>
+        <%= error_tag f, :answer %>
+        <%= submit "send answer", phx_disable_with: "Sending answer..." %>
+        </.form>
+    <% end %>
 </div>
 <% end %>
 <%= if @status == :paused do %>
-    TODO: display user scoring
+    <%= if @player_score_and_position do %>
+        <p>You are in position <%= @player_score_and_position.position %> (<%= @player_score_and_position.score %> points).</p>
+    <% end %>
+    <p>Waiting for next question ...</p>
 <% end %>
 
 <%= if @status == :game_over do %>
-<%= if @podium do %>
-    <h2>Podium</h2>
-<ul>
-<%= for {player_name, score} <- @podium do %>
-<li><%= player_name %>: <%= score %> points</li>
-<% end %>
-</ul>
-<% end %>
+        <p>You finished in position <%= @player_score_and_position.position %> (<%= @player_score_and_position.score %> points).</p>
 <% end %>
