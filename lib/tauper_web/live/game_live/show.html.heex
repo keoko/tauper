@@ -26,12 +26,26 @@
 <%= if @status == :paused do %>
 <%= if @podium do %>
     <h2>Podium</h2>
-<ul>
-<%= for {player_name, score} <- @podium do %>
-<li><%= player_name %>: <%= score %> points</li>
-<% end %>
-</ul>
-<% end %>
+    <table>
+      <thead>
+        <tr>
+          <th>Position</th>
+          <th>Player</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+    <%= for {{player_name, score}, position} <- Enum.with_index(@podium, 1) do %>
+      <tr>
+        <td><%= position %></td>
+        <td><%= player_name %></td>
+        <td><%= score %> points</td>
+      </tr>
+    <% end %>
+      </tbody>
+    </table>
+  <% end %>
+
     <button phx-click="next">Next Question</button>
 <% end %>
 
@@ -39,11 +53,24 @@
 <%= if @status == :game_over do %>
   <%= if @podium do %>
     <h2>Final Podium</h2>
-    <ul>
-    <%= for {player_name, score} <- @podium do %>
-      <li><%= player_name %>: <%= score %> points</li>
+    <table>
+      <thead>
+        <tr>
+          <th>Position</th>
+          <th>Player</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+    <%= for {{player_name, score}, position} <- Enum.with_index(@podium, 1) do %>
+      <tr>
+        <td><%= position %></td>
+        <td><%= player_name %></td>
+        <td><%= score %> points</td>
+      </tr>
     <% end %>
-    </ul>
+      </tbody>
+    </table>
   <% end %>
 
   <button phx-click="stop">Stop Game</button>

@@ -2,13 +2,12 @@
 * Tasks
 ** DONE stop timer when in paused status
 ** DONE skip question
-** TODO create table with player names and scores instead of bullet points
-** TODO show score with 0
+** DONE create table with player names and scores instead of bullet points
 ** DONE score with timing
-** TODO once answered the question, hide question and display message waiting next question
+** DONE once answered the question, hide question and display message waiting next question
 ** DONE timer goes too fast
 I didn't return properly the state in sart_game and there were multiple timers active at the same time.
-** TODO display player score in paused state
+** DONE display player score in paused state
 ** DONE change phoenix header with a tauper game
 ** DONE build questions based on user-provided params (e.g. max number of questions, columns, etc.)
 ** DONE stop game
