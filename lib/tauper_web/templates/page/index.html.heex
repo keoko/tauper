@@ -1,18 +1,2 @@
-<.form let={f} for={@changeset} action={Routes.game_path(@conn, :join)} as={"join_game_params"}>
-  <%= if @changeset.action do %>
-    <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
-    </div>
-  <% end %>
-
-  <%= label f, :game_code %>
-  <%= text_input f, :game_code %>
-  <%= error_tag f, :game_code %>
-
-  <%= label f, :player_name %>
-  <%= text_input f, :player_name %>
-  <%= error_tag f, :player_name %>
-  <div>
-    <%= submit "Join Game" %>
-  </div>
-</.form>
+<span><%= button "New Game", to: Routes.game_path(@conn, :new), method: "get" %></span> or
+<span><%= button "Join Game", to: Routes.game_path(@conn, :join), method: "get" %></span>
