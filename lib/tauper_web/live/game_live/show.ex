@@ -88,7 +88,7 @@ defmodule TauperWeb.GameLive.Show do
     code = socket.assigns.code
     Games.stop_game(code)
 
-    {:noreply, redirect(socket, to: Routes.game_path(socket, :new))}
+    {:noreply, redirect(socket, to: Routes.page_path(socket, :index))}
   end
 
   defp page_title(:show), do: "Show Game"
