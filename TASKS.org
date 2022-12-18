@@ -1,5 +1,8 @@
 #+title: Tasks
 * Tasks
+** TODO display number of answers in started mode
+** TODO joining an invalid game throws an error
+** TODO time is not properly displayed sometimes when starting next question
 ** DONE stop timer when in paused status
 ** DONE skip question
 ** DONE create table with player names and scores instead of bullet points
@@ -13,7 +16,7 @@ I didn't return properly the state in sart_game and there were multiple timers a
 ** DONE stop game
 ** DONE time per question
 ** TODO add the rest of elements
-** TODO if all players have answered the question move to the next one
+** DONE if all players have answered the question move to the next one
 ** TODO display periodic table with highlighted cell
 ** TODO remove game schema
 The game data has been moved to the genserver, so there is no need to keep the game data in DB.

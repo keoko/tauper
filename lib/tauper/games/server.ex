@@ -117,6 +117,13 @@ defmodule Tauper.Games.Server do
       is_correct = is_correct(question, answer)
       state = state |> update_score(player, is_correct)
 
+      state =
+        if all_plawers_answered_question(state) do
+          change_status(state, :paused)
+        else
+          state
+        end
+
       {:reply, {:ok, %{is_correct: is_correct}}, state}
     end
   end
@@ -259,12 +266,12 @@ defmodule Tauper.Games.Server do
   end
 
   def maybe_init_player_score(state, player) do
-    list_nils = Stream.repeatedly(fn -> nil end) |> Enum.take(length(state.questions))
-    init_score = 0..length(list_nils) |> Stream.zip(list_nils) |> Enum.into(%{})
-
     if get_in(state, [:score, player]) != nil do
       state
     else
+      list_nils = Stream.repeatedly(fn -> nil end) |> Enum.take(length(state.questions))
+      init_score = 0..length(list_nils) |> Stream.zip(list_nils) |> Enum.into(%{})
+
       update_in(state, [:score], &Map.put(&1, player, init_score))
     end
   end
@@ -344,5 +351,15 @@ defmodule Tauper.Games.Server do
     end
 
     %{state | timer: nil}
+  end
+
+  def all_plawers_answered_question(state) do
+    # first expression is needed because state.score is only populoated in the first player answer
+    players = Presence.list_players(state.code)
+
+    map_size(state.score) == Enum.count(players) and
+      Enum.all?(state.score, fn {_player, player_score} ->
+        !is_nil(player_score[state.current_question])
+      end)
   end
 end
