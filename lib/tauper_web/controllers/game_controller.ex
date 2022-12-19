@@ -44,7 +44,7 @@ defmodule TauperWeb.GameController do
 
   def join(conn, %{"join_game_params" => %{"game_code" => code} = params}) do
     with {:ok, valid_params} <- validate_join_params(params),
-         [_pid] = Games.lookup(code) do
+         [_pid] <- Games.lookup(code) do
       conn
       |> renew_session()
       |> put_session(:player_name, valid_params.player_name)

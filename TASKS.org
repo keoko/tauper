@@ -1,7 +1,7 @@
 #+title: Tasks
 * Tasks
 ** TODO display number of answers in started mode
-** TODO joining an invalid game throws an error
+** DONE joining an invalid game throws an error
 ** TODO time is not properly displayed sometimes when starting next question
 ** DONE stop timer when in paused status
 ** DONE skip question
