@@ -10,15 +10,12 @@
     </tr>
   </thead>
   <tbody>
-<%= for game <- @games do %>
+<%= for game_code <- @games do %>
     <tr>
-      <td><%= game.code %></td>
-      <td><%= game.status %></td>
+      <td><%= game_code %></td>
 
       <td>
-        <span><%= link "Show", to: Routes.game_path(@conn, :show, game) %></span>
-        <span><%= link "Edit", to: Routes.game_path(@conn, :edit, game) %></span>
-        <span><%= link "Delete", to: Routes.game_path(@conn, :delete, game), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <span><%= link "Join", to: Routes.game_path(@conn, :join, game_code: game_code) %></span>
       </td>
     </tr>
 <% end %>

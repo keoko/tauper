@@ -7,7 +7,7 @@ defmodule TauperWeb.GameController do
   alias Ecto.Changeset
 
   def index(conn, _params) do
-    games = Games.list_games()
+    games = Games.list_game_codes()
     render(conn, "index.html", games: games)
   end
 
@@ -97,64 +97,6 @@ defmodule TauperWeb.GameController do
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
-
-    #
-    # player_name = "owner"
-    # game_params = %{code: code, status: "not_started"}
-
-    # case Games.create_game(game_params) do
-    #   {:ok, _pid} ->
-    #     Games.new_game(game_params.code)
-
-    #     conn
-    #     |> renew_session()
-    #     |> put_session(:player_name, player_name)
-    #     |> put_session(:code, code)
-    #     |> put_flash(:info, "Game created successfully with code " <> game_params.code)
-    #     |> redirect(to: Routes.game_show_path(conn, :show, code))
-
-    #   {:error, %Ecto.Changeset{} = changeset} ->
-    #     render(conn, "new.html", changeset: changeset)
-    # end
-  end
-
-  def show(conn, %{"id" => id}) do
-    game = Games.get_game!(id)
-    render(conn, "show.html", game: game)
-    # live_render(conn, TauperWeb.CounterLive,
-    #   session: %{
-    #     "game_code" => game.code
-    #   }
-    # )
-  end
-
-  def edit(conn, %{"id" => id}) do
-    game = Games.get_game!(id)
-    changeset = Games.change_game(game)
-    render(conn, "edit.html", game: game, changeset: changeset)
-  end
-
-  def update(conn, %{"id" => id, "game" => game_params}) do
-    game = Games.get_game!(id)
-
-    case Games.update_game(game, game_params) do
-      {:ok, game} ->
-        conn
-        |> put_flash(:info, "Game updated successfully.")
-        |> redirect(to: Routes.game_path(conn, :show, game))
-
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", game: game, changeset: changeset)
-    end
-  end
-
-  def delete(conn, %{"id" => id}) do
-    game = Games.get_game!(id)
-    {:ok, _game} = Games.delete_game(game)
-
-    conn
-    |> put_flash(:info, "Game deleted successfully.")
-    |> redirect(to: Routes.game_path(conn, :index))
   end
 
   # This function renews the session ID and erases the whole

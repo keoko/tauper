@@ -22,15 +22,14 @@ defmodule TauperWeb.Router do
 
     get "/", PageController, :index
 
-    resources "/games", GameController
+    resources "/games", GameController, only: [:index, :new, :create]
+    get "/games/join", GameController, :new_join
+    post "/games/join", GameController, :join
 
     live_session :default, on_mount: TauperWeb.GameLive.Play do
-      live "/game/:code", GameLive.Show, :show
-      live "/play/:code", GameLive.Play, :play
+      live "/games/play/:code", GameLive.Play, :play
+      live "/games/:code", GameLive.Show, :show
     end
-
-    get "/join", GameController, :new_join
-    post "/join", GameController, :join
   end
 
   # Other scopes may use custom stacks.
