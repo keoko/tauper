@@ -3,11 +3,10 @@
 ** TODO add the rest of elements
 ** DONE time is not properly displayed sometimes when starting next question
 ** TODO display periodic table with highlighted cell
-** TODO display number of answers in started mode
 ** TODO remove game schema
 The game data has been moved to the genserver, so there is no need to keep the game data in DB.
 ** TODO remove game actions not needed (edit game, etc.)
-** TODO rename live_game.ex to live/game_live/new.ex
+** DONE rename live_game.ex to live/game_live/play.ex
 ** DONE can we remove "next_question" event?
 Yes, it looks like "status_changed" would be enough.
 ** DONE joining an invalid game throws an error
@@ -107,3 +106,5 @@ create a file in the same liveview folder with name {liveview_name}.html.heex
 ** watcher mode: connect to a game just for wantching the game
 ** purge zombie games. Kill games live more than 24h
 ** display number of question? remaining questions?
+** display number of answers in started mode
+** list_games

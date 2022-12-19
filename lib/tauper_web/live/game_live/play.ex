@@ -1,4 +1,4 @@
-defmodule TauperWeb.GameLive do
+defmodule TauperWeb.GameLive.Play do
   # use Phoenix.LiveView, layout: {TauperWeb.LayoutView, "live.html"}
   use TauperWeb, :live_view
   alias Tauper.Games

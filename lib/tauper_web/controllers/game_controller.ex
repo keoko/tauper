@@ -49,7 +49,7 @@ defmodule TauperWeb.GameController do
       |> renew_session()
       |> put_session(:player_name, valid_params.player_name)
       |> put_session(:code, valid_params.game_code)
-      |> redirect(to: Routes.game_path(conn, :play, valid_params.game_code))
+      |> redirect(to: Routes.game_play_path(conn, :play, valid_params.game_code))
     else
       [] ->
         conn
