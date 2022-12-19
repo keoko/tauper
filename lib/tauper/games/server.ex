@@ -179,8 +179,6 @@ defmodule Tauper.Games.Server do
     if is_last_question(state) do
       change_status(state, :game_over)
     else
-      Endpoint.broadcast(Presence.topic(state.code), "next_question", %{})
-
       %{
         state
         | current_question: state.current_question + 1,

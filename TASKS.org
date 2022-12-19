@@ -1,8 +1,16 @@
 #+title: Tasks
 * Tasks
+** TODO add the rest of elements
+** DONE time is not properly displayed sometimes when starting next question
+** TODO display periodic table with highlighted cell
 ** TODO display number of answers in started mode
+** TODO remove game schema
+The game data has been moved to the genserver, so there is no need to keep the game data in DB.
+** TODO remove game actions not needed (edit game, etc.)
+** TODO rename live_game.ex to live/game_live/new.ex
+** DONE can we remove "next_question" event?
+Yes, it looks like "status_changed" would be enough.
 ** DONE joining an invalid game throws an error
-** TODO time is not properly displayed sometimes when starting next question
 ** DONE stop timer when in paused status
 ** DONE skip question
 ** DONE create table with player names and scores instead of bullet points
@@ -15,15 +23,7 @@ I didn't return properly the state in sart_game and there were multiple timers a
 ** DONE build questions based on user-provided params (e.g. max number of questions, columns, etc.)
 ** DONE stop game
 ** DONE time per question
-** TODO add the rest of elements
 ** DONE if all players have answered the question move to the next one
-** TODO display periodic table with highlighted cell
-** TODO remove game schema
-The game data has been moved to the genserver, so there is no need to keep the game data in DB.
-** TODO remove game actions not needed (edit game, etc.)
-** TODO rename live_game.ex to live/game_live/new.ex
-** TODO can we remove "next_question" event?
-It looks like "status_changed" would be enough.
 ** DONE move next question to show liveview
 ** DONE different views based on game owner/player
 yes, it should be split in 2 views: one to handle the game by the game owner, and the other one will be the player view.
@@ -106,3 +106,4 @@ create a file in the same liveview folder with name {liveview_name}.html.heex
 ** elixir state machines gen fsm?
 ** watcher mode: connect to a game just for wantching the game
 ** purge zombie games. Kill games live more than 24h
+** display number of question? remaining questions?

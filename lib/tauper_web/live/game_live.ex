@@ -118,19 +118,10 @@ defmodule TauperWeb.GameLive do
      |> assign(:question, game.question.sentence)
      |> assign(:status, new_status)
      |> assign(:podium, podium)
+     |> assign(:remaining_time, game.remaining_time)
      |> assign(:answered, false)
      |> assign(:is_correct, nil)
      |> assign(:player_score_and_position, player_score_and_position)}
-  end
-
-  def handle_info(%{event: "next_question"}, socket) do
-    game_code = socket.assigns.game_code
-    game = Games.game(game_code)
-
-    {:noreply,
-     socket
-     |> assign(:status, game.status)
-     |> assign(:question, game.question.sentence)}
   end
 
   def handle_info(%{event: "question_tick", payload: payload}, socket) do
