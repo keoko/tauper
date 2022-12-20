@@ -1,6 +1,6 @@
 #+title: Tasks
 * Tasks
-** TODO add the rest of elements
+** DONE add the rest of elements
 ** DONE time is not properly displayed sometimes when starting next question
 ** TODO display periodic table with highlighted cell
 ** TODO remove game schema
