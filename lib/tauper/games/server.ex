@@ -244,6 +244,12 @@ defmodule Tauper.Games.Server do
       is_correct = is_correct(question, answer)
       state = state |> update_score(player, is_correct)
 
+      Endpoint.broadcast(
+        Presence.topic(state.code),
+        "question_answered",
+        calculate_answers(state)
+      )
+
       state =
         if all_plawers_answered_question(state) do
           change_status(state, :paused)
@@ -314,11 +320,11 @@ defmodule Tauper.Games.Server do
     end
   end
 
-  def is_last_question(state) do
+  defp is_last_question(state) do
     state.current_question == Enum.count(state.questions) - 1
   end
 
-  def build_questions(num_questions, params \\ []) do
+  defp build_questions(num_questions, params \\ []) do
     all_questions =
       for question_type <- question_types(params),
           atomic_number <- atomic_numbers(params),
@@ -334,7 +340,7 @@ defmodule Tauper.Games.Server do
     Enum.take(questions, num)
   end
 
-  def question_types(params) do
+  defp question_types(params) do
     types = params[:question_types] || @question_types
 
     Enum.reduce(types, [], fn v, acc ->
@@ -342,7 +348,7 @@ defmodule Tauper.Games.Server do
     end)
   end
 
-  def atomic_numbers(params) do
+  defp atomic_numbers(params) do
     groups = params[:element_groups] || Enum.to_list(1..@max_num_groups)
 
     @elements
@@ -350,7 +356,7 @@ defmodule Tauper.Games.Server do
     |> Enum.map(fn {k, _v} -> k end)
   end
 
-  def build_sentence(question) do
+  defp build_sentence(question) do
     element = get_element(question.atomic_number)
 
     case question.type do
@@ -360,11 +366,11 @@ defmodule Tauper.Games.Server do
     end
   end
 
-  def shuffle_questions(questions) do
+  defp shuffle_questions(questions) do
     Enum.shuffle(questions)
   end
 
-  def is_correct(question, answer) do
+  defp is_correct(question, answer) do
     element = get_element(question.atomic_number)
 
     correct_answer =
@@ -377,11 +383,11 @@ defmodule Tauper.Games.Server do
     correct_answer == answer
   end
 
-  def get_element(atomic_number) do
+  defp get_element(atomic_number) do
     @elements[atomic_number]
   end
 
-  def update_score(state, player, is_correct) do
+  defp update_score(state, player, is_correct) do
     score = if is_correct, do: state.remaining_time, else: 0
 
     state
@@ -389,7 +395,7 @@ defmodule Tauper.Games.Server do
     |> put_in([:score, player, state.current_question], score)
   end
 
-  def maybe_init_player_score(state, player) do
+  defp maybe_init_player_score(state, player) do
     if get_in(state, [:score, player]) != nil do
       state
     else
@@ -400,26 +406,26 @@ defmodule Tauper.Games.Server do
     end
   end
 
-  def calculate_podium(state, num_players) do
+  defp calculate_podium(state, num_players) do
     state.score
     |> calculate_score
     |> sort_by_score
     |> Enum.take(num_players)
   end
 
-  def calculate_score(m) do
+  defp calculate_score(m) do
     Enum.map(m, fn {k, v} -> {k, sum_points(v)} end)
   end
 
-  def sum_points(m) do
+  defp sum_points(m) do
     m |> Map.values() |> Enum.reject(&is_nil/1) |> Enum.sum()
   end
 
-  def sort_by_score(m) do
+  defp sort_by_score(m) do
     Enum.sort_by(m, fn {_k, v} -> v end, :desc)
   end
 
-  def has_already_answered(state, player) do
+  defp has_already_answered(state, player) do
     !is_nil(get_in(state, [:score, player, state.current_question]))
   end
 
@@ -436,6 +442,7 @@ defmodule Tauper.Games.Server do
   defp status_details(state) do
     state
     |> Map.delete(:questions)
+    |> Map.put(:answers, calculate_answers(state))
     |> Map.put(:question, Enum.at(state.questions, state.current_question))
   end
 
@@ -464,12 +471,12 @@ defmodule Tauper.Games.Server do
     end
   end
 
-  def start_timer(state) do
+  defp start_timer(state) do
     {:ok, timer} = :timer.send_interval(:timer.seconds(1), self(), :tick)
     %{state | timer: timer}
   end
 
-  def stop_timer(state) do
+  defp stop_timer(state) do
     if !is_nil(state.timer) do
       {:ok, _cancel} = :timer.cancel(state.timer)
     end
@@ -477,13 +484,31 @@ defmodule Tauper.Games.Server do
     %{state | timer: nil}
   end
 
-  def all_plawers_answered_question(state) do
-    # first expression is needed because state.score is only populoated in the first player answer
-    players = Presence.list_players(state.code)
+  defp all_plawers_answered_question(state) do
+    # needed because state.score is only populoated when the player answers a question
+    num_players = Presence.num_players(state.code)
 
-    map_size(state.score) == Enum.count(players) and
+    map_size(state.score) == num_players and
       Enum.all?(state.score, fn {_player, player_score} ->
         !is_nil(player_score[state.current_question])
       end)
+  end
+
+  defp calculate_answers(state) do
+    num_players = num_players(state)
+
+    num_answers =
+      state.score
+      |> Enum.filter(fn {_k, v} -> !is_nil(Map.get(v, state.current_question)) end)
+      |> Enum.count()
+
+    %{total_players: num_players, num_answers: num_answers}
+  end
+
+  defp num_players(state) do
+    active_players = Presence.num_players(state.code)
+    score_players = Enum.count(state.score)
+
+    max(active_players, score_players)
   end
 end

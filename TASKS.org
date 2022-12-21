@@ -1,5 +1,6 @@
 #+title: Tasks
 * Tasks
+** TODO display number of answers in started mode
 ** TODO only owner can view the games/show page
 ** TODO remove special elements
 ** DONE disable start game if there are no players in the game
@@ -119,5 +120,4 @@ create a file in the same liveview folder with name {liveview_name}.html.heex
 ** elixir state machines gen fsm?
 ** watcher mode: connect to a game just for wantching the game
 ** purge zombie games. Kill games live more than 24h
-** display number of answers in started mode
 ** list_games

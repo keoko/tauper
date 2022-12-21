@@ -31,6 +31,10 @@ defmodule TauperWeb.Presence do
     |> extract_players()
   end
 
+  def num_players(code) do
+    list_players(code) |> Enum.count()
+  end
+
   defp extract_players(%{metas: metas}) do
     players_from_metas_list(metas)
   end

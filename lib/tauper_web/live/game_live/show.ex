@@ -11,7 +11,7 @@ defmodule TauperWeb.GameLive.Show do
       Endpoint.subscribe(Presence.topic(code))
     end
 
-    {:ok, socket}
+    {:ok, socket |> assign(:answers, nil)}
   end
 
   @impl true
@@ -42,6 +42,12 @@ defmodule TauperWeb.GameLive.Show do
      |> assign(:remaining_time, payload.remaining_time)}
   end
 
+  def handle_info(%{event: "question_answered", payload: payload}, socket) do
+    {:noreply,
+     socket
+     |> assign(:answers, payload)}
+  end
+
   def handle_info(%{event: "game_status_changed"} = data, socket) do
     game_code = socket.assigns.game_code
     new_status = data.payload.status
@@ -52,6 +58,7 @@ defmodule TauperWeb.GameLive.Show do
      socket
      |> assign(:question, game.question)
      |> assign(:game, game)
+     |> assign(:answers, game.answers)
      |> assign(:remaining_time, game.remaining_time)
      |> assign(:status, new_status)
      |> assign(:podium, podium)}
