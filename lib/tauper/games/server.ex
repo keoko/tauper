@@ -7,10 +7,12 @@ defmodule Tauper.Games.Server do
   @question_types ["symbol", "name", "oxidation_states"]
 
   @default_num_questions 20
+  def default_num_questions, do: @default_num_questions
+
+  @default_question_max_time 20
+  def default_question_max_time, do: @default_question_max_time
 
   @max_num_groups 18
-
-  @question_timeout 10
 
   @initial_state %{
     code: nil,
@@ -19,7 +21,8 @@ defmodule Tauper.Games.Server do
     status: :not_started,
     score: %{},
     timer: nil,
-    remaining_time: @question_timeout
+    remaining_time: @default_question_max_time,
+    question_max_time: @default_question_max_time
   }
 
   # TODO load all elements
@@ -184,9 +187,15 @@ defmodule Tauper.Games.Server do
   ## Defining GenServer callbacks
   @impl true
   def init(params \\ []) do
+    question_max_time = params[:question_max_time] || @default_question_max_time
     questions = build_questions(params)
 
-    state = %{@initial_state | code: params.code, questions: questions}
+    state = %{
+      @initial_state
+      | code: params.code,
+        questions: questions,
+        question_max_time: question_max_time
+    }
 
     {:ok, state}
   end
@@ -271,7 +280,6 @@ defmodule Tauper.Games.Server do
     remaining_time = state.remaining_time - 1
 
     if remaining_time < 1 do
-      Endpoint.broadcast(Presence.topic(state.code), "question_timeout", %{})
       {:noreply, %{state | remaining_time: remaining_time} |> change_status(:paused)}
     else
       Endpoint.broadcast(
@@ -297,7 +305,7 @@ defmodule Tauper.Games.Server do
       %{
         state
         | current_question: state.current_question + 1,
-          remaining_time: @question_timeout
+          remaining_time: state.question_max_time
       }
       |> change_status(:started)
     end

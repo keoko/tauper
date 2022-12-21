@@ -6,8 +6,13 @@
   <% end %>
 
   <%= label f, :num_questions, "Nombre de preguntes" %>
-  <%= number_input f, :num_questions, value: 20 %>
+  <%= number_input f, :num_questions, value: Tauper.Games.Server.default_num_questions %>
   <%= error_tag f, :num_questions %>
+
+
+  <%= label f, :question_max_time, "Temps per pregunta (segons)" %>
+  <%= number_input f, :question_max_time, value: Tauper.Games.Server.default_question_max_time %>
+  <%= error_tag f, :question_max_time %>
 
   <%= label f, :question_types, "Tipus de preguntes" %>
   <%=  multiple_select(f, :question_types, ["Símbol": "symbol", "Nom": "name", "Valències": "oxidation_numbers"], selected: ["symbol", "name", "oxidation_numbers"]) %>

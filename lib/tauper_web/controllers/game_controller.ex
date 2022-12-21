@@ -64,6 +64,7 @@ defmodule TauperWeb.GameController do
   def change_new_game_request(attrs \\ %{}) do
     types = %{
       num_questions: :integer,
+      question_max_time: :integer,
       question_types: {:array, :string},
       element_groups: {:array, :integer}
     }
@@ -72,8 +73,14 @@ defmodule TauperWeb.GameController do
     # TODO how to convert question_types from sting to an atom (enums)?
     {%{}, types}
     |> Changeset.cast(attrs, Map.keys(types))
-    |> Changeset.validate_required([:num_questions, :question_types, :element_groups])
+    |> Changeset.validate_required([
+      :num_questions,
+      :question_max_time,
+      :question_types,
+      :element_groups
+    ])
     |> Changeset.validate_number(:num_questions, greater_than: 0)
+    |> Changeset.validate_number(:question_max_time, greater_than: 0)
   end
 
   defp validate_new_params(params) do

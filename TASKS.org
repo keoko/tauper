@@ -1,15 +1,17 @@
 #+title: Tasks
 * Tasks
 ** TODO display users in rows instead of bulleted lists
-** TODO removed special elements
-** TODO configure time per question
+** TODO remove special elements
+** TODO remove lobby channel?
+** TODO animate 3 waiting dots
+** TODO remove game schema
+The game data has been moved to the genserver, so there is no need to keep the game data in DB.
+** DONE configure time per question
 ** DONE redirect to join page does not work
 ** DONE add the rest of elements
 ** DONE time is not properly displayed sometimes when starting next question
 ** DONE display periodic table with highlighted cell
-** TODO remove game schema
-The game data has been moved to the genserver, so there is no need to keep the game data in DB.
-** YES remove game actions not needed (edit game, etc.)
+** DONE remove game actions not needed (edit game, etc.)
 ** DONE rename live_game.ex to live/game_live/play.ex
 ** DONE can we remove "next_question" event?
 Yes, it looks like "status_changed" would be enough.

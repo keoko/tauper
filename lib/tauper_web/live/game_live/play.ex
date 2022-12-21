@@ -127,12 +127,6 @@ defmodule TauperWeb.GameLive.Play do
      |> assign(:remaining_time, payload.remaining_time)}
   end
 
-  def handle_info(%{event: "question_timeout"}, socket) do
-    {:noreply,
-     socket
-     |> assign(:remaining_time, "timeout")}
-  end
-
   def handle_info(_event, socket) do
     {:noreply, socket}
   end
