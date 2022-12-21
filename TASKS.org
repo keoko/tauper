@@ -3,7 +3,7 @@
 ** TODO display users in rows instead of bulleted lists
 ** TODO removed special elements
 ** TODO configure time per question
-** redirect to join page does not work
+** DONE redirect to join page does not work
 ** DONE add the rest of elements
 ** DONE time is not properly displayed sometimes when starting next question
 ** DONE display periodic table with highlighted cell

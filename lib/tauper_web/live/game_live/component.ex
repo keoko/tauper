@@ -10,4 +10,30 @@ defmodule TauperWeb.GameLive.Component do
     </div>
     """
   end
+
+  def podium(assigns) do
+    ~H"""
+    <%= if @podium do %>
+     <h2><%= @title %></h2>
+     <table>
+       <thead>
+         <tr>
+           <th>Position</th>
+           <th>Player</th>
+           <th>Score</th>
+         </tr>
+       </thead>
+       <tbody>
+     <%= for {{player_name, score}, position} <- Enum.with_index(@podium, 1) do %>
+       <tr>
+         <td><%= position %></td>
+         <td><%= player_name %></td>
+         <td><%= score %> points</td>
+       </tr>
+     <% end %>
+       </tbody>
+     </table>
+    <% end %>
+    """
+  end
 end
