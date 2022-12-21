@@ -21,7 +21,6 @@ defmodule TauperWeb.GameLive.Show do
     {
       :noreply,
       socket
-      |> assign(:page_title, page_title(socket.assigns.live_action))
       |> assign(:code, code)
       |> assign(:players, players)
     }
@@ -91,7 +90,4 @@ defmodule TauperWeb.GameLive.Show do
 
     {:noreply, redirect(socket, to: Routes.page_path(socket, :index))}
   end
-
-  defp page_title(:show), do: "Show Game"
-  defp page_title(:edit), do: "Edit Game"
 end
