@@ -16,7 +16,7 @@ it does not add any value
 Does it impact to socket refresh?
 ** TODO remove game schema
 The game data has been moved to the genserver, so there is no need to keep the game data in DB.
-** TODO remove auth-related files
+** DONE remove auth-related files
 ** DONE configure time per question
 ** DONE redirect to join page does not work
 ** DONE add the rest of elements
