@@ -11,6 +11,19 @@ defmodule TauperWeb.GameLive.Component do
     """
   end
 
+  def players(assigns) do
+    ~H"""
+    <div>
+     <strong>Players:</strong>
+     <ul>
+     <%= for player <- @players do %>
+         <li><%= player.name %> </li>
+     <% end %>
+     </ul>
+    </div>
+    """
+  end
+
   def podium(assigns) do
     ~H"""
     <%= if @podium do %>
