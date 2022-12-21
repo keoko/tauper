@@ -1,13 +1,20 @@
 #+title: Tasks
 * Tasks
-** TODO disable start game if there are no players in the game
-** TODO display number of question? remaining questions?
-** TODO display users in rows instead of bulleted lists
+** TODO only owner can view the games/show page
 ** TODO remove special elements
+** TODO disable start game if there are no players in the game
+** DONE display number of question? remaining questions?
+** DONE display users in rows instead of bulleted lists
+** TODO display what the player responded in last page?
+** TODO remove page title in LVs
+it does not add any value
 ** DONE remove lobby channel?
 ** TODO animate 3 waiting dots
+** TODO use game map instead passing fields in assign?
+Does it impact to socket refresh?
 ** TODO remove game schema
 The game data has been moved to the genserver, so there is no need to keep the game data in DB.
+** TODO remove auth-related files
 ** DONE configure time per question
 ** DONE redirect to join page does not work
 ** DONE add the rest of elements

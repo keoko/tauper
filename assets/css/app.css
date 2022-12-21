@@ -1,6 +1,15 @@
 /* This file is for your main application CSS */
 @import "./phoenix.css";
 
+
+#players ul li {
+  display: inline;
+}
+
+#players li + li::before {
+    content: " | ";
+}
+
 /* Alerts and form errors used by phx.new */
 .alert {
   padding: 15px;
@@ -119,7 +128,10 @@
   100% { opacity: 0; }
 }
 
-/* taula periodica */
+
+/*
+ * taula periodica
+ */
 #table {
   display: grid;
   grid-template-columns: repeat(17, auto) 1fr;

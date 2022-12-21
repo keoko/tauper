@@ -13,7 +13,7 @@ defmodule TauperWeb.GameLive.Component do
 
   def players(assigns) do
     ~H"""
-    <div>
+    <div id="players">
      <strong>Players:</strong>
      <ul>
      <%= for player <- @players do %>
