@@ -1,8 +1,10 @@
 #+title: Tasks
 * Tasks
+** TODO disable start game if there are no players in the game
+** TODO display number of question? remaining questions?
 ** TODO display users in rows instead of bulleted lists
 ** TODO remove special elements
-** TODO remove lobby channel?
+** DONE remove lobby channel?
 ** TODO animate 3 waiting dots
 ** TODO remove game schema
 The game data has been moved to the genserver, so there is no need to keep the game data in DB.
@@ -73,7 +75,6 @@ create a file in the same liveview folder with name {liveview_name}.html.heex
 ** DONE what is the difference between a request session and liveview session
 ** TODO what is live_socket_id
 ** DONE list only participants of the game
-** TODO disable start game if there are no players in the game
 ** DONE change header to Passa Paraula
 ** DONE join game
 ** DONE start game
@@ -111,6 +112,5 @@ create a file in the same liveview folder with name {liveview_name}.html.heex
 ** elixir state machines gen fsm?
 ** watcher mode: connect to a game just for wantching the game
 ** purge zombie games. Kill games live more than 24h
-** display number of question? remaining questions?
 ** display number of answers in started mode
 ** list_games

@@ -2,10 +2,6 @@
 // Remove this line if you add a your own CSS build pipeline (e.g postcss).
 import "../css/app.css"
 
-// If you want to use Phoenix channels, run `mix help phx.gen.channel`
-// to get started and then uncomment the line below.
-import "./user_socket.js"
-
 import {Socket, Presence} from "phoenix"
 
 // You can include dependencies in two ways.
@@ -44,33 +40,3 @@ liveSocket.connect()
 // >> liveSocket.enableLatencySim(1000)  // enabled for duration of browser session
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
-
-
-// function renderOnlineUsers(presence) {
-//   let response = ""
-
-//   presence.list((id, {metas: [first, ...rest]}) => {
-//     let count = rest.length + 1
-//     response += `<br>${id} (count: ${count})</br>`
-//   })
-
-//   // document.querySelector("main[role=main]").innerHTML = response
-//     document.querySelector("#div-presence").innerHTML = response
-// }
-
-
-// function connectGameChannel(game_id) {
-//   let socket = new Socket("/socket", {params: {token: window.userToken}})
-//   let channel = socket.channel("room:lobby", {name: window.location.search.split("=")[1]})
-//   let presence = new Presence(channel)
-
-
-//   socket.connect()
-
-//   presence.onSync(() => renderOnlineUsers(presence))
-
-//   channel.join()
-// }
-
-// const btn = document.getElementById('myBtn');
-// btn.addEventListener('click', doClick, false);
