@@ -1,8 +1,9 @@
 #+title: Tasks
 * Tasks
-** TODO display number of answers in started mode
+** DONE display number of answers in started mode
 ** TODO only owner can view the games/show page
 ** TODO remove special elements
+** TODO use live_action to diplay different states: podium, final_podium, question, start_game
 ** DONE disable start game if there are no players in the game
 ** DONE display number of question? remaining questions?
 ** DONE display users in rows instead of bulleted lists

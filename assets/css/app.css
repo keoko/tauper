@@ -10,6 +10,24 @@
     content: " | ";
 }
 
+#podium th {
+  text-align: center;
+}
+
+td.position {
+  text-align: right;
+}
+
+
+td.player_name {
+  text-align: center;
+}
+
+
+td.score {
+  text-align: center;
+}
+
 /* Alerts and form errors used by phx.new */
 .alert {
   padding: 15px;
