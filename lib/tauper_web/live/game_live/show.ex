@@ -2,6 +2,7 @@ defmodule TauperWeb.GameLive.Show do
   use TauperWeb, :live_view
   alias Tauper.Games
   alias TauperWeb.{Presence, Endpoint}
+  alias TauperWeb.GameLive.Component
 
   @impl true
   def mount(_params, _session, socket) do
@@ -50,7 +51,7 @@ defmodule TauperWeb.GameLive.Show do
 
     {:noreply,
      socket
-     |> assign(:question, game.question.sentence)
+     |> assign(:question, game.question)
      |> assign(:status, new_status)
      |> assign(:podium, podium)}
   end
@@ -63,7 +64,7 @@ defmodule TauperWeb.GameLive.Show do
   def handle_event("start", _data, socket) do
     code = socket.assigns.code
     game = Games.start_game(code)
-    {:noreply, assign(socket, status: game.status, question: game.question.sentence)}
+    {:noreply, assign(socket, status: game.status, question: game.question)}
   end
 
   def handle_event("next", _data, socket) do
@@ -71,8 +72,7 @@ defmodule TauperWeb.GameLive.Show do
     game = Games.next_question(code)
     podium = if game.status in [:game_over, :paused], do: Games.podium(code), else: []
 
-    {:noreply,
-     assign(socket, status: game.status, question: game.question.sentence, podium: podium)}
+    {:noreply, assign(socket, status: game.status, question: game.question, podium: podium)}
   end
 
   def handle_event("skip", _data, socket) do
@@ -80,8 +80,7 @@ defmodule TauperWeb.GameLive.Show do
     game = Games.skip_question(code)
     podium = if game.status in [:game_over, :paused], do: Games.podium(code), else: []
 
-    {:noreply,
-     assign(socket, status: game.status, question: game.question.sentence, podium: podium)}
+    {:noreply, assign(socket, status: game.status, question: game.question, podium: podium)}
   end
 
   def handle_event("stop", _data, socket) do

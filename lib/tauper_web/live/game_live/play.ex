@@ -41,10 +41,7 @@ defmodule TauperWeb.GameLive.Play do
         {:cont,
          socket
          |> assign(:game_code, code)
-         |> assign(
-           :question,
-           if(!is_nil(game["question"]), do: game.question.sentence, else: nil)
-         )
+         |> assign(:question, game.question)
          |> assign(:podium, Games.podium(code))
          |> assign(:changeset, change_answer())
          |> assign(:status, game.status)
@@ -115,7 +112,7 @@ defmodule TauperWeb.GameLive.Play do
 
     {:noreply,
      socket
-     |> assign(:question, game.question.sentence)
+     |> assign(:question, game.question)
      |> assign(:status, new_status)
      |> assign(:podium, podium)
      |> assign(:remaining_time, game.remaining_time)

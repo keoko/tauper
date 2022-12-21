@@ -2,6 +2,7 @@
 
 <h2>code: <em><%= @game_code %></em></h2>
 <button phx-click="start" phx-value-game_code= {@game_code} >Start Game</button>
+<Component.periodic_table question={@question} />
 
 <div>
     <strong>Players:</strong>
@@ -15,11 +16,12 @@
 
 <%= if @status == :started do %>
     <div>
-        <strong><%= @question %></strong>
+        <strong><%= @question.sentence %></strong>
     </div>
     <div>time: <%=  @remaining_time %></div>
 
     <button phx-click="skip">Skip Question</button>
+    <Component.periodic_table question={@question} />
 <% end %>
 
 
