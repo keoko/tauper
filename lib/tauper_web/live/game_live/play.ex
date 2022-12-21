@@ -55,7 +55,7 @@ defmodule TauperWeb.GameLive.Play do
         {:halt,
          socket
          |> put_flash(:error, error.message)
-         |> redirect(to: "/join")}
+         |> redirect(to: Routes.page_path(socket, :index))}
     end
   end
 
