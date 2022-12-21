@@ -52,6 +52,7 @@ defmodule TauperWeb.GameLive.Show do
     {:noreply,
      socket
      |> assign(:question, game.question)
+     |> assign(:game, game)
      |> assign(:remaining_time, game.remaining_time)
      |> assign(:status, new_status)
      |> assign(:podium, podium)}

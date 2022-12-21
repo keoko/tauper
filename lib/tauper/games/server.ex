@@ -17,6 +17,7 @@ defmodule Tauper.Games.Server do
   @initial_state %{
     code: nil,
     questions: [],
+    num_questions: @default_num_questions,
     current_question: 0,
     status: :not_started,
     score: %{},
@@ -188,12 +189,14 @@ defmodule Tauper.Games.Server do
   @impl true
   def init(params \\ []) do
     question_max_time = params[:question_max_time] || @default_question_max_time
-    questions = build_questions(params)
+    num_questions = params[:num_questions] || @default_num_questions
+    questions = build_questions(num_questions, params)
 
     state = %{
       @initial_state
       | code: params.code,
         questions: questions,
+        num_questions: num_questions,
         question_max_time: question_max_time
     }
 
@@ -315,7 +318,7 @@ defmodule Tauper.Games.Server do
     state.current_question == Enum.count(state.questions) - 1
   end
 
-  def build_questions(params \\ []) do
+  def build_questions(num_questions, params \\ []) do
     all_questions =
       for question_type <- question_types(params),
           atomic_number <- atomic_numbers(params),
@@ -323,7 +326,7 @@ defmodule Tauper.Games.Server do
 
     all_questions
     |> shuffle_questions()
-    |> filter_num_questions(params[:num_questions] || @default_num_questions)
+    |> filter_num_questions(num_questions)
     |> Enum.map(fn q -> Map.put(q, :sentence, build_sentence(q)) end)
   end
 

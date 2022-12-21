@@ -42,6 +42,7 @@ defmodule TauperWeb.GameLive.Play do
          socket
          |> assign(:game_code, code)
          |> assign(:question, game.question)
+         |> assign(:game, game)
          |> assign(:podium, Games.podium(code))
          |> assign(:changeset, change_answer())
          |> assign(:status, game.status)

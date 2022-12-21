@@ -8,7 +8,7 @@
 
 <%= if @status == :started do %>
     <div>
-        <strong><%= @question.sentence %></strong>
+        <strong>(<%= @game.current_question + 1 %>/<%=  @game.num_questions %>) <%= @question.sentence %></strong>
     </div>
     <div>time: <%=  @remaining_time %></div>
 
