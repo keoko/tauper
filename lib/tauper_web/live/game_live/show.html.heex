@@ -1,7 +1,7 @@
 <%= if @status == :not_started do %>
 
 <h2>code: <em><%= @game_code %></em></h2>
-<button phx-click="start" phx-value-game_code= {@game_code} >Start Game</button>
+<button phx-click="start" phx-value-game_code= {@game_code} disabled={Enum.count(@players) ==0}>Start Game</button>
 <Component.periodic_table question={@question} />
 <Component.players players={@players} />
 <% end %>

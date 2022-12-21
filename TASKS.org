@@ -2,11 +2,11 @@
 * Tasks
 ** TODO only owner can view the games/show page
 ** TODO remove special elements
-** TODO disable start game if there are no players in the game
+** DONE disable start game if there are no players in the game
 ** DONE display number of question? remaining questions?
 ** DONE display users in rows instead of bulleted lists
 ** TODO display what the player responded in last page?
-** TODO remove page title in LVs
+** DONE remove page title in LVs
 it does not add any value
 ** DONE remove lobby channel?
 ** TODO animate 3 waiting dots

@@ -15,11 +15,15 @@ defmodule TauperWeb.GameLive.Component do
     ~H"""
     <div id="players">
      <strong>Players:</strong>
+    <%= if Enum.count(@players) == 0 do %>
+    <p>No players yet.</p>
+    <% else %>
      <ul>
      <%= for player <- @players do %>
          <li><%= player.name %> </li>
      <% end %>
      </ul>
+    <% end %>
     </div>
     """
   end
