@@ -14,8 +14,6 @@ defmodule Tauper.Application do
       {Registry, [keys: :unique, name: @registry]},
       # Start Game Supervisor
       {Tauper.Games.Supervisor, []},
-      # Start the Ecto repository
-      Tauper.Repo,
       # Start the Telemetry supervisor
       TauperWeb.Telemetry,
       # Start the PubSub system

@@ -1,9 +1,5 @@
 defmodule TauperWeb.PageController do
   use TauperWeb, :controller
-  import Phoenix.LiveView.Controller
-  alias Tauper.Games
-  alias Tauper.Games.Game
-  alias Ecto.Changeset
   alias TauperWeb.GameController
 
   def index(conn, params) do

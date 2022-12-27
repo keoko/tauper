@@ -324,7 +324,7 @@ defmodule Tauper.Games.Server do
     state.current_question == Enum.count(state.questions) - 1
   end
 
-  defp build_questions(num_questions, params \\ []) do
+  defp build_questions(num_questions, params) do
     all_questions =
       for question_type <- question_types(params),
           atomic_number <- atomic_numbers(params),
@@ -465,9 +465,6 @@ defmodule Tauper.Games.Server do
 
       :game_over ->
         stop_timer(state)
-
-      _ ->
-        state
     end
   end
 

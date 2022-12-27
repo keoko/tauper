@@ -8,7 +8,7 @@
 import Config
 
 config :tauper,
-  ecto_repos: [Tauper.Repo]
+  ecto_repos: []
 
 # Configures the endpoint
 config :tauper, TauperWeb.Endpoint,

@@ -3,18 +3,20 @@
 ** DONE display number of answers in started mode
 ** TODO only owner can view the games/show page
 ** TODO remove special elements
+** TODO display time/questions answered at the top in a bar?
+** TODO i18n
 ** TODO use live_action to diplay different states: podium, final_podium, question, start_game
 ** DONE disable start game if there are no players in the game
 ** DONE display number of question? remaining questions?
 ** DONE display users in rows instead of bulleted lists
-** TODO display what the player responded in last page?
+** TODO display what the player responded in final podium?
 ** DONE remove page title in LVs
 it does not add any value
 ** DONE remove lobby channel?
 ** TODO animate 3 waiting dots
 ** TODO use game map instead passing fields in assign?
 Does it impact to socket refresh?
-** TODO remove game schema
+** DONE remove game schema
 The game data has been moved to the genserver, so there is no need to keep the game data in DB.
 ** DONE remove auth-related files
 ** DONE configure time per question
@@ -47,7 +49,7 @@ yes, it should be split in 2 views: one to handle the game by the game owner, an
 it would help to reduce the propagation of unnecessary messages between games
 ** DONE next question does not refresh all users
 ** DONE start game does not refresh all users
-send event when there is any game change?
+send event when there is a  ny game change?
 ** DONE show podium as last page
 ** DONE start game
 ** DONE next question
@@ -116,7 +118,6 @@ create a file in the same liveview folder with name {liveview_name}.html.heex
 ** optimised data transfer
 ** TODO does it add extra load to the system? manage all websocket connections?
 * Nice to haves
-** i18n
 ** ECS
 ** elixir state machines gen fsm?
 ** watcher mode: connect to a game just for wantching the game

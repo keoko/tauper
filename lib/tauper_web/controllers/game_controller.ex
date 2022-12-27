@@ -3,7 +3,6 @@ defmodule TauperWeb.GameController do
   import Phoenix.Controller
 
   alias Tauper.Games
-  alias Tauper.Games.Game
   alias Ecto.Changeset
 
   def index(conn, _params) do
@@ -11,8 +10,8 @@ defmodule TauperWeb.GameController do
     render(conn, "index.html", games: games)
   end
 
-  def new(conn, _params) do
-    changeset = Games.change_game(%Game{})
+  def new(conn, params) do
+    changeset = change_new_game_request(params)
     render(conn, "new.html", changeset: changeset)
   end
 
