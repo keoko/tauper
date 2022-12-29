@@ -15,7 +15,7 @@
   <%= error_tag f, :num_questions %>
 
   <%= label f, :question_types, gettext("Types of questions") %>
-  <%=  multiple_select(f, :question_types, [{gettext("Symbol"),  "symbol"}, {gettext("Name"), "name"}, {gettext("Oxidation Numbers"), "oxidation_numbers"}], selected: ["symbol", "name", "oxidation_numbers"]) %>
+  <%=  multiple_select(f, :question_types, [{gettext("Symbol"),  "symbol"}, {gettext("Name"), "name"}, {gettext("Oxidation Numbers"), "oxidation_states"}], selected: ["symbol", "name", "oxidation_states"]) %>
   <%= error_tag f, :question_types %>
 
   <%= label f, :element_groups, gettext("Element groups") %>

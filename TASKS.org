@@ -1,5 +1,12 @@
 #+title: Tasks
 * Tasks
+** TODO start game / waiting to start the game / player already in game
+** TODO display if it worked/failed in player window -> me lo ha contado bien o mal,
+** TODO display answer in scoring page
+** TODO running out of time
+** TODO oxidation_states are wrong
+** DONE oxidation_states questions are not generated
+** TODO not sensitive to lowercase/uppercase
 ** DONE display number of answers in started mode
 ** TODO only owner can view the games/show page
 ** TODO remove special elements
@@ -89,6 +96,7 @@ create a file in the same liveview folder with name {liveview_name}.html.heex
 ** DONE change header to Passa Paraula
 ** DONE join game
 ** DONE start game
+*
 * Concepts
 ** Game
 ** Player
