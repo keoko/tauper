@@ -1,30 +1,50 @@
 <.form let={f} for={@changeset} action={@action} as="new_game_form">
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
-      <p>Oops, something went wrong! Please check the errors below.</p>
+      <p><%= gettext "Oops, something went wrong! Please check the errors below." %></p>
     </div>
   <% end %>
 
-  <%= label f, :num_questions, "Nombre de preguntes" %>
-  <%= number_input f, :num_questions, value: Tauper.Games.Server.default_num_questions %>
+  <%= label f, :num_questions, gettext("Number of questions") %>
+  <%= number_input f, :num_questions, value: 20 %>
   <%= error_tag f, :num_questions %>
 
 
-  <%= label f, :question_max_time, "Temps per pregunta (segons)" %>
-  <%= number_input f, :question_max_time, value: Tauper.Games.Server.default_question_max_time %>
-  <%= error_tag f, :question_max_time %>
+  <%= label f, :question_max_time, gettext("Time per question (seconds)") %>
+  <%= number_input f, :question_max_time, value: 20 %>
+  <%= error_tag f, :num_questions %>
 
-  <%= label f, :question_types, "Tipus de preguntes" %>
-  <%=  multiple_select(f, :question_types, ["Símbol": "symbol", "Nom": "name", "Valències": "oxidation_numbers"], selected: ["symbol", "name", "oxidation_numbers"]) %>
+  <%= label f, :question_types, gettext("Types of questions") %>
+  <%=  multiple_select(f, :question_types, [{gettext("Symbol"),  "symbol"}, {gettext("Name"), "name"}, {gettext("Oxidation Numbers"), "oxidation_numbers"}], selected: ["symbol", "name", "oxidation_numbers"]) %>
   <%= error_tag f, :question_types %>
 
-  <%= label f, :element_groups, "Grups d'elements" %>
-  <%#=  multiple_select(f, :element_groups, ["Símbol": "symbol", "Nom": "name", "Valències": "oxidation_numbers"], selected: ["symbol", "name", "oxidation_numbers"]) %>
-  <%= multiple_select(f, :element_groups,["grup 1": 1, "grup 2": 2, "grup 3": 3, "grup 4": 4, "grup 5": 5, "grup 6": 6, "grup 7": 7, "grup 8": 8, "grup 9": 9, "grup 10": 10, "grup 11": 11, "grup 12": 12, "grup 13": 13, "grup 14": 14, "grup 15": 15, "grup 16": 16, "grup 17": 17, "grup 18": 18], selected: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]) %>
-
+  <%= label f, :element_groups, gettext("Element groups") %>
+  <%#= multiple_select(f, :element_groups,["grup 1": 1, "grup 2": 2, "grup 3": 3, "grup 4": 4, "grup 5": 5, "grup 6": 6, "grup 7": 7, "grup 8": 8, "grup 9": 9, "grup 10": 10, "grup 11": 11, "grup 12": 12, "grup 13": 13, "grup 14": 14, "grup 15": 15, "grup 16": 16, "grup 17": 17, "grup 18": 18], selected: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]) %>
+  <!-- to generate list with emacs lisp: (dotimes (i 18) (insert (format "{gettext(\"group %%{group_number}\", group_number: %d), %d},\n" (1+ i) (1+ i) ))) -->
+  <%= multiple_select(f, :element_groups,
+    [
+    {gettext("group %{group_number}", group_number: 1), 1},
+    {gettext("group %{group_number}", group_number: 2), 2},
+    {gettext("group %{group_number}", group_number: 3), 3},
+    {gettext("group %{group_number}", group_number: 4), 4},
+    {gettext("group %{group_number}", group_number: 5), 5},
+    {gettext("group %{group_number}", group_number: 6), 6},
+    {gettext("group %{group_number}", group_number: 7), 7},
+    {gettext("group %{group_number}", group_number: 8), 8},
+    {gettext("group %{group_number}", group_number: 9), 9},
+    {gettext("group %{group_number}", group_number: 10), 10},
+    {gettext("group %{group_number}", group_number: 11), 11},
+    {gettext("group %{group_number}", group_number: 12), 12},
+    {gettext("group %{group_number}", group_number: 13), 13},
+    {gettext("group %{group_number}", group_number: 14), 14},
+    {gettext("group %{group_number}", group_number: 15), 15},
+    {gettext("group %{group_number}", group_number: 16), 16},
+    {gettext("group %{group_number}", group_number: 17), 17},
+    {gettext("group %{group_number}", group_number: 18), 18},
+  ], selected: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]) %>
   <%= error_tag f, :element_groups %>
 
   <div>
-    <%= submit "New Game" %>
+    <%= submit gettext("New Game") %>
   </div>
 </.form>

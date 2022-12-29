@@ -1,10 +1,10 @@
-<h1>Listing Games</h1>
+<h1><%= gettext("Listing Games") %></h1>
 
 <table>
   <thead>
     <tr>
-      <th>Code</th>
-      <th>Status</th>
+      <th><%= gettext("Code") %></th>
+      <th><%= gettext("Status") %></th>
 
       <th></th>
     </tr>
@@ -15,11 +15,11 @@
       <td><%= game_code %></td>
 
       <td>
-        <span><%= link "Join", to: Routes.game_path(@conn, :join, game_code: game_code) %></span>
+        <span><%= link gettext("Join"), to: Routes.game_path(@conn, :join, game_code: game_code) %></span>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Game", to: Routes.game_path(@conn, :new) %></span>
+<span><%= link gettext("New Game"), to: Routes.game_path(@conn, :new) %></span>

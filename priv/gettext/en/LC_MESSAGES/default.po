@@ -1,0 +1,135 @@
+## "msgid"s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove "msgid"s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use "mix gettext.extract --merge" or "mix gettext.merge"
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+"Plural-Forms: nplurals=2\n"
+
+#: lib/tauper_web/templates/game/new_join.html.heex:17
+#: lib/tauper_web/templates/page/index.html.heex:2
+#, elixir-autogen, elixir-format
+msgid "Join Game"
+msgstr "Unir-se al joc"
+
+#: lib/tauper_web/templates/page/index.html.heex:1
+#, elixir-autogen, elixir-format
+msgid "or"
+msgstr ""
+
+#: lib/tauper_web/templates/game/new.html.heex:5
+#: lib/tauper_web/templates/game/new_join.html.heex:21
+#, elixir-autogen, elixir-format
+msgid "Back"
+msgstr ""
+
+#: lib/tauper_web/templates/game/index.html.heex:6
+#, elixir-autogen, elixir-format
+msgid "Code"
+msgstr ""
+
+#: lib/tauper_web/templates/game/form.html.heex:21
+#, elixir-autogen, elixir-format
+msgid "Element groups"
+msgstr ""
+
+#: lib/tauper_web/templates/game/index.html.heex:18
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Join"
+msgstr "Unir-se al joc"
+
+#: lib/tauper_web/templates/game/new_join.html.heex:1
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Join game"
+msgstr "Unir-se al joc"
+
+#: lib/tauper_web/templates/game/index.html.heex:1
+#, elixir-autogen, elixir-format
+msgid "Listing Games"
+msgstr ""
+
+#: lib/tauper_web/templates/game/form.html.heex:18
+#, elixir-autogen, elixir-format
+msgid "Name"
+msgstr ""
+
+#: lib/tauper_web/templates/game/form.html.heex:48
+#: lib/tauper_web/templates/game/index.html.heex:25
+#: lib/tauper_web/templates/game/new.html.heex:1
+#: lib/tauper_web/templates/page/index.html.heex:1
+#, elixir-autogen, elixir-format
+msgid "New Game"
+msgstr ""
+
+#: lib/tauper_web/templates/game/form.html.heex:8
+#, elixir-autogen, elixir-format
+msgid "Number of questions"
+msgstr ""
+
+#: lib/tauper_web/templates/game/form.html.heex:4
+#: lib/tauper_web/templates/game/new_join.html.heex:5
+#, elixir-autogen, elixir-format
+msgid "Oops, something went wrong! Please check the errors below."
+msgstr ""
+
+#: lib/tauper_web/templates/game/form.html.heex:18
+#, elixir-autogen, elixir-format
+msgid "Oxidation Numbers"
+msgstr ""
+
+#: lib/tauper_web/templates/game/index.html.heex:7
+#, elixir-autogen, elixir-format
+msgid "Status"
+msgstr ""
+
+#: lib/tauper_web/templates/game/form.html.heex:13
+#, elixir-autogen, elixir-format
+msgid "Time per question (seconds)"
+msgstr ""
+
+#: lib/tauper_web/templates/game/form.html.heex:17
+#, elixir-autogen, elixir-format
+msgid "Types of questions"
+msgstr ""
+
+#: lib/tauper_web/templates/layout/root.html.heex:18
+#, elixir-autogen, elixir-format
+msgid "game"
+msgstr ""
+
+#: lib/tauper_web/templates/game/form.html.heex:26
+#: lib/tauper_web/templates/game/form.html.heex:27
+#: lib/tauper_web/templates/game/form.html.heex:28
+#: lib/tauper_web/templates/game/form.html.heex:29
+#: lib/tauper_web/templates/game/form.html.heex:30
+#: lib/tauper_web/templates/game/form.html.heex:31
+#: lib/tauper_web/templates/game/form.html.heex:32
+#: lib/tauper_web/templates/game/form.html.heex:33
+#: lib/tauper_web/templates/game/form.html.heex:34
+#: lib/tauper_web/templates/game/form.html.heex:35
+#: lib/tauper_web/templates/game/form.html.heex:36
+#: lib/tauper_web/templates/game/form.html.heex:37
+#: lib/tauper_web/templates/game/form.html.heex:38
+#: lib/tauper_web/templates/game/form.html.heex:39
+#: lib/tauper_web/templates/game/form.html.heex:40
+#: lib/tauper_web/templates/game/form.html.heex:41
+#: lib/tauper_web/templates/game/form.html.heex:42
+#: lib/tauper_web/templates/game/form.html.heex:43
+#, elixir-autogen, elixir-format
+msgid "group %{group_number}"
+msgstr ""
+
+#: lib/tauper_web/templates/layout/root.html.heex:21
+#, elixir-autogen, elixir-format
+msgid "player"
+msgstr ""
+
+#: lib/tauper_web/templates/game/form.html.heex:18
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Symbol"
+msgstr ""

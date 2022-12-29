@@ -15,10 +15,10 @@
         <nav>
           <ul>
             <%=  if assigns[:game_code] do %>
-              <li> game: <%=  @game_code %></li>
+              <li> <%= gettext("game") %>: <%=  @game_code %></li>
             <% end %>
             <%=  if assigns[:game_code] do %>
-              <li> player: <%=  @player_name %></li>
+              <li> <%= gettext("player") %>: <%=  @player_name %></li>
             <% end %>
           </ul>
         </nav>
