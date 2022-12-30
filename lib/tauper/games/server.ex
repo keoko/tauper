@@ -385,13 +385,22 @@ defmodule Tauper.Games.Server do
   end
 
   defp is_correct_name(name, answered_name) do
-    # TODO ignore case
-    # TODO ignore accented characters
     String.downcase(name) == String.downcase(answered_name)
   end
 
-  defp is_correct_oxidation_states(oxidation_states, answered_oxidation_states) do
-    oxidation_states == answered_oxidation_states
+  defp is_correct_oxidation_states(oxidation_states, answer) do
+    try do
+      answered_oxidation_states =
+        answer
+        |> String.split([",", " "])
+        |> Enum.reject(&(&1 == ""))
+        |> Enum.map(&String.to_integer/1)
+        |> Enum.sort()
+
+      oxidation_states == answered_oxidation_states
+    rescue
+      _ -> false
+    end
   end
 
   defp get_element(atomic_number) do

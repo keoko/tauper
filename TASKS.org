@@ -1,5 +1,6 @@
 #+title: Tasks
 * Tasks
+** DONE implement oxidation states is_correct function
 ** TODO remove special elements
 ** TODO oxidation_states are wrong
 ** DONE not sensitive to lowercase/uppercase in checking element name
@@ -10,6 +11,7 @@
 ** TODO only owner can view the games/show page
 ** TODO display time/questions answered at the top in a bar?
 ** TODO i18n
+** TODO locales "en" and "ca"
 ** TODO use live_action to diplay different states: podium, final_podium, question, start_game
 ** DONE oxidation_states questions are not generated
 ** DONE display number of answers in started mode
