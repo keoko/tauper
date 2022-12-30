@@ -1,6 +1,8 @@
 defmodule TauperWeb.GameLive.Component do
   use Phoenix.Component
 
+  import TauperWeb.Gettext
+
   def periodic_table(assigns) do
     ~H"""
     <div id="table">
@@ -14,9 +16,9 @@ defmodule TauperWeb.GameLive.Component do
   def players(assigns) do
     ~H"""
     <div id="players">
-     <strong>Players:</strong>
+     <strong><%= gettext("Players") %>:</strong>
     <%= if Enum.count(@players) == 0 do %>
-    <p>No players yet.</p>
+    <p><%= gettext("No players yet") %></p>
     <% else %>
      <ul>
      <%= for player <- @players do %>
@@ -35,9 +37,9 @@ defmodule TauperWeb.GameLive.Component do
      <table id="podium">
        <thead>
          <tr>
-           <th>Position</th>
-           <th>Player</th>
-           <th>Score</th>
+           <th><%= gettext("Position") %></th>
+           <th><%= gettext("Player") %></th>
+           <th><%= gettext("Score") %></th>
          </tr>
        </thead>
        <tbody>

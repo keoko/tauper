@@ -132,3 +132,111 @@ msgstr ""
 #, elixir-autogen, elixir-format
 msgid "Symbol"
 msgstr ""
+
+#: lib/tauper_web/live/game_live/show.html.heex:24
+#, elixir-autogen, elixir-format
+msgid "Next Question"
+msgstr ""
+
+#: lib/tauper_web/live/game_live/component.ex:21
+#, elixir-autogen, elixir-format
+msgid "No players yet"
+msgstr ""
+
+#: lib/tauper_web/live/game_live/component.ex:41
+#, elixir-autogen, elixir-format
+msgid "Player"
+msgstr ""
+
+#: lib/tauper_web/live/game_live/component.ex:19
+#, elixir-autogen, elixir-format
+msgid "Players"
+msgstr ""
+
+#: lib/tauper_web/live/game_live/component.ex:40
+#, elixir-autogen, elixir-format
+msgid "Position"
+msgstr ""
+
+#: lib/tauper_web/live/game_live/component.ex:42
+#, elixir-autogen, elixir-format
+msgid "Score"
+msgstr ""
+
+#: lib/tauper_web/live/game_live/play.html.heex:24
+#, elixir-autogen, elixir-format
+msgid "Sending answer..."
+msgstr ""
+
+#: lib/tauper_web/live/game_live/show.html.heex:18
+#, elixir-autogen, elixir-format
+msgid "Skip Question"
+msgstr ""
+
+#: lib/tauper_web/live/game_live/show.html.heex:4
+#, elixir-autogen, elixir-format
+msgid "Start Game"
+msgstr ""
+
+#: lib/tauper_web/live/game_live/show.html.heex:29
+#, elixir-autogen, elixir-format
+msgid "Stop Game"
+msgstr ""
+
+#: lib/tauper_web/live/game_live/play.html.heex:36
+#, elixir-autogen, elixir-format
+msgid "Waiting for next question ..."
+msgstr ""
+
+#: lib/tauper_web/live/game_live/play.html.heex:3
+#, elixir-autogen, elixir-format
+msgid "Waiting to start the game ..."
+msgstr ""
+
+#: lib/tauper_web/live/game_live/play.html.heex:34
+#, elixir-autogen, elixir-format
+msgid "You are in position %{position}(%{score} points)."
+msgstr ""
+
+#: lib/tauper_web/live/game_live/play.html.heex:41
+#, elixir-autogen, elixir-format
+msgid "You finished in position %{position}(%{score} points)."
+msgstr ""
+
+#: lib/tauper_web/live/game_live/play.html.heex:14
+#: lib/tauper_web/live/game_live/play.html.heex:31
+#, elixir-autogen, elixir-format
+msgid "Your answer is %{answer}."
+msgstr ""
+
+#: lib/tauper_web/live/game_live/show.html.heex:3
+#, elixir-autogen, elixir-format
+msgid "code"
+msgstr ""
+
+#: lib/tauper_web/live/game_live/play.html.heex:24
+#, elixir-autogen, elixir-format
+msgid "send answer"
+msgstr ""
+
+#: lib/tauper_web/live/game_live/show.html.heex:13
+#, elixir-autogen, elixir-format
+msgid "time"
+msgstr ""
+
+#: lib/tauper_web/live/game_live/play.html.heex:14
+#, elixir-autogen, elixir-format
+msgid "correct"
+msgstr ""
+
+#: lib/tauper_web/live/game_live/play.html.heex:14
+#, elixir-autogen, elixir-format
+msgid "wrong"
+msgstr ""
+
+#: lib/tauper_web/live/game_live/show.html.heex:15
+#, elixir-autogen, elixir-format
+msgid "only a player pending to answer"
+msgid_plural "%{count} players pending to answer"
+msgstr[0] ""
+msgstr[1] ""

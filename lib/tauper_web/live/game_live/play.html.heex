@@ -1,6 +1,6 @@
 <%= if @status == :not_started do %>
 <div>
-    Waiting to start the game ...
+    <%= gettext("Waiting to start the game ...") %>
 </div>
 <% end %>
 
@@ -11,7 +11,7 @@
 <div>
     <div>time: <%= @remaining_time %></div>
     <%= if assigns[:answered] do %>
-            Your answer is <%=  if @is_correct, do: "correct", else: "wrong" %>.
+            <%= gettext("Your answer is %{answer}.", [answer: (if @is_correct, do: gettext("correct"), else: gettext("wrong"))]) %>
     <% else %>
         <.form
         let={f}
@@ -21,21 +21,23 @@
         phx-submit="answer">
         <%= text_input f, :answer, autocomplete: "off" %>
         <%= error_tag f, :answer %>
-        <%= submit "send answer", phx_disable_with: "Sending answer..." %>
+        <%= submit gettext("send answer"), phx_disable_with: gettext("Sending answer...") %>
         </.form>
     <% end %>
 </div>
 <% end %>
 <%= if @status == :paused do %>
     <%= if assigns[:answered] do %>
-            Your answer is <%=  if @is_correct, do: "correct", else: "wrong" %>.
+            <%= gettext("Your answer is %{answer}.", [answer: (if @is_correct, do: "correct", else: "wrong")]) %>
     <% end %>
-    <%= if @player_score_and_position do %>
-        <p>You are in position <%= @player_score_and_position.position %> (<%= @player_score_and_position.score %> points).</p>
+    <%= if assigns[:player_score_and_position] do %>
+        <p><%= gettext("You are in position %{position}(%{score} points).", [position: @player_score_and_position.position, score: @player_score_and_position.score]) %></p>
     <% end %>
-    <p>Waiting for next question ...</p>
+    <p><%= gettext("Waiting for next question ...") %></p>
 <% end %>
 
 <%= if @status == :game_over do %>
-        <p>You finished in position <%= @player_score_and_position.position %> (<%= @player_score_and_position.score %> points).</p>
+    <%= if assigns[:player_score_and_position] do %>
+        <p><%= gettext("You finished in position %{position}(%{score} points).", [position: @player_score_and_position.position, score: @player_score_and_position.score]) %></p>
+    <% end %>
 <% end %>

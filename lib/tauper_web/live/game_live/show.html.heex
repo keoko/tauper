@@ -1,7 +1,7 @@
 <%= if @status == :not_started do %>
 
-<h2>code: <em><%= @game_code %></em></h2>
-<button phx-click="start" phx-value-game_code= {@game_code} disabled={Enum.count(@players) ==0}>Start Game</button>
+<h2><%= gettext("code") %>: <em><%= @game_code %></em></h2>
+<button phx-click="start" phx-value-game_code= {@game_code} disabled={Enum.count(@players) ==0}><%= gettext("Start Game") %></button>
 <Component.periodic_table question={@question} />
 <Component.players players={@players} />
 <% end %>
@@ -10,21 +10,21 @@
     <div>
         <strong>(<%= @game.current_question + 1 %>/<%=  @game.num_questions %>) <%= @question.sentence %></strong>
     </div>
-    <div>time: <%=  @remaining_time %></div>
+    <div><%= gettext("time") %>: <%=  @remaining_time %></div>
     <%=  if assigns[:answers] do %>
-      <div><%= (@answers.total_players - @answers.num_answers) %> players pending to answer</div>
+      <div><%= ngettext("only a player pending to answer", "%{count} players pending to answer", (@answers.total_players - @answers.num_answers)) %></div>
     <% end %>
 
-    <button phx-click="skip">Skip Question</button>
+    <button phx-click="skip"><%= gettext("Skip Question") %></button>
     <Component.periodic_table question={@question} />
 <% end %>
 
 <%= if @status == :paused do %>
   <Component.podium podium={@podium} title="Podium"/>
-  <button phx-click="next">Next Question</button>
+  <button phx-click="next"><%= gettext("Next Question") %></button>
 <% end %>
 
 <%= if @status == :game_over do %>
   <Component.podium podium={@podium} title="Final Podium"/>
-  <button phx-click="stop">Stop Game</button>
+  <button phx-click="stop"><%= gettext("Stop Game") %></button>
 <% end %>
