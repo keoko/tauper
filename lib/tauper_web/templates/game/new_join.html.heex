@@ -6,11 +6,11 @@
     </div>
   <% end %>
 
-  <%= label f, :game_code %>
+  <%= label f, :game_code, gettext("code") %>
   <%= text_input f, :game_code, autocomplete: "off" %>
   <%= error_tag f, :game_code %>
 
-  <%= label f, :player_name %>
+  <%= label f, :player_name, gettext("player") %>
   <%= text_input f, :player_name, autocomplete: "off" %>
   <%= error_tag f, :player_name %>
   <div>
