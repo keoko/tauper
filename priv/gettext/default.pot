@@ -96,7 +96,7 @@ msgstr ""
 msgid "Types of questions"
 msgstr ""
 
-#: lib/tauper_web/templates/layout/root.html.heex:18
+#: lib/tauper_web/templates/layout/root.html.heex:24
 #, elixir-autogen, elixir-format
 msgid "game"
 msgstr ""
@@ -123,7 +123,8 @@ msgstr ""
 msgid "group %{group_number}"
 msgstr ""
 
-#: lib/tauper_web/templates/layout/root.html.heex:21
+#: lib/tauper_web/templates/game/new_join.html.heex:13
+#: lib/tauper_web/templates/layout/root.html.heex:27
 #, elixir-autogen, elixir-format
 msgid "player"
 msgstr ""
@@ -210,6 +211,7 @@ msgid "Your answer is %{answer}."
 msgstr ""
 
 #: lib/tauper_web/live/game_live/show.html.heex:3
+#: lib/tauper_web/templates/game/new_join.html.heex:9
 #, elixir-autogen, elixir-format
 msgid "code"
 msgstr ""
@@ -240,3 +242,28 @@ msgid "only a player pending to answer"
 msgid_plural "%{count} players pending to answer"
 msgstr[0] ""
 msgstr[1] ""
+
+#: lib/tauper/games/server.ex:375
+#, elixir-autogen, elixir-format
+msgid "What are the oxidation states of %{element_name}?"
+msgstr ""
+
+#: lib/tauper/games/server.ex:370
+#, elixir-autogen, elixir-format
+msgid "What is the name of %{element_symbol}?"
+msgstr ""
+
+#: lib/tauper/games/server.ex:365
+#, elixir-autogen, elixir-format
+msgid "What is the symbol of %{element_name}?"
+msgstr ""
+
+#: lib/tauper_web/live/game_live/show.html.heex:28
+#, elixir-autogen, elixir-format
+msgid "Final Podium"
+msgstr ""
+
+#: lib/tauper_web/live/game_live/show.html.heex:23
+#, elixir-autogen, elixir-format
+msgid "Podium"
+msgstr ""

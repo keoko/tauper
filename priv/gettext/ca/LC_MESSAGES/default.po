@@ -97,7 +97,7 @@ msgstr "Temps per pregunta (segons)"
 msgid "Types of questions"
 msgstr "Tipus de preguntes"
 
-#: lib/tauper_web/templates/layout/root.html.heex:18
+#: lib/tauper_web/templates/layout/root.html.heex:24
 #, elixir-autogen, elixir-format
 msgid "game"
 msgstr "joc"
@@ -124,7 +124,8 @@ msgstr "joc"
 msgid "group %{group_number}"
 msgstr "grup %{group_number}"
 
-#: lib/tauper_web/templates/layout/root.html.heex:21
+#: lib/tauper_web/templates/game/new_join.html.heex:13
+#: lib/tauper_web/templates/layout/root.html.heex:27
 #, elixir-autogen, elixir-format
 msgid "player"
 msgstr "jugador"
@@ -211,6 +212,7 @@ msgid "Your answer is %{answer}."
 msgstr "La teva resposta és %{answer}."
 
 #: lib/tauper_web/live/game_live/show.html.heex:3
+#: lib/tauper_web/templates/game/new_join.html.heex:9
 #, elixir-autogen, elixir-format, fuzzy
 msgid "code"
 msgstr "codi"
@@ -241,3 +243,28 @@ msgid "only a player pending to answer"
 msgid_plural "%{count} players pending to answer"
 msgstr[0] "Només falta un jugador per respondre"
 msgstr[1] "%{count} jugadors pendents per respondre"
+
+#: lib/tauper/games/server.ex:375
+#, elixir-autogen, elixir-format
+msgid "What are the oxidation states of %{element_name}?"
+msgstr "Quines són les valències de l'element %{element_name}?"
+
+#: lib/tauper/games/server.ex:370
+#, elixir-autogen, elixir-format
+msgid "What is the name of %{element_symbol}?"
+msgstr "Quin és el nom del símbol %{element_symbol}?"
+
+#: lib/tauper/games/server.ex:365
+#, elixir-autogen, elixir-format
+msgid "What is the symbol of %{element_name}?"
+msgstr "Quin és el símbol de l'element %{element_name}?"
+
+#: lib/tauper_web/live/game_live/show.html.heex:28
+#, elixir-autogen, elixir-format
+msgid "Final Podium"
+msgstr "Pòdium final"
+
+#: lib/tauper_web/live/game_live/show.html.heex:23
+#, elixir-autogen, elixir-format
+msgid "Podium"
+msgstr "Pòdium"

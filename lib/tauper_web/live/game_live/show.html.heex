@@ -20,11 +20,11 @@
 <% end %>
 
 <%= if @status == :paused do %>
-  <Component.podium podium={@podium} title="Podium"/>
+  <Component.podium podium={@podium} title={gettext("Podium")}/>
   <button phx-click="next"><%= gettext("Next Question") %></button>
 <% end %>
 
 <%= if @status == :game_over do %>
-  <Component.podium podium={@podium} title="Final Podium"/>
+  <Component.podium podium={@podium} title={gettext("Final Podium")}/>
   <button phx-click="stop"><%= gettext("Stop Game") %></button>
 <% end %>
