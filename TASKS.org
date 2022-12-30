@@ -1,6 +1,7 @@
 #+title: Tasks
 * Tasks
 ** DONE implement oxidation states is_correct function
+** TODO translate errors in CA
 ** TODO remove special elements
 ** TODO oxidation_states are wrong
 ** DONE not sensitive to lowercase/uppercase in checking element name
@@ -112,6 +113,8 @@ create a file in the same liveview folder with name {liveview_name}.html.heex
 ** Sasa Juric card game https://www.theerlangelist.com/article/spawn_or_not
 ** GenServer, DynamicSupervisor and Registry: The Elixir Triad To Manage Processes https://levelup.gitconnected.com/genserver-dynamicsupervisor-and-registry-the-elixir-triad-to-manage-processes-a65d4c3351c1
 ** Multiplayer Go with Elixir's Registry, PubSub and dynamic supervisors https://blog.appsignal.com/2019/08/13/elixir-alchemy-multiplayer-go-with-registry-pubsub-and-dynamic-supervisors.html
+** A better way to set and manage locale data in your phoenix apps
+https://phrase.com/blog/posts/set-and-manage-locale-data-in-your-phoenix-l10n-project/
 
 * Elixir feeling
 ** no documentation how to manage explicit javascript in phoenix

@@ -8,6 +8,7 @@ defmodule TauperWeb.Router do
     plug :put_root_layout, {TauperWeb.LayoutView, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug TauperWeb.Plugs.Locale
   end
 
   pipeline :api do
