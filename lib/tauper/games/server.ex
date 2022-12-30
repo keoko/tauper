@@ -1,6 +1,7 @@
 defmodule Tauper.Games.Server do
   use GenServer
   alias TauperWeb.{Endpoint, Presence}
+  import TauperWeb.Gettext
 
   @registry :game_registry
 
@@ -360,9 +361,20 @@ defmodule Tauper.Games.Server do
     element = get_element(question.atomic_number)
 
     case question.type do
-      "symbol" -> "Quin es el símbol del #{element.name}?"
-      "name" -> "Quin es el nom del #{element.symbol}?"
-      "oxidation_states" -> "Quin són els estats d'oxidació del #{element.name}?"
+      "symbol" ->
+        gettext("What is the symbol of %{element_name}?",
+          element_name: element.name
+        )
+
+      "name" ->
+        gettext("What is the name of %{element_symbol}?",
+          element_symbol: element.symbol
+        )
+
+      "oxidation_states" ->
+        gettext("What are the oxidation states of %{element_name}?",
+          element_name: element.name
+        )
     end
   end
 
