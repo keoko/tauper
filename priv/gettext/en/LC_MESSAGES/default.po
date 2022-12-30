@@ -15,7 +15,7 @@ msgstr ""
 #: lib/tauper_web/templates/page/index.html.heex:2
 #, elixir-autogen, elixir-format
 msgid "Join Game"
-msgstr "Unir-se al joc"
+msgstr ""
 
 #: lib/tauper_web/templates/page/index.html.heex:1
 #, elixir-autogen, elixir-format
@@ -39,14 +39,14 @@ msgid "Element groups"
 msgstr ""
 
 #: lib/tauper_web/templates/game/index.html.heex:18
-#, elixir-autogen, elixir-format, fuzzy
+#, elixir-autogen, elixir-format
 msgid "Join"
-msgstr "Unir-se al joc"
+msgstr ""
 
 #: lib/tauper_web/templates/game/new_join.html.heex:1
-#, elixir-autogen, elixir-format, fuzzy
+#, elixir-autogen, elixir-format
 msgid "Join game"
-msgstr "Unir-se al joc"
+msgstr ""
 
 #: lib/tauper_web/templates/game/index.html.heex:1
 #, elixir-autogen, elixir-format
@@ -130,7 +130,7 @@ msgid "player"
 msgstr ""
 
 #: lib/tauper_web/templates/game/form.html.heex:18
-#, elixir-autogen, elixir-format, fuzzy
+#, elixir-autogen, elixir-format
 msgid "Symbol"
 msgstr ""
 
@@ -140,17 +140,17 @@ msgid "Next Question"
 msgstr ""
 
 #: lib/tauper_web/live/game_live/component.ex:21
-#, elixir-autogen, elixir-format, fuzzy
+#, elixir-autogen, elixir-format
 msgid "No players yet"
 msgstr ""
 
 #: lib/tauper_web/live/game_live/component.ex:41
-#, elixir-autogen, elixir-format, fuzzy
+#, elixir-autogen, elixir-format
 msgid "Player"
 msgstr ""
 
 #: lib/tauper_web/live/game_live/component.ex:19
-#, elixir-autogen, elixir-format, fuzzy
+#, elixir-autogen, elixir-format
 msgid "Players"
 msgstr ""
 
@@ -211,7 +211,7 @@ msgid "Your answer is %{answer}."
 msgstr ""
 
 #: lib/tauper_web/live/game_live/show.html.heex:3
-#, elixir-autogen, elixir-format, fuzzy
+#, elixir-autogen, elixir-format
 msgid "code"
 msgstr ""
 
