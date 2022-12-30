@@ -60,7 +60,9 @@ defmodule TauperWeb.GameLive.Play do
     end
   end
 
-  def mount(_params, _session, socket) do
+  def mount(_params, %{"locale" => locale}, socket) do
+    Gettext.put_locale(TauperWeb.Gettext, locale)
+
     if connected?(socket) do
       code = socket.assigns.game_code
       Endpoint.subscribe(Presence.topic(code))
