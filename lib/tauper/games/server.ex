@@ -373,14 +373,25 @@ defmodule Tauper.Games.Server do
   defp is_correct(question, answer) do
     element = get_element(question.atomic_number)
 
-    correct_answer =
-      case question.type do
-        "symbol" -> element.symbol
-        "name" -> element.name
-        "oxidation_states" -> element.oxidation_states
-      end
+    case question.type do
+      "symbol" -> is_correct_symbol(element.symbol, answer)
+      "name" -> is_correct_name(element.name, answer)
+      "oxidation_states" -> is_correct_oxidation_states(element.oxidation_states, answer)
+    end
+  end
 
-    correct_answer == answer
+  defp is_correct_symbol(symbol, answered_symbol) do
+    symbol == answered_symbol
+  end
+
+  defp is_correct_name(name, answered_name) do
+    # TODO ignore case
+    # TODO ignore accented characters
+    String.downcase(name) == String.downcase(answered_name)
+  end
+
+  defp is_correct_oxidation_states(oxidation_states, answered_oxidation_states) do
+    oxidation_states == answered_oxidation_states
   end
 
   defp get_element(atomic_number) do

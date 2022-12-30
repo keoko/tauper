@@ -11,11 +11,7 @@
 <div>
     <div>time: <%= @remaining_time %></div>
     <%= if assigns[:answered] do %>
-        <%= if assigns[:is_correct] do %>
             Your answer is <%=  if @is_correct, do: "correct", else: "wrong" %>.
-        <% else %>
-            Your answer is <%=  if @is_correct, do: "correct", else: "wrong" %>.
-        <% end %>
     <% else %>
         <.form
         let={f}
@@ -31,6 +27,9 @@
 </div>
 <% end %>
 <%= if @status == :paused do %>
+    <%= if assigns[:answered] do %>
+            Your answer is <%=  if @is_correct, do: "correct", else: "wrong" %>.
+    <% end %>
     <%= if @player_score_and_position do %>
         <p>You are in position <%= @player_score_and_position.position %> (<%= @player_score_and_position.score %> points).</p>
     <% end %>

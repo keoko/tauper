@@ -1,20 +1,20 @@
 #+title: Tasks
 * Tasks
+** TODO remove special elements
+** TODO oxidation_states are wrong
+** DONE not sensitive to lowercase/uppercase in checking element name
 ** TODO start game / waiting to start the game / player already in game
-** TODO display if it worked/failed in player window -> me lo ha contado bien o mal,
+** DONE display if it worked/failed in player window -> me lo ha contado bien o mal,
 ** TODO display answer in scoring page
 ** TODO running out of time
-** TODO oxidation_states are wrong
-** DONE oxidation_states questions are not generated
-** TODO not sensitive to lowercase/uppercase
-** DONE display number of answers in started mode
 ** TODO only owner can view the games/show page
-** TODO remove special elements
 ** TODO display time/questions answered at the top in a bar?
 ** TODO i18n
 ** TODO use live_action to diplay different states: podium, final_podium, question, start_game
+** DONE oxidation_states questions are not generated
+** DONE display number of answers in started mode
 ** DONE disable start game if there are no players in the game
-** DONE display number of question? remaining questions?
+** DONE display number of questions remainins questions?
 ** DONE display users in rows instead of bulleted lists
 ** TODO display what the player responded in final podium?
 ** DONE remove page title in LVs
