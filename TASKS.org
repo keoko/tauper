@@ -1,20 +1,19 @@
 #+title: Tasks
 * Tasks
-** DONE implement oxidation states is_correct function
+** DONE implement valences is_correct function
 ** TODO translate errors in CA
-** TODO remove special elements
-** TODO oxidation_states are wrong
+** DONE remove special elements
+** DONE valences are wrong
 ** DONE not sensitive to lowercase/uppercase in checking element name
 ** DONE start game / waiting to start the game / player already in game
 ** DONE display if it worked/failed in player window -> me lo ha contado bien o mal,
-** TODO display answer in scoring page
+** DONE display answer in scoring page
 ** TODO running out of time
 ** TODO only owner can view the games/show page
 ** TODO display time/questions answered at the top in a bar?
-** TODO i18n
+** DONE i18n
 ** DONE locales "en" and "ca"
-** TODO use live_action to diplay different states: podium, final_podium, question, start_game
-** DONE oxidation_states questions are not generated
+** DONE valences questions are not generated
 ** DONE display number of answers in started mode
 ** DONE disable start game if there are no players in the game
 ** DONE display number of questions remainins questions?
@@ -27,6 +26,7 @@ it does not add any value
 ** TODO use game map instead passing fields in assign?
 Does it impact to socket refresh?
 ** TODO questions are always in catalan
+** TODO use live_action to diplay different states: podium, final_podium, question, start_game
 ** DONE remove game schema
 The game data has been moved to the genserver, so there is no need to keep the game data in DB.
 ** DONE remove auth-related files

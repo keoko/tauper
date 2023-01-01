@@ -6,7 +6,7 @@ defmodule Tauper.Games.Server do
 
   @registry :game_registry
 
-  @question_types ["symbol", "name", "oxidation_states"]
+  @question_types ["symbol", "name", "valences"]
 
   @default_num_questions 20
   def default_num_questions, do: @default_num_questions
@@ -255,8 +255,8 @@ defmodule Tauper.Games.Server do
           element_symbol: element.symbol
         )
 
-      "oxidation_states" ->
-        gettext("What are the oxidation states of %{element_name}?",
+      "valences" ->
+        gettext("What are the valences of %{element_name}?",
           element_name: element.name
         )
     end
@@ -272,7 +272,7 @@ defmodule Tauper.Games.Server do
     case question.type do
       "symbol" -> is_correct_symbol(element.symbol, answer)
       "name" -> is_correct_name(element.name, answer)
-      "oxidation_states" -> is_correct_oxidation_states(element.oxidation_states, answer)
+      "valences" -> is_correct_valences(element.valences, answer)
     end
   end
 
@@ -284,16 +284,16 @@ defmodule Tauper.Games.Server do
     String.downcase(name) == String.downcase(answered_name)
   end
 
-  defp is_correct_oxidation_states(oxidation_states, answer) do
+  defp is_correct_valences(valences, answer) do
     try do
-      answered_oxidation_states =
+      answered_valences =
         answer
         |> String.split([",", " "])
         |> Enum.reject(&(&1 == ""))
         |> Enum.map(&String.to_integer/1)
         |> Enum.sort()
 
-      oxidation_states == answered_oxidation_states
+      valences == answered_valences
     rescue
       _ -> false
     end

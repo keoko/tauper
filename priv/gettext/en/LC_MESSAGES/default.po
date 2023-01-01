@@ -79,7 +79,7 @@ msgstr ""
 
 #: lib/tauper_web/templates/game/form.html.heex:18
 #, elixir-autogen, elixir-format
-msgid "Oxidation Numbers"
+msgid "Valences"
 msgstr ""
 
 #: lib/tauper_web/templates/game/index.html.heex:7
@@ -246,7 +246,7 @@ msgstr[1] ""
 
 #: lib/tauper/games/server.ex:381
 #, elixir-autogen, elixir-format
-msgid "What are the oxidation states of %{element_name}?"
+msgid "What are the valences of %{element_name}?"
 msgstr ""
 
 #: lib/tauper/games/server.ex:376

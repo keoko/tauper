@@ -197,7 +197,7 @@ input {
 }
 
 
-.oxidation-states {
+.valences {
     float: right;
     text-align: right;
     font-size: 0.5vw;
@@ -226,7 +226,7 @@ input {
   font-size: 1vw;
 }
 
-#element-box .oxidation-states {
+#element-box .valences {
     font-size: 1vw;
 }
 
