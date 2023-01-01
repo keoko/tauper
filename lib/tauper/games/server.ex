@@ -20,6 +20,7 @@ defmodule Tauper.Games.Server do
     questions: [],
     num_questions: @default_num_questions,
     current_question: 0,
+    answer: nil,
     status: :not_started,
     score: %{},
     timer: nil,
@@ -329,7 +330,12 @@ defmodule Tauper.Games.Server do
     all_questions =
       for question_type <- question_types(params),
           atomic_number <- atomic_numbers(params),
-          do: %{type: question_type, atomic_number: atomic_number}
+          do: %{
+            type: question_type,
+            atomic_number: atomic_number,
+            answer:
+              Map.get(@elements, atomic_number) |> Map.get(String.to_existing_atom(question_type))
+          }
 
     all_questions
     |> shuffle_questions()

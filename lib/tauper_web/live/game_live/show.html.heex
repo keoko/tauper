@@ -20,6 +20,7 @@
 <% end %>
 
 <%= if @status == :paused do %>
+  <div><%= gettext("The answer is <strong>%{answer}</strong>", [answer: inspect(@question.answer)]) |> raw() %></div>
   <Component.podium podium={@podium} title={gettext("Podium")}/>
   <button phx-click="next"><%= gettext("Next Question") %></button>
 <% end %>

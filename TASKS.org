@@ -5,14 +5,14 @@
 ** TODO remove special elements
 ** TODO oxidation_states are wrong
 ** DONE not sensitive to lowercase/uppercase in checking element name
-** TODO start game / waiting to start the game / player already in game
+** DONE start game / waiting to start the game / player already in game
 ** DONE display if it worked/failed in player window -> me lo ha contado bien o mal,
 ** TODO display answer in scoring page
 ** TODO running out of time
 ** TODO only owner can view the games/show page
 ** TODO display time/questions answered at the top in a bar?
 ** TODO i18n
-** TODO locales "en" and "ca"
+** DONE locales "en" and "ca"
 ** TODO use live_action to diplay different states: podium, final_podium, question, start_game
 ** DONE oxidation_states questions are not generated
 ** DONE display number of answers in started mode
@@ -26,6 +26,7 @@ it does not add any value
 ** TODO animate 3 waiting dots
 ** TODO use game map instead passing fields in assign?
 Does it impact to socket refresh?
+** TODO questions are always in catalan
 ** DONE remove game schema
 The game data has been moved to the genserver, so there is no need to keep the game data in DB.
 ** DONE remove auth-related files
