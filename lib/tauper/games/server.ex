@@ -2,6 +2,7 @@ defmodule Tauper.Games.Server do
   use GenServer
   alias TauperWeb.{Endpoint, Presence}
   import TauperWeb.Gettext
+  alias Tauper.Games.Tables.EducemFar, as: Table
 
   @registry :game_registry
 
@@ -26,130 +27,6 @@ defmodule Tauper.Games.Server do
     timer: nil,
     remaining_time: @default_question_max_time,
     question_max_time: @default_question_max_time
-  }
-
-  # TODO load all elements
-  # TODO does it make sense to have it in another file?
-  # TODO cnaviar oxidatoin_states per valiencia
-  @elements %{
-    1 => %{symbol: "H", name: "Hidrogen", oxidation_states: [1], group: 1},
-    2 => %{symbol: "He", name: "Heli", oxidation_states: [0], group: 18},
-    3 => %{symbol: "Li", name: "Liti", oxidation_states: [1], group: 1},
-    4 => %{symbol: "Be", name: "Beril·li", oxidation_states: [2], group: 2},
-    5 => %{symbol: "B", name: "Bor", oxidation_states: [1, 2, 3], group: 13},
-    6 => %{symbol: "C", name: "Carboni", oxidation_states: [1, 2, 3, 4], group: 14},
-    7 => %{symbol: "N", name: "Nitrogen", oxidation_states: [1, 2, 3, 4, 5], group: 15},
-    8 => %{symbol: "O", name: "Oxigen", oxidation_states: [1, 2], group: 16},
-    9 => %{symbol: "F", name: "Fluor", oxidation_states: [1], group: 17},
-    10 => %{symbol: "Ne", name: "Neó", oxidation_states: [0], group: 18},
-    11 => %{symbol: "Na", name: "Sodi", oxidation_states: [1], group: 1},
-    12 => %{symbol: "Mg", name: "Magnesi", oxidation_states: [1, 2], group: 2},
-    13 => %{symbol: "Al", name: "Alumini", oxidation_states: [1, 3], group: 13},
-    14 => %{symbol: "Si", name: "Silici", oxidation_states: [1, 2, 3, 4], group: 14},
-    15 => %{symbol: "P", name: "Fòsfor", oxidation_states: [1, 2, 3, 4, 5], group: 15},
-    16 => %{symbol: "S", name: "Sofre", oxidation_states: [1, 2, 3, 4, 5, 6], group: 16},
-    17 => %{symbol: "Cl", name: "Clor", oxidation_states: [1, 2, 3, 4, 5, 6, 7], group: 17},
-    18 => %{symbol: "Ar", name: "Argó", oxidation_states: [0], group: 18},
-    19 => %{symbol: "K", name: "Potassi", oxidation_states: [1], group: 1},
-    20 => %{symbol: "Ca", name: "Calci", oxidation_states: [2], group: 2},
-    21 => %{symbol: "Sc", name: "Escandi", oxidation_states: [1, 2, 3], group: 3},
-    22 => %{symbol: "Ti", name: "Titani", oxidation_states: [1, 2, 3, 4], group: 4},
-    23 => %{symbol: "V", name: "Vanadi", oxidation_states: [1, 2, 3, 4], group: 5},
-    24 => %{symbol: "Cr", name: "Cron", oxidation_states: [1, 2, 3, 4, 5, 6], group: 6},
-    25 => %{symbol: "Mn", name: "Manganès", oxidation_states: [1, 2, 3, 4, 5, 6, 7], group: 7},
-    26 => %{symbol: "Fe", name: "Ferro", oxidation_states: [1, 2, 3, 4, 5, 6], group: 8},
-    27 => %{symbol: "Co", name: "Cobalt", oxidation_states: [1, 2, 3, 4, 5], group: 9},
-    28 => %{symbol: "Ni", name: "Niquel", oxidation_states: [1, 2, 3, 4], group: 10},
-    29 => %{symbol: "Cu", name: "Coure", oxidation_states: [1, 2, 3, 4], group: 11},
-    30 => %{symbol: "Zn", name: "Zinc", oxidation_states: [2], group: 12},
-    31 => %{symbol: "Ga", name: "Gal·li", oxidation_states: [1, 2, 3], group: 13},
-    32 => %{symbol: "Ge", name: "Germani", oxidation_states: [1, 2, 3, 4], group: 14},
-    33 => %{symbol: "As", name: "Arsènic", oxidation_states: [2, 3, 5], group: 15},
-    34 => %{symbol: "Se", name: "Seleni", oxidation_states: [2, 4, 6], group: 16},
-    35 => %{symbol: "Br", name: "Brom", oxidation_states: [1, 3, 4, 5, 7], group: 17},
-    36 => %{symbol: "Kr", name: "Criptó", oxidation_states: [2], group: 18},
-    37 => %{symbol: "Rb", name: "Rubidi", oxidation_states: [1], group: 1},
-    38 => %{symbol: "Sr", name: "Estronci", oxidation_states: [2], group: 2},
-    39 => %{symbol: "Y", name: "Itri", oxidation_states: [1, 2, 3], group: 3},
-    40 => %{symbol: "Zr", name: "Zirconi", oxidation_states: [1, 2, 3, 4], group: 4},
-    41 => %{symbol: "Nb", name: "Niobi", oxidation_states: [1, 2, 3, 4, 5], group: 5},
-    42 => %{symbol: "Mo", name: "Molibdè", oxidation_states: [1, 2, 3, 4, 5, 6], group: 6},
-    43 => %{symbol: "Tc", name: "Tecneci", oxidation_states: [1, 2, 3, 4, 5, 6, 7], group: 7},
-    44 => %{symbol: "Ru", name: "Ruteni", oxidation_states: [1, 2, 3, 4, 5, 6, 7, 8], group: 8},
-    45 => %{symbol: "Rh", name: "Rodi", oxidation_states: [1, 2, 3, 4, 5, 6], group: 9},
-    46 => %{symbol: "Pd", name: "Pal·ladi", oxidation_states: [2, 4], group: 10},
-    47 => %{symbol: "Ag", name: "Argent", oxidation_states: [1, 2, 3], group: 11},
-    48 => %{symbol: "Cd", name: "Cadmi", oxidation_states: [2], group: 12},
-    49 => %{symbol: "In", name: "Indi", oxidation_states: [1, 2, 3], group: 13},
-    50 => %{symbol: "Sn", name: "Estany", oxidation_states: [2, 4], group: 14},
-    51 => %{symbol: "Sb", name: "Antimoni", oxidation_states: [3, 5], group: 15},
-    52 => %{symbol: "Te", name: "Tel·luri", oxidation_states: [2, 4, 5, 6], group: 16},
-    53 => %{symbol: "I", name: "Iode", oxidation_states: [1, 3, 5, 7], group: 17},
-    54 => %{symbol: "Xe", name: "Xenó", oxidation_states: [2, 4, 6, 8], group: 18},
-    55 => %{symbol: "Cs", name: "Cesi", oxidation_states: [1], group: 1},
-    56 => %{symbol: "Ba", name: "Bari", oxidation_states: [2], group: 2},
-    57 => %{symbol: "La", name: "Lantani", oxidation_states: [2, 3], group: 3},
-    58 => %{symbol: "Ce", name: "Ceri", oxidation_states: [2, 3, 4], group: 4},
-    59 => %{symbol: "Pr", name: "Praseodimi", oxidation_states: [2, 3, 4], group: 5},
-    60 => %{symbol: "Nd", name: "Neodimi", oxidation_states: [2, 3], group: 6},
-    61 => %{symbol: "Pm", name: "Prometi", oxidation_states: [3], group: 7},
-    62 => %{symbol: "Sm", name: "Samari", oxidation_states: [2, 3], group: 8},
-    63 => %{symbol: "Eu", name: "Europi", oxidation_states: [2, 3], group: 9},
-    64 => %{symbol: "Gd", name: "Gadolini", oxidation_states: [1, 2, 3], group: 10},
-    65 => %{symbol: "Tb", name: "Terbi", oxidation_states: [1, 3, 4], group: 11},
-    66 => %{symbol: "Dy", name: "Disprosi", oxidation_states: [2, 3], group: 12},
-    67 => %{symbol: "Ho", name: "Holmi", oxidation_states: [3], group: 13},
-    68 => %{symbol: "Er", name: "Erbi", oxidation_states: [3], group: 14},
-    69 => %{symbol: "Tm", name: "Tuli", oxidation_states: [2, 3], group: 15},
-    70 => %{symbol: "Yb", name: "Iterbi", oxidation_states: [2, 3], group: 16},
-    71 => %{symbol: "Lu", name: "Luteci", oxidation_states: [3], group: 17},
-    72 => %{symbol: "Hf", name: "Hafni", oxidation_states: [2, 3, 4], group: 4},
-    73 => %{symbol: "Ta", name: "Tàntal", oxidation_states: [1, 2, 3, 4, 5], group: 5},
-    74 => %{symbol: "W", name: "Tungstè", oxidation_states: [1, 2, 3, 4, 5, 6], group: 6},
-    75 => %{symbol: "Re", name: "Reni", oxidation_states: [1, 2, 3, 4, 5, 6, 7], group: 7},
-    76 => %{symbol: "Os", name: "Osmi", oxidation_states: [1, 2, 3, 4, 5, 6, 7, 8], group: 8},
-    77 => %{symbol: "Ir", name: "Iridi", oxidation_states: [1, 2, 3, 4, 5, 6], group: 9},
-    78 => %{symbol: "Pt", name: "Platí", oxidation_states: [2, 4, 5, 6], group: 10},
-    79 => %{symbol: "Au", name: "Or", oxidation_states: [1, 2, 3, 5], group: 11},
-    80 => %{symbol: "Hg", name: "Mercuri", oxidation_states: [1, 2, 4], group: 12},
-    81 => %{symbol: "Tl", name: "Tal·li", oxidation_states: [1, 3], group: 13},
-    82 => %{symbol: "Pb", name: "Plom", oxidation_states: [2, 4], group: 14},
-    83 => %{symbol: "Bi", name: "Bismut", oxidation_states: [3, 5], group: 15},
-    84 => %{symbol: "Po", name: "Poloni", oxidation_states: [2, 4, 6], group: 16},
-    85 => %{symbol: "At", name: "Àstat", oxidation_states: [1, 3, 5], group: 17},
-    86 => %{symbol: "Rn", name: "Radó", oxidation_states: [2], group: 18},
-    87 => %{symbol: "Fr", name: "Franci", oxidation_states: [1], group: 1},
-    88 => %{symbol: "Ra", name: "Radi", oxidation_states: [2], group: 2},
-    89 => %{symbol: "Ac", name: "Actini", oxidation_states: [3], group: 3},
-    90 => %{symbol: "Th", name: "Tori", oxidation_states: [2, 3, 4], group: 4},
-    91 => %{symbol: "Pa", name: "Protoactini", oxidation_states: [3, 4, 5], group: 5},
-    92 => %{symbol: "U", name: "Urani", oxidation_states: [3, 4, 5, 6], group: 6},
-    93 => %{symbol: "Np", name: "Neptuni", oxidation_states: [3, 4, 5, 6, 7], group: 7},
-    94 => %{symbol: "Pu", name: "Plutoni", oxidation_states: [3, 4, 5, 6, 7], group: 8},
-    95 => %{symbol: "Am", name: "Amerci", oxidation_states: [2, 3, 4, 5, 6], group: 9},
-    96 => %{symbol: "Cm", name: "Curi", oxidation_states: [3, 4], group: 10},
-    97 => %{symbol: "Bk", name: "Berkeli", oxidation_states: [3, 4], group: 11},
-    98 => %{symbol: "Cf", name: "Californi", oxidation_states: [2, 3, 4], group: 12},
-    99 => %{symbol: "Es", name: "Einsteini", oxidation_states: [2, 3], group: 13},
-    100 => %{symbol: "Fm", name: "Fermi", oxidation_states: [2, 3], group: 14},
-    101 => %{symbol: "Md", name: "Mendelevi", oxidation_states: [2, 3], group: 15},
-    102 => %{symbol: "No", name: "Nobeli", oxidation_states: [2, 3], group: 16},
-    103 => %{symbol: "Lr", name: "Lawrenci", oxidation_states: [3], group: 17},
-    104 => %{symbol: "Rf", name: "Rutherfordi", oxidation_states: [4], group: 4},
-    105 => %{symbol: "Db", name: "Dubni", oxidation_states: [0], group: 5},
-    106 => %{symbol: "Sg", name: "Seaborgi", oxidation_states: [0], group: 6},
-    107 => %{symbol: "Bh", name: "Bohri", oxidation_states: [0], group: 7},
-    108 => %{symbol: "Hs", name: "Hassi", oxidation_states: [0], group: 8},
-    109 => %{symbol: "Mt", name: "Meitneri", oxidation_states: [0], group: 9},
-    110 => %{symbol: "Ds", name: "Darmstadti", oxidation_states: [0], group: 10},
-    111 => %{symbol: "Rg", name: "Roentgeni", oxidation_states: [0], group: 11},
-    112 => %{symbol: "Cn", name: "Copernici", oxidation_states: [0], group: 12},
-    113 => %{symbol: "Nh", name: "Nihoni", oxidation_states: [0], group: 13},
-    114 => %{symbol: "Fl", name: "Flerovi", oxidation_states: [0], group: 14},
-    115 => %{symbol: "Mc", name: "Moscovi", oxidation_states: [0], group: 15},
-    116 => %{symbol: "Lv", name: "Livermori", oxidation_states: [0], group: 16},
-    117 => %{symbol: "Ts", name: "Tennes", oxidation_states: [0], group: 17},
-    118 => %{symbol: "Og", name: "Oganessó", oxidation_states: [0], group: 18}
   }
 
   ## missing client API
@@ -334,7 +211,8 @@ defmodule Tauper.Games.Server do
             type: question_type,
             atomic_number: atomic_number,
             answer:
-              Map.get(@elements, atomic_number) |> Map.get(String.to_existing_atom(question_type))
+              Map.get(elements(), atomic_number)
+              |> Map.get(String.to_existing_atom(question_type))
           }
 
     all_questions
@@ -358,7 +236,7 @@ defmodule Tauper.Games.Server do
   defp atomic_numbers(params) do
     groups = params[:element_groups] || Enum.to_list(1..@max_num_groups)
 
-    @elements
+    elements()
     |> Enum.filter(fn {_k, v} -> v.group in groups end)
     |> Enum.map(fn {k, _v} -> k end)
   end
@@ -422,7 +300,8 @@ defmodule Tauper.Games.Server do
   end
 
   defp get_element(atomic_number) do
-    @elements[atomic_number]
+    elements = elements()
+    elements[atomic_number]
   end
 
   defp update_score(state, player, is_correct) do
@@ -546,4 +425,6 @@ defmodule Tauper.Games.Server do
 
     max(active_players, score_players)
   end
+
+  defp elements, do: Table.elements()
 end
