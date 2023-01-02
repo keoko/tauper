@@ -1,7 +1,11 @@
 #+title: Tasks
 * Tasks
 ** DONE implement valences is_correct function
+** TODO send score email
+** TODO display flash message when email is sent or not
+** TODO email is marked as spam
 ** TODO translate errors in CA
+** TODO translate error messages of the app
 ** DONE remove special elements
 ** DONE valences are wrong
 ** DONE not sensitive to lowercase/uppercase in checking element name

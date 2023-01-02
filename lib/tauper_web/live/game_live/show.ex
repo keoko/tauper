@@ -128,7 +128,18 @@ defmodule TauperWeb.GameLive.Show do
     code = socket.assigns.code
     podium = Games.podium(code)
 
-    ScoreEmail.send_score_email(email, code, podium)
+    socket =
+      case ScoreEmail.send_score_email(email, code, podium) do
+        {:ok, _} ->
+          socket |> put_flash(:info, gettext("Email sent"))
+
+        _ ->
+          socket
+          |> put_flash(
+            :error,
+            gettext("Email cannot be sent. There has been an unexpected error.")
+          )
+      end
 
     {:noreply, socket}
   end

@@ -66,6 +66,8 @@ if config_env() == :prod do
   #
   # See https://hexdocs.pm/swoosh/Swoosh.html#module-installation for details.
   config :tauper, Tauper.Mailer,
-    adapter: Swoosh.Adapters.SendGrid,
+    adapter: Swoosh.Adapters.Sendgrid,
     api_key: System.get_env("SENDGRID_API_KEY")
+
+  config :swoosh, :api_client, Swoosh.ApiClient.Hackney
 end
