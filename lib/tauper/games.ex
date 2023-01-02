@@ -50,8 +50,8 @@ defmodule Tauper.Games do
     Server.answer(game_code, answer, player)
   end
 
-  def podium(game_code) do
-    Server.podium(game_code)
+  def podium(game_code, num_players \\ nil) do
+    Server.podium(game_code, num_players)
   end
 
   def list_game_codes() do

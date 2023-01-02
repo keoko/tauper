@@ -1,0 +1,18 @@
+<table id="podium">
+<thead>
+    <tr>
+    <th><%= gettext("Position") %></th>
+    <th><%= gettext("Player") %></th>
+    <th><%= gettext("Score") %></th>
+    </tr>
+</thead>
+<tbody>
+<%= for {{player_name, score}, position} <- Enum.with_index(@podium, 1) do %>
+<tr>
+    <td class="position"><%= position %></td>
+    <td class="player_name"><%= player_name %></td>
+    <td class="score"><%= score %> <%= gettext("points") %></td>
+</tr>
+<% end %>
+</tbody>
+</table>

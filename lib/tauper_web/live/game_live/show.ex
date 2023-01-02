@@ -3,6 +3,9 @@ defmodule TauperWeb.GameLive.Show do
   alias Tauper.Games
   alias TauperWeb.{Presence, Endpoint}
   alias TauperWeb.GameLive.Component
+  alias Tauper.Email.{Recipient, ScoreEmail}
+
+  @podium_places 5
 
   @impl true
   def mount(_params, %{"locale" => locale}, socket) do
@@ -13,7 +16,10 @@ defmodule TauperWeb.GameLive.Show do
       Endpoint.subscribe(Presence.topic(code))
     end
 
-    {:ok, socket |> assign(:answers, nil)}
+    {:ok,
+     socket
+     |> assign(:answers, nil)
+     |> assign(:email_recipient, %Recipient{})}
   end
 
   @impl true
@@ -54,7 +60,11 @@ defmodule TauperWeb.GameLive.Show do
     game_code = socket.assigns.game_code
     new_status = data.payload.status
     game = Games.game(game_code)
-    podium = if new_status in [:game_over, :paused], do: Games.podium(game_code), else: []
+
+    podium =
+      if new_status in [:game_over, :paused],
+        do: Games.podium(game_code, @podium_places),
+        else: []
 
     {:noreply,
      socket
@@ -80,17 +90,15 @@ defmodule TauperWeb.GameLive.Show do
   def handle_event("next", _data, socket) do
     code = socket.assigns.code
     game = Games.next_question(code)
-    podium = if game.status in [:game_over, :paused], do: Games.podium(code), else: []
 
-    {:noreply, assign(socket, status: game.status, question: game.question, podium: podium)}
+    {:noreply, assign(socket, status: game.status, question: game.question)}
   end
 
   def handle_event("skip", _data, socket) do
     code = socket.assigns.code
     game = Games.skip_question(code)
-    podium = if game.status in [:game_over, :paused], do: Games.podium(code), else: []
 
-    {:noreply, assign(socket, status: game.status, question: game.question, podium: podium)}
+    {:noreply, assign(socket, status: game.status, question: game.question)}
   end
 
   def handle_event("stop", _data, socket) do
@@ -98,5 +106,30 @@ defmodule TauperWeb.GameLive.Show do
     Games.stop_game(code)
 
     {:noreply, redirect(socket, to: Routes.page_path(socket, :index))}
+  end
+
+  def handle_event(
+        "validate_score_email",
+        %{"score-email-form" => recipient_params},
+        %{assigns: %{email_recipient: recipient}} = socket
+      ) do
+    changeset =
+      recipient
+      |> Recipient.changeset(recipient_params)
+      |> Map.put(:action, :validate)
+
+    {:noreply,
+     socket
+     |> assign(:changeset, changeset)}
+  end
+
+  def handle_event("send_score_email", %{"score-email-form" => recipient_params}, socket) do
+    email = recipient_params["email"]
+    code = socket.assigns.code
+    podium = Games.podium(code)
+
+    ScoreEmail.send_score_email(email, code, podium)
+
+    {:noreply, socket}
   end
 end

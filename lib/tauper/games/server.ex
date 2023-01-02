@@ -60,7 +60,7 @@ defmodule Tauper.Games.Server do
     call_server(process_name, :score)
   end
 
-  def podium(process_name, num_players \\ 5) do
+  def podium(process_name, num_players \\ nil) do
     call_server(process_name, {:podium, num_players})
   end
 
@@ -323,11 +323,14 @@ defmodule Tauper.Games.Server do
     end
   end
 
-  defp calculate_podium(state, num_players) do
+  defp calculate_podium(state, num_players \\ nil) do
     state.score
     |> calculate_score
     |> sort_by_score
-    |> Enum.take(num_players)
+    |> case do
+      score when num_players == nil -> score
+      score -> Enum.take(score, num_players)
+    end
   end
 
   defp calculate_score(m) do

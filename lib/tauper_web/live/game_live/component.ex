@@ -47,7 +47,7 @@ defmodule TauperWeb.GameLive.Component do
        <tr>
          <td class="position"><%= position %></td>
          <td class="player_name"><%= player_name %></td>
-         <td class="score"><%= score %> points</td>
+         <td class="score"><%= score %> <%= gettext("points") %></td>
        </tr>
      <% end %>
        </tbody>
