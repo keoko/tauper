@@ -146,6 +146,7 @@ msgid "No players yet"
 msgstr "Encara no hi ha cap jugador"
 
 #: lib/tauper_web/live/game_live/component.ex:41
+#: lib/tauper_web/templates/email/score_email.html.eex:5
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Player"
 msgstr "Jugador"
@@ -156,11 +157,13 @@ msgid "Players"
 msgstr "Jugadors"
 
 #: lib/tauper_web/live/game_live/component.ex:40
+#: lib/tauper_web/templates/email/score_email.html.eex:4
 #, elixir-autogen, elixir-format
 msgid "Position"
 msgstr "Posició"
 
 #: lib/tauper_web/live/game_live/component.ex:42
+#: lib/tauper_web/templates/email/score_email.html.eex:6
 #, elixir-autogen, elixir-format
 msgid "Score"
 msgstr "Puntuació"
@@ -180,7 +183,7 @@ msgstr "Saltar pregunta"
 msgid "Start Game"
 msgstr "Començar a jugar"
 
-#: lib/tauper_web/live/game_live/show.html.heex:30
+#: lib/tauper_web/live/game_live/show.html.heex:48
 #, elixir-autogen, elixir-format
 msgid "Stop Game"
 msgstr "Parar el joc"
@@ -228,11 +231,13 @@ msgid "time"
 msgstr "temps"
 
 #: lib/tauper_web/live/game_live/play.html.heex:14
+#: lib/tauper_web/live/game_live/play.html.heex:31
 #, elixir-autogen, elixir-format
 msgid "correct"
 msgstr "correcta"
 
 #: lib/tauper_web/live/game_live/play.html.heex:14
+#: lib/tauper_web/live/game_live/play.html.heex:31
 #, elixir-autogen, elixir-format
 msgid "wrong"
 msgstr "incorrecta"
@@ -244,17 +249,17 @@ msgid_plural "%{count} players pending to answer"
 msgstr[0] "Només falta un jugador per respondre"
 msgstr[1] "%{count} jugadors pendents per respondre"
 
-#: lib/tauper/games/server.ex:381
+#: lib/tauper/games/server.ex:259
 #, elixir-autogen, elixir-format
 msgid "What are the valences of %{element_name}?"
 msgstr "Quines són les valències de l'element %{element_name}?"
 
-#: lib/tauper/games/server.ex:376
+#: lib/tauper/games/server.ex:254
 #, elixir-autogen, elixir-format
 msgid "What is the name of %{element_symbol}?"
 msgstr "Quin és el nom del símbol %{element_symbol}?"
 
-#: lib/tauper/games/server.ex:371
+#: lib/tauper/games/server.ex:249
 #, elixir-autogen, elixir-format
 msgid "What is the symbol of %{element_name}?"
 msgstr "Quin és el símbol de l'element %{element_name}?"
@@ -273,3 +278,29 @@ msgstr "Pòdium"
 #, elixir-autogen, elixir-format
 msgid "The answer is <strong>%{answer}</strong>"
 msgstr "La resposta és <strong>%{answer}</strong>"
+
+#: lib/tauper_web/live/game_live/show.ex:140
+#, elixir-autogen, elixir-format
+msgid "Email cannot be sent. There has been an unexpected error."
+msgstr "No es pot enviar el email. Hi hagut un error inesperat."
+
+#: lib/tauper_web/live/game_live/show.ex:134
+#, elixir-autogen, elixir-format
+msgid "Email sent"
+msgstr "Email enviat"
+
+#: lib/tauper_web/live/game_live/show.html.heex:44
+#, elixir-autogen, elixir-format
+msgid "Send Score Email"
+msgstr "Enviar Email"
+
+#: lib/tauper_web/live/game_live/show.html.heex:44
+#, elixir-autogen, elixir-format, fuzzy
+msgid "Sending email..."
+msgstr "Enviant email..."
+
+#: lib/tauper_web/live/game_live/component.ex:50
+#: lib/tauper_web/templates/email/score_email.html.eex:14
+#, elixir-autogen, elixir-format
+msgid "points"
+msgstr "punts"
