@@ -58,7 +58,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: lib/tauper_web/templates/game/form.html.heex:48
+#: lib/tauper_web/templates/game/form.html.heex:51
 #: lib/tauper_web/templates/game/index.html.heex:25
 #: lib/tauper_web/templates/game/new.html.heex:1
 #: lib/tauper_web/templates/page/index.html.heex:1
@@ -102,6 +102,7 @@ msgstr ""
 msgid "game"
 msgstr ""
 
+#: lib/tauper_web/templates/game/form.html.heex:25
 #: lib/tauper_web/templates/game/form.html.heex:26
 #: lib/tauper_web/templates/game/form.html.heex:27
 #: lib/tauper_web/templates/game/form.html.heex:28
@@ -119,7 +120,6 @@ msgstr ""
 #: lib/tauper_web/templates/game/form.html.heex:40
 #: lib/tauper_web/templates/game/form.html.heex:41
 #: lib/tauper_web/templates/game/form.html.heex:42
-#: lib/tauper_web/templates/game/form.html.heex:43
 #, elixir-autogen, elixir-format
 msgid "group %{group_number}"
 msgstr ""
@@ -135,7 +135,7 @@ msgstr ""
 msgid "Symbol"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:25
+#: lib/tauper_web/live/game_live/show.html.heex:59
 #, elixir-autogen, elixir-format
 msgid "Next Question"
 msgstr ""
@@ -169,11 +169,12 @@ msgid "Score"
 msgstr ""
 
 #: lib/tauper_web/live/game_live/play.html.heex:24
+#: lib/tauper_web/live/game_live/show.html.heex:35
 #, elixir-autogen, elixir-format
 msgid "Sending answer..."
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:18
+#: lib/tauper_web/live/game_live/show.html.heex:40
 #, elixir-autogen, elixir-format
 msgid "Skip Question"
 msgstr ""
@@ -183,7 +184,7 @@ msgstr ""
 msgid "Start Game"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:48
+#: lib/tauper_web/live/game_live/show.html.heex:84
 #, elixir-autogen, elixir-format
 msgid "Stop Game"
 msgstr ""
@@ -210,6 +211,8 @@ msgstr ""
 
 #: lib/tauper_web/live/game_live/play.html.heex:14
 #: lib/tauper_web/live/game_live/play.html.heex:31
+#: lib/tauper_web/live/game_live/show.html.heex:25
+#: lib/tauper_web/live/game_live/show.html.heex:52
 #, elixir-autogen, elixir-format
 msgid "Your answer is %{answer}."
 msgstr ""
@@ -221,80 +224,85 @@ msgid "code"
 msgstr ""
 
 #: lib/tauper_web/live/game_live/play.html.heex:24
+#: lib/tauper_web/live/game_live/show.html.heex:35
 #, elixir-autogen, elixir-format
 msgid "send answer"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:13
+#: lib/tauper_web/live/game_live/show.html.heex:15
 #, elixir-autogen, elixir-format
 msgid "time"
 msgstr ""
 
 #: lib/tauper_web/live/game_live/play.html.heex:14
 #: lib/tauper_web/live/game_live/play.html.heex:31
+#: lib/tauper_web/live/game_live/show.html.heex:25
+#: lib/tauper_web/live/game_live/show.html.heex:52
 #, elixir-autogen, elixir-format
 msgid "correct"
 msgstr ""
 
 #: lib/tauper_web/live/game_live/play.html.heex:14
 #: lib/tauper_web/live/game_live/play.html.heex:31
+#: lib/tauper_web/live/game_live/show.html.heex:25
+#: lib/tauper_web/live/game_live/show.html.heex:52
 #, elixir-autogen, elixir-format
 msgid "wrong"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:15
+#: lib/tauper_web/live/game_live/show.html.heex:19
 #, elixir-autogen, elixir-format
 msgid "only a player pending to answer"
 msgid_plural "%{count} players pending to answer"
 msgstr[0] ""
 msgstr[1] ""
 
-#: lib/tauper/games/server.ex:259
+#: lib/tauper/games/server.ex:265
 #, elixir-autogen, elixir-format
 msgid "What are the valences of %{element_name}?"
 msgstr ""
 
-#: lib/tauper/games/server.ex:254
+#: lib/tauper/games/server.ex:260
 #, elixir-autogen, elixir-format
 msgid "What is the name of %{element_symbol}?"
 msgstr ""
 
-#: lib/tauper/games/server.ex:249
+#: lib/tauper/games/server.ex:255
 #, elixir-autogen, elixir-format
 msgid "What is the symbol of %{element_name}?"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:29
+#: lib/tauper_web/live/game_live/show.html.heex:63
 #, elixir-autogen, elixir-format
 msgid "Final Podium"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:24
+#: lib/tauper_web/live/game_live/show.html.heex:47
 #, elixir-autogen, elixir-format
 msgid "Podium"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:23
+#: lib/tauper_web/live/game_live/show.html.heex:45
 #, elixir-autogen, elixir-format
 msgid "The answer is <strong>%{answer}</strong>"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.ex:140
+#: lib/tauper_web/live/game_live/show.ex:172
 #, elixir-autogen, elixir-format
 msgid "Email cannot be sent. There has been an unexpected error."
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.ex:134
+#: lib/tauper_web/live/game_live/show.ex:166
 #, elixir-autogen, elixir-format
 msgid "Email sent"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:44
+#: lib/tauper_web/live/game_live/show.html.heex:79
 #, elixir-autogen, elixir-format
 msgid "Send Score Email"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:44
+#: lib/tauper_web/live/game_live/show.html.heex:79
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Sending email..."
 msgstr ""
@@ -303,4 +311,14 @@ msgstr ""
 #: lib/tauper_web/templates/email/score_email.html.eex:14
 #, elixir-autogen, elixir-format
 msgid "points"
+msgstr ""
+
+#: lib/tauper_web/templates/game/form.html.heex:46
+#, elixir-autogen, elixir-format
+msgid "Alone"
+msgstr ""
+
+#: lib/tauper_web/live/game_live/show.html.heex:55
+#, elixir-autogen, elixir-format
+msgid "Your score is %{score} points."
 msgstr ""

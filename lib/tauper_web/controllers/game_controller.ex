@@ -52,7 +52,7 @@ defmodule TauperWeb.GameController do
     else
       [] ->
         conn
-        |> put_flash(:error, "Invalid game code  '#{code}'. Please try another code.")
+        |> put_flash(:error, "Invalid game code '#{code}'. Please try another code.")
         |> render("new_join.html", changeset: change_join_game_request(params))
 
       {:error, %Changeset{} = changeset} ->
@@ -65,7 +65,8 @@ defmodule TauperWeb.GameController do
       num_questions: :integer,
       question_max_time: :integer,
       question_types: {:array, :string},
-      element_groups: {:array, :integer}
+      element_groups: {:array, :integer},
+      alone: :boolean
     }
 
     # apply_action(:insert) needed to display error messages in the form
@@ -76,7 +77,8 @@ defmodule TauperWeb.GameController do
       :num_questions,
       :question_max_time,
       :question_types,
-      :element_groups
+      :element_groups,
+      :alone
     ])
     |> Changeset.validate_number(:num_questions, greater_than: 0)
     |> Changeset.validate_number(:question_max_time, greater_than: 0)

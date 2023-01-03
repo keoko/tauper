@@ -1,9 +1,11 @@
 <%= if @status == :not_started do %>
 
 <h2><%= gettext("code") %>: <em><%= @game_code %></em></h2>
-<button phx-click="start" phx-value-game_code= {@game_code} disabled={Enum.count(@players) ==0}><%= gettext("Start Game") %></button>
+<button phx-click="start" phx-value-game_code= {@game_code} disabled={!@game.alone && Enum.count(@players) == 0}><%= gettext("Start Game") %></button>
 <Component.periodic_table question={@question} />
+<%= if !@game.alone do %>
 <Component.players players={@players} />
+<% end %>
 <% end %>
 
 <%= if @status == :started do %>
@@ -11,8 +13,28 @@
         <strong>(<%= @game.current_question + 1 %>/<%=  @game.num_questions %>) <%= @question.sentence %></strong>
     </div>
     <div><%= gettext("time") %>: <%=  @remaining_time %></div>
+
+    <%= if !@game.alone do %>
     <%=  if assigns[:answers] do %>
       <div><%= ngettext("only a player pending to answer", "%{count} players pending to answer", (@answers.total_players - @answers.num_answers)) %></div>
+      <% end %>
+    <% end %>
+
+    <%= if @game.alone do %>
+      <%= if assigns[:answered] do %>
+              <%= gettext("Your answer is %{answer}.", [answer: (if @is_correct, do: gettext("correct"), else: gettext("wrong"))]) %>
+      <% else %>
+          <.form
+          let={f}
+          for={@changeset}
+          id="answer-form"
+          as="answer-form"
+          phx-submit="answer">
+          <%= text_input f, :answer, autocomplete: "off" %>
+          <%= error_tag f, :answer %>
+          <%= submit gettext("send answer"), phx_disable_with: gettext("Sending answer...") %>
+          </.form>
+      <% end %>
     <% end %>
 
     <button phx-click="skip"><%= gettext("Skip Question") %></button>
@@ -21,12 +43,25 @@
 
 <%= if @status == :paused do %>
   <div><%= gettext("The answer is <strong>%{answer}</strong>", [answer: inspect(@question.answer)]) |> raw() %></div>
+  <%= if !@game.alone do %>
   <Component.podium podium={@podium} title={gettext("Podium")}/>
+  <% end %>
+
+  <%= if @game.alone do %>
+    <%= if assigns[:answered] do %>
+      <p><%= gettext("Your answer is %{answer}.", [answer: (if @is_correct, do: gettext("correct"), else: gettext("wrong"))]) %></p>
+    <% end %>
+    <%= if assigns[:player_score_and_position] do %>
+        <p><%= gettext("Your score is %{score} points.", [score: @player_score_and_position.score]) %></p>
+    <% end %>
+  <% end %>
+
   <button phx-click="next"><%= gettext("Next Question") %></button>
 <% end %>
 
 <%= if @status == :game_over do %>
   <Component.podium podium={@podium} title={gettext("Final Podium")}/>
+  <%= if !@game.alone do %>
   <div>
     <.form
       let={f}
@@ -45,5 +80,6 @@
     </div>
   </.form>
   </div>
+  <% end %>
   <button phx-click="stop"><%= gettext("Stop Game") %></button>
 <% end %>

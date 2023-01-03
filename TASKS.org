@@ -1,8 +1,11 @@
 #+title: Tasks
 * Tasks
 ** DONE implement valences is_correct function
-** TODO send score email
-** TODO display flash message when email is sent or not
+** TODO individual game
+** TODO build and display link to share with players when creating new game
+only display "player" field when passing the game as a parameter.
+** DONE send score email
+** DONE display flash message when email is sent or not
 ** TODO email is marked as spam
 ** TODO translate errors in CA
 ** TODO translate error messages of the app

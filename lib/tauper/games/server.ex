@@ -14,6 +14,9 @@ defmodule Tauper.Games.Server do
   @default_question_max_time 20
   def default_question_max_time, do: @default_question_max_time
 
+  @default_alone false
+  def default_alone, do: @default_alone
+
   @max_num_groups 18
 
   @initial_state %{
@@ -26,7 +29,8 @@ defmodule Tauper.Games.Server do
     score: %{},
     timer: nil,
     remaining_time: @default_question_max_time,
-    question_max_time: @default_question_max_time
+    question_max_time: @default_question_max_time,
+    alone: @default_alone
   }
 
   ## missing client API
@@ -69,6 +73,7 @@ defmodule Tauper.Games.Server do
   def init(params \\ []) do
     question_max_time = params[:question_max_time] || @default_question_max_time
     num_questions = params[:num_questions] || @default_num_questions
+    alone = params[:alone] || @default_alone
     questions = build_questions(num_questions, params)
 
     state = %{
@@ -76,7 +81,8 @@ defmodule Tauper.Games.Server do
       | code: params.code,
         questions: questions,
         num_questions: num_questions,
-        question_max_time: question_max_time
+        question_max_time: question_max_time,
+        alone: alone
     }
 
     {:ok, state}

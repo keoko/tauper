@@ -58,8 +58,15 @@ defmodule TauperWeb.GameLive.Show do
 
   def handle_info(%{event: "game_status_changed"} = data, socket) do
     game_code = socket.assigns.game_code
+    player_name = socket.assigns.player_name
     new_status = data.payload.status
     game = Games.game(game_code)
+    answered = if new_status in [:started, :game_over], do: false, else: socket.assigns.answered
+    is_correct = if new_status in [:started, :game_over], do: nil, else: socket.assigns.is_correct
+    podium = if new_status in [:paused, :game_over], do: Games.podium(game_code), else: []
+
+    player_score_and_position =
+      TauperWeb.GameLive.Play.get_player_score_and_position(player_name, podium)
 
     podium =
       if new_status in [:game_over, :paused],
@@ -72,8 +79,11 @@ defmodule TauperWeb.GameLive.Show do
      |> assign(:game, game)
      |> assign(:answers, game.answers)
      |> assign(:remaining_time, game.remaining_time)
+     |> assign(:answered, answered)
+     |> assign(:is_correct, is_correct)
      |> assign(:status, new_status)
-     |> assign(:podium, podium)}
+     |> assign(:podium, podium)
+     |> assign(:player_score_and_position, player_score_and_position)}
   end
 
   def handle_info(_event, socket) do
@@ -99,6 +109,28 @@ defmodule TauperWeb.GameLive.Show do
     game = Games.skip_question(code)
 
     {:noreply, assign(socket, status: game.status, question: game.question)}
+  end
+
+  def handle_event("answer", %{"answer-form" => %{"answer" => answer}}, socket) do
+    game_code = socket.assigns.game_code
+    player_name = socket.assigns.player_name
+    game = socket.assigns.game
+
+    is_correct =
+      case Games.answer(game_code, answer, player_name) do
+        {:ok, %{is_correct: is_correct}} -> is_correct
+        _ -> nil
+      end
+
+    # force skipping the question to jump to the "podium" page
+    if game.alone do
+      Games.skip_question(game_code)
+    end
+
+    {:noreply,
+     socket
+     |> assign(:is_correct, is_correct)
+     |> assign(:answered, true)}
   end
 
   def handle_event("stop", _data, socket) do

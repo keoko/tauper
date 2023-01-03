@@ -19,7 +19,6 @@
   <%= error_tag f, :question_types %>
 
   <%= label f, :element_groups, gettext("Element groups") %>
-  <%#= multiple_select(f, :element_groups,["grup 1": 1, "grup 2": 2, "grup 3": 3, "grup 4": 4, "grup 5": 5, "grup 6": 6, "grup 7": 7, "grup 8": 8, "grup 9": 9, "grup 10": 10, "grup 11": 11, "grup 12": 12, "grup 13": 13, "grup 14": 14, "grup 15": 15, "grup 16": 16, "grup 17": 17, "grup 18": 18], selected: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]) %>
   <!-- to generate list with emacs lisp: (dotimes (i 18) (insert (format "{gettext(\"group %%{group_number}\", group_number: %d), %d},\n" (1+ i) (1+ i) ))) -->
   <%= multiple_select(f, :element_groups,
     [
@@ -43,6 +42,10 @@
     {gettext("group %{group_number}", group_number: 18), 18},
   ], selected: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18]) %>
   <%= error_tag f, :element_groups %>
+
+  <%= label f, :alone, gettext("Alone") %>
+  <%= checkbox f, :alone %>
+  <%= error_tag f, :alone %>
 
   <div>
     <%= submit gettext("New Game") %>
