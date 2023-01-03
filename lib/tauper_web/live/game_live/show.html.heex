@@ -9,10 +9,13 @@
 <% end %>
 
 <%= if @status == :started do %>
+    <div style="overflow: hidden">
+    <button phx-click="skip" style="float: right;"><%= gettext("Skip Question") %></button>
+    <span style="float: right; margin: 0px 10px; padding: 2px 0"><%= gettext("time") %>: <%=  @remaining_time %></span>
+    </div>
     <div>
         <strong>(<%= @game.current_question + 1 %>/<%=  @game.num_questions %>) <%= @question.sentence %></strong>
     </div>
-    <div><%= gettext("time") %>: <%=  @remaining_time %></div>
 
     <%= if !@game.alone do %>
     <%=  if assigns[:answers] do %>
@@ -37,7 +40,6 @@
       <% end %>
     <% end %>
 
-    <button phx-click="skip"><%= gettext("Skip Question") %></button>
     <Component.periodic_table question={@question} />
 <% end %>
 
