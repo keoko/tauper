@@ -9,3 +9,13 @@ Tauper is a multiplayer game implemented in Elixir.
 
 ## Pre-requisites
   * direnv
+
+## deploy the app
+#+BEGIN_SRC bash
+fly deploy
+#+END_SRC
+
+## gather new translations
+#+BEGIN_SRC bash
+mix gettext.extract --merge
+#+END_SRC
