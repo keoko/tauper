@@ -1,27 +1,28 @@
 <%= if @status == :not_started do %>
-
-<h2><%= gettext("code") %>: <em><%= @game_code %></em></h2>
-<button phx-click="start" phx-value-game_code= {@game_code} disabled={!@game.alone && Enum.count(@players) == 0}><%= gettext("Start Game") %></button>
+<section class="start-game">
+  <h2><%= gettext("code") %>: <strong><%= @game_code %></strong></h2>
+  <button phx-click="start" phx-value-game_code= {@game_code} disabled={!@game.alone && Enum.count(@players) == 0}><%= gettext("Start Game") %></button>
+</section>
+  <%= if !@game.alone do %>
+    <Component.players players={@players} />
+  <% end %>
 <Component.periodic_table question={@question} />
-<%= if !@game.alone do %>
-<Component.players players={@players} />
-<% end %>
 <% end %>
 
 <%= if @status == :started do %>
-    <div style="overflow: hidden">
-    <button phx-click="skip" style="float: right;"><%= gettext("Skip Question") %></button>
-    <span style="float: right; margin: 0px 10px; padding: 2px 0"><%= gettext("time") %>: <%=  @remaining_time %></span>
-    </div>
-    <div>
-        <strong>(<%= @game.current_question + 1 %>/<%=  @game.num_questions %>) <%= @question.sentence %></strong>
-    </div>
-
+    <section class="skip-question">
+    <div><%= gettext("time") %>: <%=  @remaining_time %></div>
     <%= if !@game.alone do %>
     <%=  if assigns[:answers] do %>
       <div><%= ngettext("only a player pending to answer", "%{count} players pending to answer", (@answers.total_players - @answers.num_answers)) %></div>
       <% end %>
     <% end %>
+    <button phx-click="skip" style="float: right;"><%= gettext("Skip Question") %></button>
+    </section>
+    <main id="sentence">
+        (<%= @game.current_question + 1 %>/<%=  @game.num_questions %>) <strong><%= @question.sentence %></strong>
+    </main>
+
 
     <%= if @game.alone do %>
       <%= if assigns[:answered] do %>
@@ -44,11 +45,10 @@
 <% end %>
 
 <%= if @status == :paused do %>
-  <div><%= gettext("The answer is <strong>%{answer}</strong>", [answer: inspect(@question.answer)]) |> raw() %></div>
-  <%= if !@game.alone do %>
-  <Component.podium podium={@podium} title={gettext("Podium")}/>
-  <% end %>
-
+  <section class="next-question">
+    <p><%= gettext("The answer is <strong>%{answer}</strong>", [answer: inspect(@question.answer)]) |> raw() %></p>
+    <button phx-click="next"><%= gettext("Next Question") %></button>
+  </section>
   <%= if @game.alone do %>
     <%= if assigns[:answered] do %>
       <p><%= gettext("Your answer is %{answer}.", [answer: (if @is_correct, do: gettext("correct"), else: gettext("wrong"))]) %></p>
@@ -57,8 +57,11 @@
         <p><%= gettext("Your score is %{score} points.", [score: @player_score_and_position.score]) %></p>
     <% end %>
   <% end %>
+  <%= if !@game.alone do %>
+  <Component.podium podium={@podium} title={gettext("Podium")}/>
+  <% end %>
 
-  <button phx-click="next"><%= gettext("Next Question") %></button>
+
 <% end %>
 
 <%= if @status == :game_over do %>

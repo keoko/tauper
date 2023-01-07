@@ -383,3 +383,30 @@ input {
   background: #fff;
   /* border-color: yellow; */
 }
+
+.start-game {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.next-question, .skip-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0 20px 0;
+}
+
+
+.next-question > *, .skip-question > * {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+#sentence {
+  padding: 20px 0;
+}
+#sentence > * {
+  font-size: 2rem;
+}

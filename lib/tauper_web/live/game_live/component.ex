@@ -15,8 +15,9 @@ defmodule TauperWeb.GameLive.Component do
 
   def players(assigns) do
     ~H"""
-    <div id="players">
-     <strong><%= gettext("Players") %>:</strong>
+     <section id="players">
+      <header><h3><%= gettext("Players") %></h3></header>
+
     <%= if Enum.count(@players) == 0 do %>
     <p><%= gettext("No players yet") %></p>
     <% else %>
@@ -26,15 +27,16 @@ defmodule TauperWeb.GameLive.Component do
      <% end %>
      </ul>
     <% end %>
-    </div>
+    </section>
     """
   end
 
   def podium(assigns) do
     ~H"""
     <%= if @podium do %>
-     <h2><%= @title %></h2>
-     <table id="podium">
+     <section id="players">
+      <header><h3><%= @title %></h3></header>
+      <table id="podium">
        <thead>
          <tr>
            <th><%= gettext("Position") %></th>
@@ -52,6 +54,7 @@ defmodule TauperWeb.GameLive.Component do
      <% end %>
        </tbody>
      </table>
+     </section>
     <% end %>
     """
   end
