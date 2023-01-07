@@ -1,6 +1,8 @@
 #+title: Tasks
 * Tasks
 ** DONE only owner can view the games/show page
+** TODO join back to the current game
+** DONE "owner" is not a valid player name.
 ** DONE display time/questions answered at the top in a bar?
 ** DONE implement valences is_correct function
 ** DONE fix periodic table overflow

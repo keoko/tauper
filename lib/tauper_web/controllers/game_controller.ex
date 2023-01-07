@@ -27,6 +27,19 @@ defmodule TauperWeb.GameController do
     |> Changeset.validate_required([:game_code, :player_name])
     |> Changeset.validate_length(:game_code, min: 3, max: 3)
     |> Changeset.validate_length(:player_name, min: 1, max: 10)
+    |> validate_player_name_is_not_owner(:player_name)
+  end
+
+  def validate_player_name_is_not_owner(changeset, field) when is_atom(field) do
+    Changeset.validate_change(changeset, field, fn field, value ->
+      case String.downcase(value) == "owner" do
+        true ->
+          [{field, "'owner' is a reserved word. Please use another name."}]
+
+        false ->
+          []
+      end
+    end)
   end
 
   def new_join(conn, params) do
