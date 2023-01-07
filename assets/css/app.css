@@ -152,14 +152,13 @@ td.score {
  */
 #table {
   display: grid;
-  grid-template-columns: repeat(17, auto) 1fr;
+  grid-template-columns: repeat(18, auto);
 }
 
 /* Every element box  */
 .element {
   cursor: pointer;
-  width: 5vw;
-  height: 5vw;
+  aspect-ratio: 1;
 
   padding: 2px;
   border: 1px solid;
