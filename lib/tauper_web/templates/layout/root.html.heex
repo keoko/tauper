@@ -11,12 +11,7 @@
   </head>
   <body>
     <header>
-      <!-- <nav role="navigation">
-           <ul class="nav nav-pills pull-right">
-           <li><%= switch_locale_path @conn, :en, "English" %></li>
-           <li><%= switch_locale_path @conn, :ru, "Català" %></li>
-           </ul>
-           </nav> -->
+        <h1>TauPer</h1>
       <section class="container">
         <nav>
           <ul>
@@ -27,8 +22,13 @@
               <li> <%= gettext("player") %>: <%=  @player_name %></li>
             <% end %>
           </ul>
+      <!-- <nav role="navigation">
+           <ul class="nav nav-pills pull-right">
+           <li><%= switch_locale_path @conn, :en, "English" %></li>
+           <li><%= switch_locale_path @conn, :ru, "Català" %></li>
+           </ul>
+           </nav> -->
         </nav>
-        <h1>TauPer - Taula Periòdica</h1>
       </section>
     </header>
 
