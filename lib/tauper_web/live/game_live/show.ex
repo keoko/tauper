@@ -4,8 +4,67 @@ defmodule TauperWeb.GameLive.Show do
   alias TauperWeb.{Presence, Endpoint}
   alias TauperWeb.GameLive.Component
   alias Tauper.Email.{Recipient, ScoreEmail}
+  alias Ecto.Changeset
 
   @podium_places 5
+
+  def can_player_join_game(player_name, code, session) do
+    cond do
+      !player_name ->
+        {:error, %{message: "missing player name"}}
+
+      player_name != "owner" ->
+        {:error, %{message: "only owner of the game can open this page"}}
+
+      code != session["code"] ->
+        {:error,
+         %{
+           message:
+             "Invalid game code. You probably joined to a different game. Please join the game again."
+         }}
+
+      Games.lookup(code) == [] ->
+        {:error, %{message: "game does not exist"}}
+
+      # current_game_code != game.code ->
+      #   {:error, %{message: "invalid game code"}}
+
+      Presence.is_player_already_in_game(code, player_name) ->
+        {:error, %{message: "player already in game"}}
+
+      true ->
+        {:ok, "player can join the game"}
+    end
+  end
+
+  def on_mount(:default, %{"code" => code} = _params, session, socket) do
+    player_name = session["player_name"]
+
+    case can_player_join_game(player_name, code, session) do
+      {:ok, _} ->
+        game = Games.game(code)
+
+        {:cont,
+         socket
+         |> assign(:game_code, code)
+         |> assign(:question, game.question)
+         |> assign(:game, game)
+         |> assign(:podium, Games.podium(code))
+         |> assign(:changeset, change_answer())
+         |> assign(:status, game.status)
+         |> assign(:remaining_time, game.remaining_time)
+         |> assign(:player_score_and_position, nil)
+         |> assign(:player_name, player_name)}
+
+      {:error, error} ->
+        # add flash message
+        #
+        {:halt,
+         socket
+         |> put_flash(:error, error.message)
+         |> redirect(to: Routes.page_path(socket, :index))}
+    end
+  end
 
   @impl true
   def mount(_params, %{"locale" => locale}, socket) do
@@ -174,5 +233,17 @@ defmodule TauperWeb.GameLive.Show do
       end
 
     {:noreply, socket}
+  end
+
+  def change_answer(attrs \\ %{}) do
+    types = %{
+      answer: :string
+    }
+
+    # apply_action(:insert) needed to display error messages in the form
+    {%{}, types}
+    |> Changeset.cast(attrs, Map.keys(types))
+    |> Changeset.validate_required([:answer])
+    |> Changeset.validate_length(:answer, min: 1, max: 50)
   end
 end

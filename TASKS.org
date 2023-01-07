@@ -1,23 +1,23 @@
 #+title: Tasks
 * Tasks
+** DONE only owner can view the games/show page
+** TODO display time/questions answered at the top in a bar?
 ** DONE implement valences is_correct function
-** TODO individual game
-** TODO build and display link to share with players when creating new game
-only display "player" field when passing the game as a parameter.
+** DONE fix periodic table overflow
+** DONE individual game
 ** DONE send score email
 ** DONE display flash message when email is sent or not
 ** TODO email is marked as spam
 ** TODO translate errors in CA
-** TODO translate error messages of the app
+** TODO translate app error messages
 ** DONE remove special elements
 ** DONE valences are wrong
 ** DONE not sensitive to lowercase/uppercase in checking element name
 ** DONE start game / waiting to start the game / player already in game
 ** DONE display if it worked/failed in player window -> me lo ha contado bien o mal,
 ** DONE display answer in scoring page
+** DONE list_games
 ** TODO running out of time
-** TODO only owner can view the games/show page
-** TODO display time/questions answered at the top in a bar?
 ** DONE i18n
 ** DONE locales "en" and "ca"
 ** DONE valences questions are not generated
@@ -143,4 +143,5 @@ https://phrase.com/blog/posts/set-and-manage-locale-data-in-your-phoenix-l10n-pr
 ** elixir state machines gen fsm?
 ** watcher mode: connect to a game just for wantching the game
 ** purge zombie games. Kill games live more than 24h
-** list_games
+** build and display link to share with players when creating new game
+only display "player" field when passing the game as a parameter.
