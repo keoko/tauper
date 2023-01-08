@@ -73,6 +73,29 @@ defmodule TauperWeb.GameController do
     end
   end
 
+  def rejoin(conn, _params) do
+    code = get_session(conn, :code)
+    player_name = get_session(conn, :player_name)
+
+    cond do
+      code == nil || player_name == nil ->
+        conn
+        |> put_flash(
+          :error,
+          "The game code or player name cannot be found. Sorry but you should join the game with another name."
+        )
+        |> redirect(to: Routes.page_path(conn, :index))
+
+      String.downcase(player_name) != "owner" ->
+        conn
+        |> redirect(to: Routes.game_play_path(conn, :play, code))
+
+      true ->
+        conn
+        |> redirect(to: Routes.game_show_path(conn, :show, code))
+    end
+  end
+
   def change_new_game_request(attrs \\ %{}) do
     types = %{
       num_questions: :integer,

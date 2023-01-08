@@ -9,6 +9,7 @@ defmodule TauperWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug TauperWeb.Plugs.Locale
+    plug TauperWeb.SessionToAssignPlug
   end
 
   pipeline :api do
@@ -23,6 +24,7 @@ defmodule TauperWeb.Router do
     resources "/games", GameController, only: [:index, :new, :create]
     get "/games/join", GameController, :new_join
     post "/games/join", GameController, :join
+    get "/games/rejoin", GameController, :rejoin
 
     live_session :show, on_mount: TauperWeb.GameLive.Show do
       live "/games/:code", GameLive.Show, :show

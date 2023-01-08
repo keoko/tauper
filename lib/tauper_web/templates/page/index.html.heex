@@ -1,2 +1,7 @@
-<span><%= button gettext("New Game"), to: Routes.game_path(@conn, :new), method: "get" %></span> <%=  gettext "or" %>
-<span><%= button gettext("Join Game"), to: Routes.game_path(@conn, :join), method: "get" %></span>
+<main id="choose-game">
+<%= button gettext("New Game"), to: Routes.game_path(@conn, :new), method: "get" %>
+<%= button gettext("Join Game"), to: Routes.game_path(@conn, :join), method: "get" %>
+<%= if @current_code != nil do %>
+<%= button gettext("Rejoin Game %{code}", [code: @current_code]), to: Routes.game_path(@conn, :rejoin), method: "get" %>
+<% end %>
+</main>
