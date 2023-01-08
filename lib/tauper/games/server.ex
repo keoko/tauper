@@ -329,7 +329,7 @@ defmodule Tauper.Games.Server do
     end
   end
 
-  defp calculate_podium(state, num_players \\ nil) do
+  defp calculate_podium(state, num_players) do
     state.score
     |> calculate_score
     |> sort_by_score
