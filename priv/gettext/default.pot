@@ -129,41 +129,40 @@ msgstr ""
 msgid "Symbol"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:50
+#: lib/tauper_web/live/game_live/show.html.heex:39
 #, elixir-autogen, elixir-format
 msgid "Next Question"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/component.ex:22
+#: lib/tauper_web/live/game_live/component.ex:24
 #, elixir-autogen, elixir-format
 msgid "No players yet"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/component.ex:43
+#: lib/tauper_web/live/game_live/component.ex:45
 #: lib/tauper_web/templates/email/score_email.html.eex:5
 #, elixir-autogen, elixir-format
 msgid "Player"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/component.ex:19
+#: lib/tauper_web/live/game_live/component.ex:21
 #, elixir-autogen, elixir-format
 msgid "Players"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/component.ex:42
+#: lib/tauper_web/live/game_live/component.ex:44
 #: lib/tauper_web/templates/email/score_email.html.eex:4
 #, elixir-autogen, elixir-format
 msgid "Position"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/component.ex:44
+#: lib/tauper_web/live/game_live/component.ex:46
 #: lib/tauper_web/templates/email/score_email.html.eex:6
 #, elixir-autogen, elixir-format
 msgid "Score"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/play.html.heex:24
-#: lib/tauper_web/live/game_live/show.html.heex:39
+#: lib/tauper_web/live/game_live/component.ex:75
 #, elixir-autogen, elixir-format
 msgid "Sending answer..."
 msgstr ""
@@ -178,12 +177,12 @@ msgstr ""
 msgid "Start Game"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:89
+#: lib/tauper_web/live/game_live/show.html.heex:78
 #, elixir-autogen, elixir-format
 msgid "Stop Game"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/play.html.heex:36
+#: lib/tauper_web/live/game_live/play.html.heex:23
 #, elixir-autogen, elixir-format
 msgid "Waiting for next question ..."
 msgstr ""
@@ -193,20 +192,10 @@ msgstr ""
 msgid "Waiting to start the game ..."
 msgstr ""
 
-#: lib/tauper_web/live/game_live/play.html.heex:34
-#, elixir-autogen, elixir-format
-msgid "You are in position %{position}(%{score} points)."
-msgstr ""
-
-#: lib/tauper_web/live/game_live/play.html.heex:41
-#, elixir-autogen, elixir-format
-msgid "You finished in position %{position}(%{score} points)."
-msgstr ""
-
-#: lib/tauper_web/live/game_live/play.html.heex:14
-#: lib/tauper_web/live/game_live/play.html.heex:31
-#: lib/tauper_web/live/game_live/show.html.heex:29
-#: lib/tauper_web/live/game_live/show.html.heex:54
+#: lib/tauper_web/live/game_live/play.html.heex:11
+#: lib/tauper_web/live/game_live/play.html.heex:18
+#: lib/tauper_web/live/game_live/show.html.heex:27
+#: lib/tauper_web/live/game_live/show.html.heex:43
 #, elixir-autogen, elixir-format
 msgid "Your answer is %{answer}."
 msgstr ""
@@ -217,29 +206,29 @@ msgstr ""
 msgid "code"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/play.html.heex:24
-#: lib/tauper_web/live/game_live/show.html.heex:39
+#: lib/tauper_web/live/game_live/component.ex:75
 #, elixir-autogen, elixir-format
 msgid "send answer"
 msgstr ""
 
+#: lib/tauper_web/live/game_live/play.html.heex:8
 #: lib/tauper_web/live/game_live/show.html.heex:14
 #, elixir-autogen, elixir-format
 msgid "time"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/play.html.heex:14
-#: lib/tauper_web/live/game_live/play.html.heex:31
-#: lib/tauper_web/live/game_live/show.html.heex:29
-#: lib/tauper_web/live/game_live/show.html.heex:54
+#: lib/tauper_web/live/game_live/play.html.heex:11
+#: lib/tauper_web/live/game_live/play.html.heex:18
+#: lib/tauper_web/live/game_live/show.html.heex:27
+#: lib/tauper_web/live/game_live/show.html.heex:43
 #, elixir-autogen, elixir-format
 msgid "correct"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/play.html.heex:14
-#: lib/tauper_web/live/game_live/play.html.heex:31
-#: lib/tauper_web/live/game_live/show.html.heex:29
-#: lib/tauper_web/live/game_live/show.html.heex:54
+#: lib/tauper_web/live/game_live/play.html.heex:11
+#: lib/tauper_web/live/game_live/play.html.heex:18
+#: lib/tauper_web/live/game_live/show.html.heex:27
+#: lib/tauper_web/live/game_live/show.html.heex:43
 #, elixir-autogen, elixir-format
 msgid "wrong"
 msgstr ""
@@ -266,17 +255,17 @@ msgstr ""
 msgid "What is the symbol of %{element_name}?"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:68
+#: lib/tauper_web/live/game_live/show.html.heex:57
 #, elixir-autogen, elixir-format
 msgid "Final Podium"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:61
+#: lib/tauper_web/live/game_live/show.html.heex:50
 #, elixir-autogen, elixir-format
 msgid "Podium"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:49
+#: lib/tauper_web/live/game_live/show.html.heex:38
 #, elixir-autogen, elixir-format
 msgid "The answer is <strong>%{answer}</strong>"
 msgstr ""
@@ -291,17 +280,17 @@ msgstr ""
 msgid "Email sent"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:84
+#: lib/tauper_web/live/game_live/show.html.heex:73
 #, elixir-autogen, elixir-format
 msgid "Send Score Email"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:84
+#: lib/tauper_web/live/game_live/show.html.heex:73
 #, elixir-autogen, elixir-format
 msgid "Sending email..."
 msgstr ""
 
-#: lib/tauper_web/live/game_live/component.ex:52
+#: lib/tauper_web/live/game_live/component.ex:54
 #: lib/tauper_web/templates/email/score_email.html.eex:14
 #, elixir-autogen, elixir-format
 msgid "points"
@@ -312,7 +301,7 @@ msgstr ""
 msgid "Alone"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:57
+#: lib/tauper_web/live/game_live/show.html.heex:46
 #, elixir-autogen, elixir-format
 msgid "Your score is %{score} points."
 msgstr ""
@@ -320,4 +309,14 @@ msgstr ""
 #: lib/tauper_web/templates/page/index.html.heex:5
 #, elixir-autogen, elixir-format
 msgid "Rejoin Game %{code}"
+msgstr ""
+
+#: lib/tauper_web/live/game_live/play.html.heex:21
+#, elixir-autogen, elixir-format
+msgid "You are in position %{position} (%{score} points)."
+msgstr ""
+
+#: lib/tauper_web/live/game_live/play.html.heex:28
+#, elixir-autogen, elixir-format
+msgid "You finished in position %{position} (%{score} points)."
 msgstr ""

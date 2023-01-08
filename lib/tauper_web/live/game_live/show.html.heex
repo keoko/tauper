@@ -19,25 +19,14 @@
     <% end %>
     <button phx-click="skip" style="float: right;"><%= gettext("Skip Question") %></button>
     </section>
-    <main id="sentence">
-        (<%= @game.current_question + 1 %>/<%=  @game.num_questions %>) <strong><%= @question.sentence %></strong>
-    </main>
 
+    <Component.sentence game={@game} question={@question} />
 
     <%= if @game.alone do %>
       <%= if assigns[:answered] do %>
               <%= gettext("Your answer is %{answer}.", [answer: (if @is_correct, do: gettext("correct"), else: gettext("wrong"))]) %>
       <% else %>
-          <.form
-          let={f}
-          for={@changeset}
-          id="answer-form"
-          as="answer-form"
-          phx-submit="answer">
-          <%= text_input f, :answer, autocomplete: "off" %>
-          <%= error_tag f, :answer %>
-          <%= submit gettext("send answer"), phx_disable_with: gettext("Sending answer...") %>
-          </.form>
+        <Component.question_form changeset={@changeset}/>
       <% end %>
     <% end %>
 

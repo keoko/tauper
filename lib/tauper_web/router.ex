@@ -9,7 +9,7 @@ defmodule TauperWeb.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug TauperWeb.Plugs.Locale
-    plug TauperWeb.SessionToAssignPlug
+    plug TauperWeb.Plugs.SessionToAssignPlug
   end
 
   pipeline :api do

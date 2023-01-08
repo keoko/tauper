@@ -3,6 +3,7 @@ defmodule TauperWeb.GameLive.Play do
   use TauperWeb, :live_view
   alias Tauper.Games
   alias TauperWeb.{Endpoint, Presence}
+  alias TauperWeb.GameLive.Component
   alias Ecto.Changeset
 
   def can_player_join_game(player_name, code, session) do
@@ -120,6 +121,7 @@ defmodule TauperWeb.GameLive.Play do
      |> assign(:question, game.question)
      |> assign(:status, new_status)
      |> assign(:podium, podium)
+     |> assign(:game, game)
      |> assign(:remaining_time, game.remaining_time)
      |> assign(:answered, answered)
      |> assign(:is_correct, is_correct)

@@ -5,39 +5,26 @@
 <% end %>
 
 <%= if @status == :started do %>
-    <div>
-        <strong><%= @question.sentence %></strong>
-    </div>
-<div>
-    <div>time: <%= @remaining_time %></div>
+    <div><%= gettext("time") %>: <%=  @remaining_time %></div>
+    <Component.sentence game={@game} question={@question} />
     <%= if assigns[:answered] do %>
-            <%= gettext("Your answer is %{answer}.", [answer: (if @is_correct, do: gettext("correct"), else: gettext("wrong"))]) %>
+       <%= gettext("Your answer is %{answer}.", [answer: (if @is_correct, do: gettext("correct"), else: gettext("wrong"))]) %>
     <% else %>
-        <.form
-        let={f}
-        for={@changeset}
-        id="answer-form"
-        as="answer-form"
-        phx-submit="answer">
-        <%= text_input f, :answer, autocomplete: "off" %>
-        <%= error_tag f, :answer %>
-        <%= submit gettext("send answer"), phx_disable_with: gettext("Sending answer...") %>
-        </.form>
+        <Component.question_form changeset={@changeset}/>
     <% end %>
-</div>
 <% end %>
 <%= if @status == :paused do %>
     <%= if assigns[:answered] do %>
             <%= gettext("Your answer is %{answer}.", [answer: (if @is_correct, do: gettext("correct"), else: gettext("wrong"))]) %>
     <% end %>
     <%= if assigns[:player_score_and_position] do %>
-        <p><%= gettext("You are in position %{position}(%{score} points).", [position: @player_score_and_position.position, score: @player_score_and_position.score]) %></p>
+        <p><%= gettext("You are in position %{position} (%{score} points).", [position: @player_score_and_position.position, score: @player_score_and_position.score]) %></p>
     <% end %>
     <p><%= gettext("Waiting for next question ...") %></p>
 <% end %>
 
 <%= if @status == :game_over do %>
     <%= if assigns[:player_score_and_position] do %>
-        <p><%= gettext("You finished in position %{position}(%{score} points).", [position: @player_score_and_position.position, score: @player_score_and_position.score]) %></p>
+        <p><%= gettext("You finished in position %{position} (%{score} points).", [position: @player_score_and_position.position, score: @player_score_and_position.score]) %></p>
     <% end %>
 <% end %>

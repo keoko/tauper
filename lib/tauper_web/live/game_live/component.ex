@@ -1,6 +1,8 @@
 defmodule TauperWeb.GameLive.Component do
   use Phoenix.Component
+  use Phoenix.HTML
 
+  import TauperWeb.ErrorHelpers
   import TauperWeb.Gettext
 
   def periodic_table(assigns) do
@@ -56,6 +58,31 @@ defmodule TauperWeb.GameLive.Component do
      </table>
      </section>
     <% end %>
+    """
+  end
+
+  def question_form(assigns) do
+    ~H"""
+    <div>
+        <.form
+        let={f}
+        for={@changeset}
+        id="answer-form"
+        as="answer-form"
+        phx-submit="answer">
+        <%= text_input f, :answer, autocomplete: "off", autofocus: "true" %>
+        <%= error_tag f, :answer %>
+        <%= submit gettext("send answer"), phx_disable_with: gettext("Sending answer...") %>
+        </.form>
+    </div>
+    """
+  end
+
+  def sentence(assigns) do
+    ~H"""
+    <main id="sentence">
+        (<%= @game.current_question + 1 %>/<%=  @game.num_questions %>) <strong><%= @question.sentence %></strong>
+    </main>
     """
   end
 end
