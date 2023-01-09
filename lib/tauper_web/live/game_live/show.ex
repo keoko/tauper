@@ -103,10 +103,12 @@ defmodule TauperWeb.GameLive.Show do
      |> assign(:players, players)}
   end
 
-  def handle_info(%{event: "question_tick", payload: payload}, socket) do
-    {:noreply,
-     socket
-     |> assign(:remaining_time, payload.remaining_time)}
+  def handle_info(%{event: "question_tick", payload: _payload}, socket) do
+    {
+      :noreply,
+      socket
+      # |> assign(:remaining_time, payload.remaining_time)
+    }
   end
 
   def handle_info(%{event: "question_answered", payload: payload}, socket) do
