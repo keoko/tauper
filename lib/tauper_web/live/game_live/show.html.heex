@@ -35,7 +35,10 @@
 
 <%= if @status == :paused do %>
   <section class="next-question">
-    <p><%= gettext("The answer is <strong>%{answer}</strong>", [answer: inspect(@question.answer)]) |> raw() %></p>
+    <div>
+      <Component.sentence game={@game} question={@question} />
+      <%= gettext("The answer is <strong>%{answer}</strong>", [answer: inspect(@question.answer)]) |> raw() %>
+    </div>
     <button phx-click="next"><%= gettext("Next Question") %></button>
   </section>
   <%= if @game.alone do %>
