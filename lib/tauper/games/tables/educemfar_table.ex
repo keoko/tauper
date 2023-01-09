@@ -51,7 +51,7 @@ defmodule Tauper.Games.Tables.EducemFar do
     82 => %{symbol: "Pb", name: "Plom", valences: [2, 4], group: 14},
     83 => %{symbol: "Bi", name: "Bismut", valences: [3, 5], group: 15},
     84 => %{symbol: "Po", name: "Poloni", valences: [2, 4], group: 16},
-    85 => %{symbol: "At", name: "Àstat", valences: [1, 3, 5, 7], group: 17},
+    85 => %{symbol: "At", name: "Àstat", valences: [2, 3], group: 17},
     86 => %{symbol: "Rn", name: "Radó", valences: [0], group: 18},
     87 => %{symbol: "Fr", name: "Franci", valences: [1], group: 1},
     88 => %{symbol: "Ra", name: "Radi", valences: [2], group: 2}
