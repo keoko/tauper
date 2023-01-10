@@ -8,14 +8,18 @@
     <div><%= gettext("time") %>: <%=  @remaining_time %></div>
     <Component.sentence game={@game} question={@question} />
     <%= if assigns[:answered] do %>
-       <%= gettext("Your answer is %{answer}.", [answer: (if @is_correct, do: gettext("correct"), else: gettext("wrong"))]) %>
+        <%= gettext("Your answer is %{answer}.", [answer: (if @is_correct, do: gettext("correct"), else: gettext("wrong"))]) %>
     <% else %>
-        <Component.question_form changeset={@changeset}/>
+        <Component.question_form changeset={@changeset} game={@game} />
     <% end %>
 <% end %>
 <%= if @status == :paused do %>
     <%= if assigns[:answered] do %>
-            <%= gettext("Your answer is %{answer}.", [answer: (if @is_correct, do: gettext("correct"), else: gettext("wrong"))]) %>
+      <%= if @is_correct do %>
+          <p><%= gettext("Your answer <strong>%{answer}</strong> is correct.", [answer: @answer]) |> raw() %></p>
+      <% else %>
+          <p><%= gettext("Your answer <strong>%{answer}</strong> is wrong. The correct one is <strong>%{correct_answer}</strong>.", [answer: @answer, correct_answer: inspect(@question.answer)]) |> raw() %></p>
+      <% end %>
     <% end %>
     <%= if assigns[:player_score_and_position] do %>
         <p><%= gettext("You are in position %{position} (%{score} points).", [position: @player_score_and_position.position, score: @player_score_and_position.score]) %></p>

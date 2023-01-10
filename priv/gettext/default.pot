@@ -129,7 +129,7 @@ msgstr ""
 msgid "Symbol"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:39
+#: lib/tauper_web/live/game_live/show.html.heex:44
 #, elixir-autogen, elixir-format
 msgid "Next Question"
 msgstr ""
@@ -162,7 +162,7 @@ msgstr ""
 msgid "Score"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/component.ex:75
+#: lib/tauper_web/live/game_live/component.ex:77
 #, elixir-autogen, elixir-format
 msgid "Sending answer..."
 msgstr ""
@@ -177,7 +177,7 @@ msgstr ""
 msgid "Start Game"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:78
+#: lib/tauper_web/live/game_live/show.html.heex:87
 #, elixir-autogen, elixir-format
 msgid "Stop Game"
 msgstr ""
@@ -194,8 +194,6 @@ msgstr ""
 
 #: lib/tauper_web/live/game_live/play.html.heex:11
 #: lib/tauper_web/live/game_live/play.html.heex:18
-#: lib/tauper_web/live/game_live/show.html.heex:27
-#: lib/tauper_web/live/game_live/show.html.heex:43
 #, elixir-autogen, elixir-format
 msgid "Your answer is %{answer}."
 msgstr ""
@@ -206,7 +204,7 @@ msgstr ""
 msgid "code"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/component.ex:75
+#: lib/tauper_web/live/game_live/component.ex:77
 #, elixir-autogen, elixir-format
 msgid "send answer"
 msgstr ""
@@ -220,7 +218,6 @@ msgstr ""
 #: lib/tauper_web/live/game_live/play.html.heex:11
 #: lib/tauper_web/live/game_live/play.html.heex:18
 #: lib/tauper_web/live/game_live/show.html.heex:27
-#: lib/tauper_web/live/game_live/show.html.heex:43
 #, elixir-autogen, elixir-format
 msgid "correct"
 msgstr ""
@@ -228,7 +225,6 @@ msgstr ""
 #: lib/tauper_web/live/game_live/play.html.heex:11
 #: lib/tauper_web/live/game_live/play.html.heex:18
 #: lib/tauper_web/live/game_live/show.html.heex:27
-#: lib/tauper_web/live/game_live/show.html.heex:43
 #, elixir-autogen, elixir-format
 msgid "wrong"
 msgstr ""
@@ -255,37 +251,37 @@ msgstr ""
 msgid "What is the symbol of %{element_name}?"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:57
+#: lib/tauper_web/live/game_live/show.html.heex:66
 #, elixir-autogen, elixir-format
 msgid "Final Podium"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:50
+#: lib/tauper_web/live/game_live/show.html.heex:59
 #, elixir-autogen, elixir-format
 msgid "Podium"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:38
+#: lib/tauper_web/live/game_live/show.html.heex:41
 #, elixir-autogen, elixir-format
 msgid "The answer is <strong>%{answer}</strong>"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.ex:231
+#: lib/tauper_web/live/game_live/show.ex:265
 #, elixir-autogen, elixir-format
 msgid "Email cannot be sent. There has been an unexpected error."
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.ex:225
+#: lib/tauper_web/live/game_live/show.ex:259
 #, elixir-autogen, elixir-format
 msgid "Email sent"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:73
+#: lib/tauper_web/live/game_live/show.html.heex:82
 #, elixir-autogen, elixir-format
 msgid "Send Score Email"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:73
+#: lib/tauper_web/live/game_live/show.html.heex:82
 #, elixir-autogen, elixir-format
 msgid "Sending email..."
 msgstr ""
@@ -301,7 +297,7 @@ msgstr ""
 msgid "Alone"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:46
+#: lib/tauper_web/live/game_live/show.html.heex:55
 #, elixir-autogen, elixir-format
 msgid "Your score is %{score} points."
 msgstr ""
@@ -319,4 +315,19 @@ msgstr ""
 #: lib/tauper_web/live/game_live/play.html.heex:28
 #, elixir-autogen, elixir-format
 msgid "You finished in position %{position} (%{score} points)."
+msgstr ""
+
+#: lib/tauper_web/live/game_live/show.html.heex:27
+#, elixir-autogen, elixir-format
+msgid "Your answer (%{answer}) is %{correct_or_wrong}."
+msgstr ""
+
+#: lib/tauper_web/live/game_live/show.html.heex:49
+#, elixir-autogen, elixir-format
+msgid "Your answer <strong>%{answer}</strong> is correct."
+msgstr ""
+
+#: lib/tauper_web/live/game_live/show.html.heex:51
+#, elixir-autogen, elixir-format
+msgid "Your answer <strong>%{answer}</strong> is wrong. The correct one is <strong>%{correct_answer}</strong>."
 msgstr ""

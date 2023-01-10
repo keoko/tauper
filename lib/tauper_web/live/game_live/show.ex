@@ -43,14 +43,17 @@ defmodule TauperWeb.GameLive.Show do
     case can_player_join_game(player_name, code, session) do
       {:ok, _} ->
         game = Games.game(code)
+        # TODO load answers from localStorage
+        answers = %{}
 
         {:cont,
          socket
          |> assign(:game_code, code)
          |> assign(:question, game.question)
          |> assign(:game, game)
+         |> assign(:answers, answers)
          |> assign(:podium, Games.podium(code))
-         |> assign(:answer, %{})
+         |> assign(:answer, nil)
          |> assign(:changeset, change_answer(%{}))
          |> assign(:status, game.status)
          |> assign(:remaining_time, game.remaining_time)
@@ -78,7 +81,7 @@ defmodule TauperWeb.GameLive.Show do
 
     {:ok,
      socket
-     |> assign(:answers, nil)
+     |> assign(:players_answers, nil)
      |> assign(:email_recipient, %Recipient{})}
   end
 
@@ -115,7 +118,7 @@ defmodule TauperWeb.GameLive.Show do
   def handle_info(%{event: "question_answered", payload: payload}, socket) do
     {:noreply,
      socket
-     |> assign(:answers, payload)}
+     |> assign(:players_answers, payload)}
   end
 
   def handle_info(%{event: "game_status_changed"} = data, socket) do
@@ -141,7 +144,7 @@ defmodule TauperWeb.GameLive.Show do
      socket
      |> assign(:question, game.question)
      |> assign(:game, game)
-     |> assign(:answers, game.answers)
+     |> assign(:players_answers, game.answers)
      |> assign(:remaining_time, game.remaining_time)
      |> assign(:answer, answer)
      |> assign(:changeset, changeset)
@@ -192,7 +195,11 @@ defmodule TauperWeb.GameLive.Show do
      |> assign(:changeset, changeset)}
   end
 
-  def handle_event("answer", %{"answer-form" => %{"answer" => answer}}, socket) do
+  def handle_event(
+        "answer",
+        %{"answer-form" => %{"question_number" => question_number, "answer" => answer}},
+        socket
+      ) do
     game_code = socket.assigns.game_code
     player_name = socket.assigns.player_name
     game = socket.assigns.game
@@ -208,9 +215,14 @@ defmodule TauperWeb.GameLive.Show do
       Games.skip_question(game_code)
     end
 
+    answers =
+      Map.put(socket.assigns.answers, question_number, answer: answer, is_correct: is_correct)
+
     {:noreply,
      socket
      |> assign(:is_correct, is_correct)
+     |> assign(:answer, answer)
+     |> assign(:answers, answers)
      |> assign(:answered, true)}
   end
 

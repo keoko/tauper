@@ -45,7 +45,7 @@ defmodule TauperWeb.GameLive.Play do
          |> assign(:question, game.question)
          |> assign(:game, game)
          |> assign(:podium, Games.podium(code))
-         |> assign(:answer, %{})
+         |> assign(:answer, nil)
          |> assign(:changeset, change_answer(%{}))
          |> assign(:status, game.status)
          |> assign(:remaining_time, game.remaining_time)
@@ -183,6 +183,7 @@ defmodule TauperWeb.GameLive.Play do
     {:noreply,
      socket
      |> assign(:is_correct, is_correct)
+     |> assign(:answer, answer)
      |> assign(:answered, true)}
   end
 

@@ -73,6 +73,7 @@ defmodule TauperWeb.GameLive.Component do
         phx-submit="answer">
         <%= text_input f, :answer, autocomplete: "off", autofocus: "true" %>
         <%= error_tag f, :answer %>
+        <%= hidden_input f, :question_number, value: @game.current_question + 1 %>
         <%= submit gettext("send answer"), phx_disable_with: gettext("Sending answer...") %>
         </.form>
     </div>
