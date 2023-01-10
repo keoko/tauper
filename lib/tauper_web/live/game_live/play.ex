@@ -45,7 +45,8 @@ defmodule TauperWeb.GameLive.Play do
          |> assign(:question, game.question)
          |> assign(:game, game)
          |> assign(:podium, Games.podium(code))
-         |> assign(:changeset, change_answer())
+         |> assign(:answer, %{})
+         |> assign(:changeset, change_answer(%{}))
          |> assign(:status, game.status)
          |> assign(:remaining_time, game.remaining_time)
          |> assign(:player_score_and_position, nil)
@@ -111,6 +112,8 @@ defmodule TauperWeb.GameLive.Play do
     player_name = socket.assigns.player_name
     new_status = data.payload.status
     game = Games.game(game_code)
+    answer = if new_status in [:started, :game_over], do: %{}, else: socket.assigns.answer
+    changeset = change_answer(%{})
     podium = if new_status in [:paused, :game_over], do: Games.podium(game_code), else: []
     player_score_and_position = get_player_score_and_position(player_name, podium)
     answered = if new_status in [:started, :game_over], do: false, else: socket.assigns.answered
@@ -123,6 +126,8 @@ defmodule TauperWeb.GameLive.Play do
      |> assign(:podium, podium)
      |> assign(:game, game)
      |> assign(:remaining_time, game.remaining_time)
+     |> assign(:answer, answer)
+     |> assign(:changeset, changeset)
      |> assign(:answered, answered)
      |> assign(:is_correct, is_correct)
      |> assign(:player_score_and_position, player_score_and_position)}
@@ -138,16 +143,31 @@ defmodule TauperWeb.GameLive.Play do
     {:noreply, socket}
   end
 
-  def change_answer(attrs \\ %{}) do
+  def change_answer(answer, attrs \\ %{}) do
     types = %{
       answer: :string
     }
 
     # apply_action(:insert) needed to display error messages in the form
-    {%{}, types}
+    {answer, types}
     |> Changeset.cast(attrs, Map.keys(types))
     |> Changeset.validate_required([:answer])
     |> Changeset.validate_length(:answer, min: 1, max: 50)
+  end
+
+  def handle_event(
+        "validate_answer",
+        %{"answer-form" => answer_params},
+        %{assigns: %{answer: answer}} = socket
+      ) do
+    changeset =
+      answer
+      |> change_answer(answer_params)
+      |> Map.put(:action, :validate)
+
+    {:noreply,
+     socket
+     |> assign(:changeset, changeset)}
   end
 
   def handle_event("answer", %{"answer-form" => %{"answer" => answer}}, socket) do
