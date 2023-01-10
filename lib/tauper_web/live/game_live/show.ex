@@ -50,7 +50,8 @@ defmodule TauperWeb.GameLive.Show do
          |> assign(:question, game.question)
          |> assign(:game, game)
          |> assign(:podium, Games.podium(code))
-         |> assign(:changeset, change_answer())
+         |> assign(:answer, %{})
+         |> assign(:changeset, change_answer(%{}))
          |> assign(:status, game.status)
          |> assign(:remaining_time, game.remaining_time)
          |> assign(:player_score_and_position, nil)
@@ -103,11 +104,11 @@ defmodule TauperWeb.GameLive.Show do
      |> assign(:players, players)}
   end
 
-  def handle_info(%{event: "question_tick", payload: _payload}, socket) do
+  def handle_info(%{event: "question_tick", payload: payload}, socket) do
     {
       :noreply,
       socket
-      # |> assign(:remaining_time, payload.remaining_time)
+      |> assign(:remaining_time, payload.remaining_time)
     }
   end
 
@@ -122,6 +123,8 @@ defmodule TauperWeb.GameLive.Show do
     player_name = socket.assigns.player_name
     new_status = data.payload.status
     game = Games.game(game_code)
+    answer = if new_status in [:started, :game_over], do: %{}, else: socket.assigns.answer
+    changeset = change_answer(%{})
     answered = if new_status in [:started, :game_over], do: false, else: socket.assigns.answered
     is_correct = if new_status in [:started, :game_over], do: nil, else: socket.assigns.is_correct
     podium = if new_status in [:paused, :game_over], do: Games.podium(game_code), else: []
@@ -140,6 +143,8 @@ defmodule TauperWeb.GameLive.Show do
      |> assign(:game, game)
      |> assign(:answers, game.answers)
      |> assign(:remaining_time, game.remaining_time)
+     |> assign(:answer, answer)
+     |> assign(:changeset, changeset)
      |> assign(:answered, answered)
      |> assign(:is_correct, is_correct)
      |> assign(:status, new_status)
@@ -170,6 +175,21 @@ defmodule TauperWeb.GameLive.Show do
     game = Games.skip_question(code)
 
     {:noreply, assign(socket, status: game.status, question: game.question)}
+  end
+
+  def handle_event(
+        "validate_answer",
+        %{"answer-form" => answer_params},
+        %{assigns: %{answer: answer}} = socket
+      ) do
+    changeset =
+      answer
+      |> change_answer(answer_params)
+      |> Map.put(:action, :validate)
+
+    {:noreply,
+     socket
+     |> assign(:changeset, changeset)}
   end
 
   def handle_event("answer", %{"answer-form" => %{"answer" => answer}}, socket) do
@@ -237,13 +257,13 @@ defmodule TauperWeb.GameLive.Show do
     {:noreply, socket}
   end
 
-  def change_answer(attrs \\ %{}) do
+  def change_answer(answer, attrs \\ %{}) do
     types = %{
       answer: :string
     }
 
     # apply_action(:insert) needed to display error messages in the form
-    {%{}, types}
+    {answer, types}
     |> Changeset.cast(attrs, Map.keys(types))
     |> Changeset.validate_required([:answer])
     |> Changeset.validate_length(:answer, min: 1, max: 50)

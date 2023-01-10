@@ -69,6 +69,7 @@ defmodule TauperWeb.GameLive.Component do
         for={@changeset}
         id="answer-form"
         as="answer-form"
+        phx-change="validate_answer"
         phx-submit="answer">
         <%= text_input f, :answer, autocomplete: "off", autofocus: "true" %>
         <%= error_tag f, :answer %>
