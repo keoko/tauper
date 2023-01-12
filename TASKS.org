@@ -2,7 +2,7 @@
 * Tasks
 ** DONE only owner can view the games/show page
 ** TODO create error page with a link to the homepage (e.g. forbidden error whe going back in a form)
-** TODO add link to go to the homepage in TauPer header
+** DONE add link to go to the homepage in TauPer header
 ** TODO migrate to Phoenix 1.7
 ** TODO answer_form logic is duplicated in show and play LV pages
 ** DONE join back to the current game
