@@ -68,6 +68,10 @@ defmodule Tauper.Games.Server do
     call_server(process_name, {:podium, num_players})
   end
 
+  def get_player_score(process_name, player_name) do
+    call_server(process_name, {:get_player_score, player_name})
+  end
+
   ## Defining GenServer callbacks
   @impl true
   def init(params \\ []) do
@@ -167,6 +171,11 @@ defmodule Tauper.Games.Server do
   @impl true
   def handle_call({:podium, num_players}, _from, state) do
     {:reply, calculate_podium(state, num_players), state}
+  end
+
+  @impl true
+  def handle_call({:get_player_score, player_name}, _from, state) do
+    {:reply, calculate_player_score(state, player_name), state}
   end
 
   @impl true
@@ -337,6 +346,30 @@ defmodule Tauper.Games.Server do
       score when num_players == nil -> score
       score -> Enum.take(score, num_players)
     end
+  end
+
+  def calculate_player_score(state, player_name) do
+    init_score = %{num_answered: 0, correct: 0, wrong: 0, points: 0}
+    player_score = get_in(state, [:score, player_name])
+    player_score = if player_score == nil, do: [], else: player_score
+
+    Enum.reduce(player_score, init_score, fn {_question_number, question_score}, acc ->
+      case question_score do
+        nil ->
+          acc
+
+        0 ->
+          %{acc | num_answered: acc.num_answered + 1, wrong: acc.wrong + 1}
+
+        _ ->
+          %{
+            acc
+            | num_answered: acc.num_answered + 1,
+              correct: acc.correct + 1,
+              points: acc.points + question_score
+          }
+      end
+    end)
   end
 
   defp calculate_score(m) do

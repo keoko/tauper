@@ -63,8 +63,8 @@
 <% end %>
 
 <%= if @status == :game_over do %>
-  <Component.podium podium={@podium} title={gettext("Final Podium")}/>
   <%= if !@game.alone do %>
+  <Component.podium podium={@podium} title={gettext("Final Podium")}/>
   <div>
     <.form
       let={f}
@@ -83,6 +83,13 @@
     </div>
   </.form>
   </div>
+  <% end %>
+  <%= if @game.alone do %>
+    <%= if assigns[:player_score] do %>
+    <div style="margin: 10px 0">
+      <%= ngettext("You have answered %{answered_number} and %{correct_number} are correct (%{points} points).", "You have answered %{answered_number} and %{correct_number} are correct (%{points} points).", @player_score.correct, [answered_number: @player_score.num_answered, correct_number: @player_score.correct, points: @player_score.points]) %>
+    </div>
+    <% end %>
   <% end %>
   <button phx-click="stop"><%= gettext("Stop Game") %></button>
 <% end %>

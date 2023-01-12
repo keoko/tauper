@@ -70,7 +70,7 @@ msgstr "Número de preguntes"
 #: lib/tauper_web/templates/game/new_join.html.heex:5
 #, elixir-autogen, elixir-format
 msgid "Oops, something went wrong! Please check the errors below."
-msgstr "Ondia, quelcom no ha funcionat! Si us plau mira els erros de sota."
+msgstr "Òndia, quelcom no ha funcionat! Si us plau mira els erros de sota."
 
 #: lib/tauper_web/templates/game/form.html.heex:18
 #, elixir-autogen, elixir-format
@@ -178,12 +178,12 @@ msgstr "Saltar pregunta"
 msgid "Start Game"
 msgstr "Començar a jugar"
 
-#: lib/tauper_web/live/game_live/show.html.heex:87
+#: lib/tauper_web/live/game_live/show.html.heex:94
 #, elixir-autogen, elixir-format
 msgid "Stop Game"
 msgstr "Parar el joc"
 
-#: lib/tauper_web/live/game_live/play.html.heex:23
+#: lib/tauper_web/live/game_live/play.html.heex:27
 #, elixir-autogen, elixir-format
 msgid "Waiting for next question ..."
 msgstr "Esperant per la següent pregunta..."
@@ -194,7 +194,6 @@ msgid "Waiting to start the game ..."
 msgstr "Esperant per començar el joc..."
 
 #: lib/tauper_web/live/game_live/play.html.heex:11
-#: lib/tauper_web/live/game_live/play.html.heex:18
 #, elixir-autogen, elixir-format
 msgid "Your answer is %{answer}."
 msgstr "La teva resposta és %{answer}."
@@ -217,14 +216,12 @@ msgid "time"
 msgstr "temps"
 
 #: lib/tauper_web/live/game_live/play.html.heex:11
-#: lib/tauper_web/live/game_live/play.html.heex:18
 #: lib/tauper_web/live/game_live/show.html.heex:27
 #, elixir-autogen, elixir-format
 msgid "correct"
 msgstr "correcta"
 
 #: lib/tauper_web/live/game_live/play.html.heex:11
-#: lib/tauper_web/live/game_live/play.html.heex:18
 #: lib/tauper_web/live/game_live/show.html.heex:27
 #, elixir-autogen, elixir-format
 msgid "wrong"
@@ -237,22 +234,22 @@ msgid_plural "%{count} players pending to answer"
 msgstr[0] "Només falta un jugador per respondre"
 msgstr[1] "%{count} jugadors pendents per respondre"
 
-#: lib/tauper/games/server.ex:265
+#: lib/tauper/games/server.ex:274
 #, elixir-autogen, elixir-format
 msgid "What are the valences of %{element_name}?"
 msgstr "Quines són les valències de l'element %{element_name}?"
 
-#: lib/tauper/games/server.ex:260
+#: lib/tauper/games/server.ex:269
 #, elixir-autogen, elixir-format
 msgid "What is the name of %{element_symbol}?"
 msgstr "Quin és el nom del símbol %{element_symbol}?"
 
-#: lib/tauper/games/server.ex:255
+#: lib/tauper/games/server.ex:264
 #, elixir-autogen, elixir-format
 msgid "What is the symbol of %{element_name}?"
 msgstr "Quin és el símbol de l'element %{element_name}?"
 
-#: lib/tauper_web/live/game_live/show.html.heex:66
+#: lib/tauper_web/live/game_live/show.html.heex:67
 #, elixir-autogen, elixir-format
 msgid "Final Podium"
 msgstr "Pòdium final"
@@ -267,12 +264,12 @@ msgstr "Pòdium"
 msgid "The answer is <strong>%{answer}</strong>"
 msgstr "La resposta és <strong>%{answer}</strong>"
 
-#: lib/tauper_web/live/game_live/show.ex:265
+#: lib/tauper_web/live/game_live/show.ex:270
 #, elixir-autogen, elixir-format
 msgid "Email cannot be sent. There has been an unexpected error."
 msgstr "No es pot enviar el email. Hi hagut un error inesperat."
 
-#: lib/tauper_web/live/game_live/show.ex:259
+#: lib/tauper_web/live/game_live/show.ex:264
 #, elixir-autogen, elixir-format
 msgid "Email sent"
 msgstr "Email enviat"
@@ -308,12 +305,12 @@ msgstr "La teva puntuació és %{score}."
 msgid "Rejoin Game %{code}"
 msgstr "Tornar al joc %{code}"
 
-#: lib/tauper_web/live/game_live/play.html.heex:21
+#: lib/tauper_web/live/game_live/play.html.heex:25
 #, elixir-autogen, elixir-format, fuzzy
 msgid "You are in position %{position} (%{score} points)."
 msgstr "Estàs en la posició %{position} (%{score} punts)."
 
-#: lib/tauper_web/live/game_live/play.html.heex:28
+#: lib/tauper_web/live/game_live/play.html.heex:32
 #, elixir-autogen, elixir-format, fuzzy
 msgid "You finished in position %{position} (%{score} points)."
 msgstr "Has acabat en la posició %{position} (%{score} punts)."
@@ -323,12 +320,21 @@ msgstr "Has acabat en la posició %{position} (%{score} punts)."
 msgid "Your answer (%{answer}) is %{correct_or_wrong}."
 msgstr "La teva resposta és %{answer}."
 
+#: lib/tauper_web/live/game_live/play.html.heex:19
 #: lib/tauper_web/live/game_live/show.html.heex:49
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Your answer <strong>%{answer}</strong> is correct."
 msgstr "La teva resposta <strong>%{answer}</strong> és correcta."
 
+#: lib/tauper_web/live/game_live/play.html.heex:21
 #: lib/tauper_web/live/game_live/show.html.heex:51
 #, elixir-autogen, elixir-format
 msgid "Your answer <strong>%{answer}</strong> is wrong. The correct one is <strong>%{correct_answer}</strong>."
 msgstr "La teva resposta <strong>%{answer}</strong> és incorrecta. La correcta és <strong>%{correct_answer}</strong>."
+
+#: lib/tauper_web/live/game_live/show.html.heex:90
+#, elixir-autogen, elixir-format, fuzzy
+msgid "You have answered %{answered_number} and %{correct_number} are correct (%{points} points)."
+msgid_plural "You have answered %{answered_number} and %{correct_number} are correct (%{points} points)."
+msgstr[0] "Has respòs %{answered_number} i %{correct_number} és correcta (%{points} points)."
+msgstr[1] "Has respòs %{answered_number} i %{correct_number} són correctes (%{points} points)."
