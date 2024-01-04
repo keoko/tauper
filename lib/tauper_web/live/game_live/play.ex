@@ -5,6 +5,7 @@ defmodule TauperWeb.GameLive.Play do
   alias TauperWeb.{Endpoint, Presence}
   alias TauperWeb.GameLive.Component
   alias Ecto.Changeset
+  require Logger
 
   def can_player_join_game(player_name, code, session) do
     cond do
@@ -173,6 +174,7 @@ defmodule TauperWeb.GameLive.Play do
   def handle_event("answer", %{"answer-form" => %{"answer" => answer}}, socket) do
     game_code = socket.assigns.game_code
     player_name = socket.assigns.player_name
+    game_question = socket.assigns.question
 
     is_correct =
       case Games.answer(game_code, answer, player_name) do
@@ -180,11 +182,29 @@ defmodule TauperWeb.GameLive.Play do
         _ -> nil
       end
 
-    {:noreply,
-     socket
-     |> assign(:is_correct, is_correct)
-     |> assign(:answer, answer)
-     |> assign(:answered, true)}
+    Logger.info('handling answer')
+
+    Logger.info(
+      inspect(%{
+        game_code: game_code,
+        player_name: player_name,
+        answer: answer,
+        is_correct: is_correct,
+        question: game_question
+      })
+    )
+
+    case is_correct do
+      nil ->
+        {:noreply, socket}
+
+      _ ->
+        {:noreply,
+         socket
+         |> assign(:is_correct, is_correct)
+         |> assign(:answer, answer)
+         |> assign(:answered, true)}
+    end
   end
 
   def get_player_score_and_position(player_name, podium) do
