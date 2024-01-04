@@ -5,8 +5,8 @@ kill_signal = "SIGTERM"
 kill_timeout = 5
 processes = []
 
-[deploy]
-  release_command = "/app/bin/migrate"
+# [deploy]
+#  release_command = "/app/bin/migrate"
 
 [env]
   PHX_HOST = "tauper.fly.dev"
@@ -41,3 +41,6 @@ processes = []
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
+
+[processes]
+  app = "/bin/sh -c '/app/bin/migrate && /app/bin/server start'"
