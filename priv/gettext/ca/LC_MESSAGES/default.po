@@ -53,7 +53,7 @@ msgstr "Llistat de Jocs"
 msgid "Name"
 msgstr "Nom"
 
-#: lib/tauper_web/templates/game/form.html.heex:51
+#: lib/tauper_web/templates/game/form.html.heex:47
 #: lib/tauper_web/templates/game/index.html.heex:25
 #: lib/tauper_web/templates/game/new.html.heex:1
 #: lib/tauper_web/templates/page/index.html.heex:2
@@ -111,10 +111,6 @@ msgstr "joc"
 #: lib/tauper_web/templates/game/form.html.heex:36
 #: lib/tauper_web/templates/game/form.html.heex:37
 #: lib/tauper_web/templates/game/form.html.heex:38
-#: lib/tauper_web/templates/game/form.html.heex:39
-#: lib/tauper_web/templates/game/form.html.heex:40
-#: lib/tauper_web/templates/game/form.html.heex:41
-#: lib/tauper_web/templates/game/form.html.heex:42
 #, elixir-autogen, elixir-format
 msgid "group %{group_number}"
 msgstr "grup %{group_number}"
@@ -290,7 +286,7 @@ msgstr "Enviant email..."
 msgid "points"
 msgstr "punts"
 
-#: lib/tauper_web/templates/game/form.html.heex:46
+#: lib/tauper_web/templates/game/form.html.heex:42
 #, elixir-autogen, elixir-format
 msgid "Alone"
 msgstr "En solitari"
@@ -336,5 +332,5 @@ msgstr "La teva resposta <strong>%{answer}</strong> és incorrecta. La correcta 
 #, elixir-autogen, elixir-format, fuzzy
 msgid "You have answered %{answered_number} and %{correct_number} are correct (%{points} points)."
 msgid_plural "You have answered %{answered_number} and %{correct_number} are correct (%{points} points)."
-msgstr[0] "Has respòs %{answered_number} i %{correct_number} és correcta (%{points} points)."
-msgstr[1] "Has respòs %{answered_number} i %{correct_number} són correctes (%{points} points)."
+msgstr[0] "Has respòs %{answered_number} i %{correct_number} és correcta (%{points} punts)."
+msgstr[1] "Has respòs %{answered_number} i %{correct_number} són correctes (%{points} punts)."

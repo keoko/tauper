@@ -53,7 +53,7 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: lib/tauper_web/templates/game/form.html.heex:51
+#: lib/tauper_web/templates/game/form.html.heex:47
 #: lib/tauper_web/templates/game/index.html.heex:25
 #: lib/tauper_web/templates/game/new.html.heex:1
 #: lib/tauper_web/templates/page/index.html.heex:2
@@ -111,10 +111,6 @@ msgstr ""
 #: lib/tauper_web/templates/game/form.html.heex:36
 #: lib/tauper_web/templates/game/form.html.heex:37
 #: lib/tauper_web/templates/game/form.html.heex:38
-#: lib/tauper_web/templates/game/form.html.heex:39
-#: lib/tauper_web/templates/game/form.html.heex:40
-#: lib/tauper_web/templates/game/form.html.heex:41
-#: lib/tauper_web/templates/game/form.html.heex:42
 #, elixir-autogen, elixir-format
 msgid "group %{group_number}"
 msgstr ""
@@ -290,7 +286,7 @@ msgstr ""
 msgid "points"
 msgstr ""
 
-#: lib/tauper_web/templates/game/form.html.heex:46
+#: lib/tauper_web/templates/game/form.html.heex:42
 #, elixir-autogen, elixir-format
 msgid "Alone"
 msgstr ""
