@@ -483,14 +483,34 @@ input {
 }
 
 
-.next-question, .game-status {
+.next-question {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 10px 0 20px 0;
+}
+
+.next-question-content {
+  width: 100%;
+}
+
+.next-question-action {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.next-question-action button {
+  min-width: 200px;
+}
+
+.game-status {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 10px 0 20px 0;
 }
 
-.next-question > *, .game-status > * {
+.game-status > * {
   margin: 0;
   border: 0;
 }
