@@ -1,21 +1,90 @@
 # Tauper
-Tauper is a multiplayer game implemented in Elixir.
 
-## Goals
-  * Learn Elixir/Phoenix
-  * Learn Phoenix Presence
-  * Learn LiveView
-  * Learn how to deploy Elixir apps in fly.io
+Tauper is a real-time multiplayer chemistry quiz game built with Elixir and Phoenix LiveView. Players compete by answering questions about chemical elements (symbols, names, and valences) as quickly as possible, earning points based on their speed and accuracy.
 
-## Pre-requisites
-  * direnv
+## Features
 
-## deploy the app
+- Real-time multiplayer gameplay using Phoenix LiveView
+- Dynamic game sessions managed with OTP GenServers
+- Live player presence tracking
+- Time-based scoring system
+- Internationalization support (Catalan and English)
+- Question types: element symbols, names, and valence states
+
+## Prerequisites
+
+- Elixir ~> 1.12
+- Erlang/OTP
+- direnv (optional, for environment management)
+
+## Setup
+
+Install dependencies:
+#+BEGIN_SRC bash
+mix deps.get
+#+END_SRC
+
+Or use the setup alias:
+#+BEGIN_SRC bash
+mix setup
+#+END_SRC
+
+## Development
+
+Start the Phoenix server:
+#+BEGIN_SRC bash
+mix phx.server
+#+END_SRC
+
+The application will be available at [[http://localhost:4000][http://localhost:4000]]
+
+Development tools:
+- LiveDashboard: [[http://localhost:4000/dashboard][http://localhost:4000/dashboard]]
+- Email preview: [[http://localhost:4000/dev/mailbox][http://localhost:4000/dev/mailbox]]
+
+## Testing
+
+Run the test suite:
+#+BEGIN_SRC bash
+mix test
+#+END_SRC
+
+## Translations
+
+Extract and merge translation strings:
+#+BEGIN_SRC bash
+mix gettext.extract --merge
+#+END_SRC
+
+Translation files are located in =priv/gettext/=.
+
+## Deployment
+
+Deploy to fly.io:
 #+BEGIN_SRC bash
 fly deploy
 #+END_SRC
 
-## gather new translations
+Build assets for production:
 #+BEGIN_SRC bash
-mix gettext.extract --merge
+mix assets.deploy
 #+END_SRC
+
+## Architecture
+
+The application uses OTP principles for game state management:
+
+- Each game runs as an isolated GenServer process
+- Games are supervised by a DynamicSupervisor
+- Player presence is tracked via Phoenix.Presence
+- Real-time updates broadcast via Phoenix.PubSub
+- No database - all state is in-memory
+
+See [[file:CLAUDE.md][CLAUDE.md]] for detailed architecture documentation.
+
+## Learning Goals
+
+- [X] Learn Elixir/Phoenix
+- [X] Learn Phoenix Presence
+- [X] Learn LiveView
+- [X] Learn how to deploy Elixir apps in fly.io
