@@ -301,6 +301,46 @@ msgstr ""
 msgid "Rejoin Game %{code}"
 msgstr ""
 
+#: lib/tauper_web/templates/page/index.html.heex:3
+#, elixir-autogen, elixir-format
+msgid "Learn the Periodic Table"
+msgstr ""
+
+#: lib/tauper_web/templates/page/index.html.heex:4
+#, elixir-autogen, elixir-format
+msgid "Compete with friends in real-time chemistry quizzes!"
+msgstr ""
+
+#: lib/tauper_web/templates/page/index.html.heex:17
+#, elixir-autogen, elixir-format
+msgid "Real-time"
+msgstr ""
+
+#: lib/tauper_web/templates/page/index.html.heex:18
+#, elixir-autogen, elixir-format
+msgid "Compete live with other players"
+msgstr ""
+
+#: lib/tauper_web/templates/page/index.html.heex:21
+#, elixir-autogen, elixir-format
+msgid "Score Points"
+msgstr ""
+
+#: lib/tauper_web/templates/page/index.html.heex:22
+#, elixir-autogen, elixir-format
+msgid "Faster answers earn more points"
+msgstr ""
+
+#: lib/tauper_web/templates/page/index.html.heex:25
+#, elixir-autogen, elixir-format
+msgid "Master Chemistry"
+msgstr ""
+
+#: lib/tauper_web/templates/page/index.html.heex:26
+#, elixir-autogen, elixir-format
+msgid "Learn symbols, names, and valences"
+msgstr ""
+
 #: lib/tauper_web/live/game_live/play.html.heex:25
 #, elixir-autogen, elixir-format, fuzzy
 msgid "You are in position %{position} (%{score} points)."

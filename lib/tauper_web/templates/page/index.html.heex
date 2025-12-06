@@ -1,7 +1,29 @@
 <main id="choose-game">
-<%= button gettext("New Game"), to: Routes.game_path(@conn, :new), method: "get" %>
-<%= button gettext("Join Game"), to: Routes.game_path(@conn, :join), method: "get" %>
-<%= if @current_code != nil do %>
-<%= button gettext("Rejoin Game %{code}", [code: @current_code]), to: Routes.game_path(@conn, :rejoin), method: "get" %>
-<% end %>
+  <section class="hero">
+    <h1><%= gettext("Learn the Periodic Table") %></h1>
+    <p><%= gettext("Compete with friends in real-time chemistry quizzes!") %></p>
+  </section>
+
+  <section class="game-actions">
+    <%= button gettext("New Game"), to: Routes.game_path(@conn, :new), method: "get", class: "button-primary" %>
+    <%= button gettext("Join Game"), to: Routes.game_path(@conn, :join), method: "get", class: "button-primary" %>
+    <%= if @current_code != nil do %>
+      <%= button gettext("Rejoin Game %{code}", [code: @current_code]), to: Routes.game_path(@conn, :rejoin), method: "get", class: "button-secondary" %>
+    <% end %>
+  </section>
+
+  <section class="features">
+    <div class="feature">
+      <h3>⚡ <%= gettext("Real-time") %></h3>
+      <p><%= gettext("Compete live with other players") %></p>
+    </div>
+    <div class="feature">
+      <h3>🏆 <%= gettext("Score Points") %></h3>
+      <p><%= gettext("Faster answers earn more points") %></p>
+    </div>
+    <div class="feature">
+      <h3>🧪 <%= gettext("Master Chemistry") %></h3>
+      <p><%= gettext("Learn symbols, names, and valences") %></p>
+    </div>
+  </section>
 </main>

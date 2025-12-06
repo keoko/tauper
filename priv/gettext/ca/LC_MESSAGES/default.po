@@ -301,6 +301,46 @@ msgstr "La teva puntuació és %{score}."
 msgid "Rejoin Game %{code}"
 msgstr "Tornar al joc %{code}"
 
+#: lib/tauper_web/templates/page/index.html.heex:3
+#, elixir-autogen, elixir-format
+msgid "Learn the Periodic Table"
+msgstr "Aprèn la Taula Periòdica"
+
+#: lib/tauper_web/templates/page/index.html.heex:4
+#, elixir-autogen, elixir-format
+msgid "Compete with friends in real-time chemistry quizzes!"
+msgstr "Competeix amb amics en qüestionaris de química en temps real!"
+
+#: lib/tauper_web/templates/page/index.html.heex:17
+#, elixir-autogen, elixir-format
+msgid "Real-time"
+msgstr "Temps real"
+
+#: lib/tauper_web/templates/page/index.html.heex:18
+#, elixir-autogen, elixir-format
+msgid "Compete live with other players"
+msgstr "Competeix en directe amb altres jugadors"
+
+#: lib/tauper_web/templates/page/index.html.heex:21
+#, elixir-autogen, elixir-format
+msgid "Score Points"
+msgstr "Acumula punts"
+
+#: lib/tauper_web/templates/page/index.html.heex:22
+#, elixir-autogen, elixir-format
+msgid "Faster answers earn more points"
+msgstr "Respostes més ràpides guanyen més punts"
+
+#: lib/tauper_web/templates/page/index.html.heex:25
+#, elixir-autogen, elixir-format
+msgid "Master Chemistry"
+msgstr "Domina la química"
+
+#: lib/tauper_web/templates/page/index.html.heex:26
+#, elixir-autogen, elixir-format
+msgid "Learn symbols, names, and valences"
+msgstr "Aprèn símbols, noms i valències"
+
 #: lib/tauper_web/live/game_live/play.html.heex:25
 #, elixir-autogen, elixir-format, fuzzy
 msgid "You are in position %{position} (%{score} points)."
