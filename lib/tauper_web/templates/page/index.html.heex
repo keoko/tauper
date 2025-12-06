@@ -5,10 +5,19 @@
   </section>
 
   <section class="game-actions">
-    <%= button gettext("New Game"), to: Routes.game_path(@conn, :new), method: "get", class: "button-primary" %>
-    <%= button gettext("Join Game"), to: Routes.game_path(@conn, :join), method: "get", class: "button-primary" %>
+    <div class="action-item">
+      <%= button gettext("New Game"), to: Routes.game_path(@conn, :new), method: "get", class: "button-primary" %>
+      <small class="action-help"><%= gettext("Create a game and play solo or invite friends") %></small>
+    </div>
+    <div class="action-item">
+      <%= button gettext("Join Game"), to: Routes.game_path(@conn, :join), method: "get", class: "button-primary" %>
+      <small class="action-help"><%= gettext("Enter a friend's game code to play together") %></small>
+    </div>
     <%= if @current_code != nil do %>
-      <%= button gettext("Rejoin Game %{code}", [code: @current_code]), to: Routes.game_path(@conn, :rejoin), method: "get", class: "button-secondary" %>
+      <div class="action-item">
+        <%= button gettext("Rejoin Game %{code}", [code: @current_code]), to: Routes.game_path(@conn, :rejoin), method: "get", class: "button-secondary" %>
+        <small class="action-help"><%= gettext("Continue your previous game") %></small>
+      </div>
     <% end %>
   </section>
 

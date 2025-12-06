@@ -558,8 +558,23 @@ input {
 .game-actions {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-bottom: 3rem;
+}
+
+.action-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.action-help {
+  font-size: 0.85rem;
+  color: #606c76;
+  text-align: center;
+  margin: 0;
+  line-height: 1.4;
 }
 
 .button-primary,
