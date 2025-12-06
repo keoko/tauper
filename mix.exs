@@ -10,7 +10,8 @@ defmodule Tauper.MixProject do
       compilers: Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+      releases: releases()
     ]
   end
 
@@ -67,6 +68,16 @@ defmodule Tauper.MixProject do
       setup: ["deps.get"],
       test: ["test"],
       "assets.deploy": ["esbuild default --minify", "phx.digest"]
+    ]
+  end
+
+  defp releases do
+    [
+      tauper: [
+        include_executables_for: [:unix],
+        steps: [:assemble, :tar],
+        overlays: ["rel/overlays"]
+      ]
     ]
   end
 end
