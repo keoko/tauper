@@ -1,23 +1,27 @@
-# Tauper
+* Tauper
 
-Tauper is a real-time multiplayer chemistry quiz game built with Elixir and Phoenix LiveView. Players compete by answering questions about chemical elements (symbols, names, and valences) as quickly as possible, earning points based on their speed and accuracy.
+A real-time multiplayer quiz game for learning the periodic table, built with Elixir and Phoenix LiveView. Players compete by answering questions about chemical elements (symbols, names, and valences) as quickly as possible, earning points based on speed and accuracy.
 
-## Features
+Make learning chemistry fun and competitive!
 
+** Features
+
+- Interactive way to learn and memorize the periodic table
 - Real-time multiplayer gameplay using Phoenix LiveView
 - Dynamic game sessions managed with OTP GenServers
 - Live player presence tracking
 - Time-based scoring system
 - Internationalization support (Catalan and English)
 - Question types: element symbols, names, and valence states
+- Configurable difficulty (select specific element groups and question types)
 
-## Prerequisites
+** Prerequisites
 
 - Elixir ~> 1.12
 - Erlang/OTP
 - direnv (optional, for environment management)
 
-## Setup
+** Setup
 
 Install dependencies:
 #+BEGIN_SRC bash
@@ -29,7 +33,7 @@ Or use the setup alias:
 mix setup
 #+END_SRC
 
-## Development
+** Development
 
 Start the Phoenix server:
 #+BEGIN_SRC bash
@@ -42,14 +46,14 @@ Development tools:
 - LiveDashboard: [[http://localhost:4000/dashboard][http://localhost:4000/dashboard]]
 - Email preview: [[http://localhost:4000/dev/mailbox][http://localhost:4000/dev/mailbox]]
 
-## Testing
+** Testing
 
 Run the test suite:
 #+BEGIN_SRC bash
 mix test
 #+END_SRC
 
-## Translations
+** Translations
 
 Extract and merge translation strings:
 #+BEGIN_SRC bash
@@ -58,7 +62,7 @@ mix gettext.extract --merge
 
 Translation files are located in =priv/gettext/=.
 
-## Deployment
+** Deployment
 
 Deploy to fly.io:
 #+BEGIN_SRC bash
@@ -70,7 +74,7 @@ Build assets for production:
 mix assets.deploy
 #+END_SRC
 
-## Architecture
+** Architecture
 
 The application uses OTP principles for game state management:
 
@@ -82,7 +86,7 @@ The application uses OTP principles for game state management:
 
 See [[file:CLAUDE.md][CLAUDE.md]] for detailed architecture documentation.
 
-## Learning Goals
+** Development Learning Goals
 
 - [X] Learn Elixir/Phoenix
 - [X] Learn Phoenix Presence
