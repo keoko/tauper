@@ -74,7 +74,10 @@ defmodule TauperWeb.GameLive.Component do
         <%= text_input f, :answer, autocomplete: "off", autofocus: "true" %>
         <%= error_tag f, :answer %>
         <%= hidden_input f, :question_number, value: @game.current_question + 1 %>
-        <%= submit gettext("send answer"), phx_disable_with: gettext("Sending answer...") %>
+        <div class="question-actions">
+          <button type="button" phx-click="skip" class="button-secondary-outline"><%= gettext("Skip Question") %></button>
+          <%= submit gettext("send answer"), phx_disable_with: gettext("Sending answer..."), class: "button-primary" %>
+        </div>
         </.form>
     </div>
     """

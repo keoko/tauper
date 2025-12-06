@@ -483,15 +483,14 @@ input {
 }
 
 
-.next-question, .skip-question {
+.next-question, .game-status {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 10px 0 20px 0;
 }
 
-
-.next-question > *, .skip-question > * {
+.next-question > *, .game-status > * {
   margin: 0;
   border: 0;
 }
@@ -599,6 +598,53 @@ input {
 .button-secondary:focus {
   background-color: #4a5560;
   border-color: #4a5560;
+}
+
+.button-secondary-outline {
+  background-color: transparent;
+  border: 1px solid #606c76;
+  color: #606c76;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  /* Match sizing with primary buttons */
+  min-height: 48px;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 0.4rem;
+  font-weight: normal;
+  line-height: 1.5;
+  height: auto;
+}
+
+.button-secondary-outline:hover,
+.button-secondary-outline:focus {
+  background-color: #606c76;
+  color: white;
+  border-color: #606c76;
+}
+
+.question-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.question-actions button,
+.question-actions input[type="submit"] {
+  flex: 1;
+  min-width: 150px;
+  max-width: 300px;
+}
+
+/* Ensure submit buttons in question-actions match button-primary styling */
+.question-actions input[type="submit"] {
+  min-height: 48px;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  height: auto;
 }
 
 .features {

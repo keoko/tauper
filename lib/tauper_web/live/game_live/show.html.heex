@@ -10,14 +10,13 @@
 <% end %>
 
 <%= if @status == :started do %>
-    <section class="skip-question">
+    <section class="game-status">
     <div><%= gettext("time") %>: <%=  @remaining_time %></div>
     <%= if !@game.alone do %>
     <%=  if assigns[:players_answers] do %>
       <div><%= ngettext("only a player pending to answer", "%{count} players pending to answer", (@players_answers.total_players - @players_answers.num_answers)) %></div>
       <% end %>
     <% end %>
-    <button phx-click="skip" style="float: right;"><%= gettext("Skip Question") %></button>
     </section>
 
     <Component.sentence game={@game} question={@question} />
