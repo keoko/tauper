@@ -473,11 +473,38 @@ input {
   border: 0;
 }
 
+/* Mobile-first question display */
 #sentence {
-  padding: 20px 0;
+  padding: 1rem;
+  text-align: center;
 }
+
 #sentence > * {
-  font-size: 2rem;
+  font-size: 1.3rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Tablet and up */
+@media (min-width: 641px) {
+  #sentence {
+    padding: 1.5rem 1rem;
+  }
+
+  #sentence > * {
+    font-size: 1.8rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  #sentence {
+    padding: 2rem 0;
+  }
+
+  #sentence > * {
+    font-size: 2rem;
+  }
 }
 
 /* Mobile-first home page styles */
