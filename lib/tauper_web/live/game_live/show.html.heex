@@ -1,12 +1,16 @@
 <%= if @status == :not_started do %>
 <section class="start-game">
-  <h2><%= gettext("code") %>: <strong><%= @game_code %></strong></h2>
-  <button phx-click="start" phx-value-game_code= {@game_code} disabled={!@game.alone && Enum.count(@players) == 0}><%= gettext("Start Game") %></button>
+  <div class="start-game-content">
+    <h2><%= gettext("code") %>: <strong><%= @game_code %></strong></h2>
+    <%= if !@game.alone do %>
+      <Component.players players={@players} />
+    <% end %>
+    <Component.periodic_table question={@question} />
+  </div>
+  <div class="start-game-action">
+    <button phx-click="start" phx-value-game_code= {@game_code} disabled={!@game.alone && Enum.count(@players) == 0} class="button-primary"><%= gettext("Start Game") %></button>
+  </div>
 </section>
-  <%= if !@game.alone do %>
-    <Component.players players={@players} />
-  <% end %>
-<Component.periodic_table question={@question} />
 <% end %>
 
 <%= if @status == :started do %>

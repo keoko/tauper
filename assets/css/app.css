@@ -479,7 +479,22 @@ input {
 
 .start-game {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 10px 0 20px 0;
+}
+
+.start-game-content {
+  width: 100%;
+}
+
+.start-game-action {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.start-game-action button {
+  min-width: 200px;
 }
 
 
