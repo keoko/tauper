@@ -308,7 +308,7 @@ msgstr ""
 
 #: lib/tauper_web/templates/page/index.html.heex:4
 #, elixir-autogen, elixir-format
-msgid "Compete with friends in real-time chemistry quizzes!"
+msgid "Play solo or compete with friends in real-time chemistry quizzes!"
 msgstr ""
 
 #: lib/tauper_web/templates/page/index.html.heex:17
@@ -318,7 +318,7 @@ msgstr ""
 
 #: lib/tauper_web/templates/page/index.html.heex:18
 #, elixir-autogen, elixir-format
-msgid "Compete live with other players"
+msgid "Play solo or compete with others"
 msgstr ""
 
 #: lib/tauper_web/templates/page/index.html.heex:21

@@ -308,8 +308,8 @@ msgstr "Aprèn la Taula Periòdica"
 
 #: lib/tauper_web/templates/page/index.html.heex:4
 #, elixir-autogen, elixir-format
-msgid "Compete with friends in real-time chemistry quizzes!"
-msgstr "Competeix amb amics en qüestionaris de química en temps real!"
+msgid "Play solo or compete with friends in real-time chemistry quizzes!"
+msgstr "Juga en solitari o competeix amb amics en qüestionaris de química en temps real!"
 
 #: lib/tauper_web/templates/page/index.html.heex:17
 #, elixir-autogen, elixir-format
@@ -318,8 +318,8 @@ msgstr "Temps real"
 
 #: lib/tauper_web/templates/page/index.html.heex:18
 #, elixir-autogen, elixir-format
-msgid "Compete live with other players"
-msgstr "Competeix en directe amb altres jugadors"
+msgid "Play solo or compete with others"
+msgstr "Juga en solitari o competeix amb altres"
 
 #: lib/tauper_web/templates/page/index.html.heex:21
 #, elixir-autogen, elixir-format
