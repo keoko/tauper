@@ -18,11 +18,35 @@ header h1 {
 header h1 a {
   text-decoration: none;
   color: #0069d9;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 header h1 a:hover,
 header h1 a:focus {
   color: #606c76;
+}
+
+header .header-icon {
+  font-size: 1.2em;
+  line-height: 1;
+  color: #0069d9;
+}
+
+header .header-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+header .header-subtitle {
+  display: block;
+  font-size: 0.4em;
+  font-weight: 400;
+  color: #606c76;
+  letter-spacing: 0.05em;
+  margin-top: 0.3em;
 }
 
 header section.container {
