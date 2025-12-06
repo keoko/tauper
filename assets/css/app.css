@@ -492,7 +492,6 @@ input {
 
 
 .next-question > *, .skip-question > * {
-  padding: 0;
   margin: 0;
   border: 0;
 }
