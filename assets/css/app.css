@@ -515,6 +515,16 @@ input {
   border: 0;
 }
 
+.game-over-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+.game-over-actions button {
+  min-width: 200px;
+}
+
 /* Mobile-first question display */
 #sentence {
   padding: 1rem;

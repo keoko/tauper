@@ -91,5 +91,7 @@
     </div>
     <% end %>
   <% end %>
-  <button phx-click="stop"><%= gettext("Stop Game") %></button>
+  <div class="game-over-actions">
+    <button phx-click="stop" class="button-secondary"><%= gettext("Stop Game") %></button>
+  </div>
 <% end %>
