@@ -46,8 +46,8 @@
     <%= error_tag f, :alone %>
   </div>
 
-  <div>
-    <%= link gettext("Back"), to: Routes.page_path(@conn, :index), class: "button-secondary" %>
-    <%= submit gettext("New Game"), class: "button-primary" %>
+  <div class="question-actions">
+    <%= link gettext("Back"), to: Routes.page_path(@conn, :index), class: "button button-outline" %>
+    <%= submit gettext("New Game"), class: "button" %>
   </div>
 </.form>

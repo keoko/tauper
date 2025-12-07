@@ -6,15 +6,15 @@
 
   <section class="game-actions">
     <div class="action-item">
-      <%= link gettext("Play Alone"), to: Routes.game_path(@conn, :new, play_alone: "true"), class: "button button-primary" %>
+      <%= link gettext("Play Alone"), to: Routes.game_path(@conn, :new, play_alone: "true"), class: "button" %>
       <small class="action-help"><%= gettext("Practice and learn at your own pace") %></small>
     </div>
     <div class="action-item">
-      <%= link gettext("Play with Friends"), to: Routes.game_path(@conn, :new, play_alone: "false"), class: "button button-primary" %>
+      <%= link gettext("Play with Friends"), to: Routes.game_path(@conn, :new, play_alone: "false"), class: "button" %>
       <small class="action-help"><%= gettext("Create a game and share the code to compete") %></small>
     </div>
     <div class="action-item">
-      <%= link gettext("Join Game"), to: Routes.game_path(@conn, :join), class: "button button-primary" %>
+      <%= link gettext("Join Game"), to: Routes.game_path(@conn, :join), class: "button" %>
       <small class="action-help"><%= gettext("Enter a friend's game code to play together") %></small>
     </div>
     <%= if @current_code != nil do %>

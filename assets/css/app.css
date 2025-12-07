@@ -493,10 +493,6 @@ input {
   justify-content: flex-end;
 }
 
-.start-game-action button {
-  min-width: 200px;
-}
-
 
 .next-question {
   display: flex;
@@ -512,10 +508,6 @@ input {
 .next-question-action {
   display: flex;
   justify-content: flex-end;
-}
-
-.next-question-action button {
-  min-width: 200px;
 }
 
 .game-status {
@@ -534,10 +526,6 @@ input {
   display: flex;
   justify-content: flex-end;
   margin-top: 2rem;
-}
-
-.game-over-actions button {
-  min-width: 200px;
 }
 
 /* Mobile-first question display */
@@ -618,53 +606,28 @@ input {
   line-height: 1.4;
 }
 
-.button-primary,
-.button-secondary {
-  /* Minimum touch target size for mobile (48px) */
-  min-height: 48px;
-  padding: 1rem;
-  font-size: 1.1rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1.5;
-  height: auto;
-}
-
-.button-secondary {
+/* Extend Milligram's button system with secondary variant */
+.button.button-secondary {
   background-color: #606c76;
   border-color: #606c76;
 }
 
-.button-secondary:hover,
-.button-secondary:focus {
+.button.button-secondary:hover,
+.button.button-secondary:focus {
   background-color: #4a5560;
   border-color: #4a5560;
 }
 
-.button-secondary-outline {
-  background-color: transparent;
-  border: 1px solid #606c76;
-  color: #606c76;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  /* Match sizing with primary buttons */
-  min-height: 48px;
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
-  border-radius: 0.4rem;
-  font-weight: normal;
-  line-height: 1.5;
-  height: auto;
-}
-
-.button-secondary-outline:hover,
-.button-secondary-outline:focus {
-  background-color: #606c76;
-  color: white;
-  border-color: #606c76;
-}
+/* Mobile-specific button adjustments */
+/* @media (max-width: 640px) { */
+/*   .button, */
+/*   button, */
+/*   input[type='button'], */
+/*   input[type='reset'], */
+/*   input[type='submit'] { */
+/*     width: 100%; */
+/*   } */
+/* } */
 
 .question-actions {
   display: flex;
@@ -674,20 +637,11 @@ input {
   flex-wrap: wrap;
 }
 
-.question-actions button,
+.question-actions .button,
 .question-actions input[type="submit"] {
   flex: 1;
   min-width: 150px;
   max-width: 300px;
-}
-
-/* Ensure submit buttons in question-actions match button-primary styling */
-.question-actions input[type="submit"] {
-  min-height: 48px;
-  padding: 1rem 2rem;
-  font-size: 1.1rem;
-  line-height: 1.5;
-  height: auto;
 }
 
 .features {
@@ -731,11 +685,13 @@ input {
     gap: 1.5rem;
   }
 
-  .button-primary,
-  .button-secondary {
+  .button,
+  button,
+  input[type='button'],
+  input[type='reset'],
+  input[type='submit'] {
     width: auto;
     min-width: 200px;
-    padding: 1rem 2rem; /* Add horizontal padding for auto-width buttons */
   }
 
   .features {

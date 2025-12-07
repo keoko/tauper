@@ -8,7 +8,7 @@
     <Component.periodic_table question={@question} />
   </div>
   <div class="start-game-action">
-    <button phx-click="start" phx-value-game_code= {@game_code} disabled={!@game.alone && Enum.count(@players) == 0} class="button-primary"><%= gettext("Start Game") %></button>
+    <button phx-click="start" phx-value-game_code= {@game_code} disabled={!@game.alone && Enum.count(@players) == 0} class="button"><%= gettext("Start Game") %></button>
   </div>
 </section>
 <% end %>
@@ -60,7 +60,7 @@
       <% end %>
     </div>
     <div class="next-question-action">
-      <button phx-click="next" class="button-primary"><%= gettext("Next Question") %></button>
+      <button phx-click="next" class="button"><%= gettext("Next Question") %></button>
     </div>
   </section>
 
@@ -83,7 +83,7 @@
     <%= error_tag f, :email %>
 
     <div>
-      <%= submit gettext("Send Score Email"), phx_disable_with: gettext("Sending email...") %>
+      <%= submit gettext("Send Score Email"), phx_disable_with: gettext("Sending email..."), class: "button" %>
     </div>
   </.form>
   </div>
@@ -96,6 +96,6 @@
     <% end %>
   <% end %>
   <div class="game-over-actions">
-    <button phx-click="stop" class="button-secondary"><%= gettext("Stop Game") %></button>
+    <button phx-click="stop" class="button button-secondary"><%= gettext("Stop Game") %></button>
   </div>
 <% end %>
