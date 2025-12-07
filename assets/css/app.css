@@ -542,8 +542,6 @@ input {
 
 /* Mobile-first question display */
 #sentence {
-  padding: 1rem;
-  text-align: center;
 }
 
 #sentence > * {
