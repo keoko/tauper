@@ -12,13 +12,14 @@
 
   <%= label f, :question_max_time, gettext("Time per question (seconds)") %>
   <%= number_input f, :question_max_time, value: 20 %>
-  <%= error_tag f, :num_questions %>
+  <%= error_tag f, :question_max_time %>
 
   <%= label f, :question_types, gettext("Types of questions") %>
   <%=  multiple_select(f, :question_types, [{gettext("Symbol"),  "symbol"}, {gettext("Name"), "name"}, {gettext("Valences"), "valences"}], selected: ["symbol", "name", "valences"]) %>
   <%= error_tag f, :question_types %>
 
   <%= label f, :element_groups, gettext("Element groups") %>
+  <!-- Groups 3-6 are excluded as they are not required for pharmacy students' curriculum -->
   <!-- to generate list with emacs lisp: (dotimes (i 18) (insert (format "{gettext(\"group %%{group_number}\", group_number: %d), %d},\n" (1+ i) (1+ i) ))) -->
   <%= multiple_select(f, :element_groups,
     [
@@ -46,6 +47,7 @@
   </div>
 
   <div>
-    <%= submit gettext("New Game") %>
+    <%= link gettext("Back"), to: Routes.page_path(@conn, :index), class: "button-secondary" %>
+    <%= submit gettext("New Game"), class: "button-primary" %>
   </div>
 </.form>
