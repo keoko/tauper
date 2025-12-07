@@ -1,5 +1,9 @@
 #+title: Tasks
 * Tasks
+** TODO styling
+** TODO beril.li
+** TODO build properly periodic table
+** TODO improve UI how to play alone / how to create a game
 ** DONE only owner can view the games/show page
 ** TODO create error page with a link to the homepage (e.g. forbidden error whe going back in a form)
 ** DONE add link to go to the homepage in TauPer header
@@ -16,8 +20,8 @@
 ** DONE individual game
 ** DONE send score email
 ** DONE display flash message when email is sent or not
-** TODO email is marked as spam
-** TODO translate errors in CA
+** KILL email is marked as spam
+** DONE translate errors in CA
 ** TODO translate app error messages
 ** DONE remove special elements
 ** DONE valences are wrong
@@ -116,7 +120,6 @@ create a file in the same liveview folder with name {liveview_name}.html.heex
 ** DONE change header to Passa Paraula
 ** DONE join game
 ** DONE start game
-*
 * Concepts
 ** Game
 ** Player
