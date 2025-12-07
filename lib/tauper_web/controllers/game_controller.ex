@@ -12,7 +12,8 @@ defmodule TauperWeb.GameController do
 
   def new(conn, params) do
     changeset = change_new_game_request(params)
-    render(conn, "new.html", changeset: changeset)
+    play_alone = Map.get(params, "play_alone")
+    render(conn, "new.html", changeset: changeset, play_alone: play_alone)
   end
 
   def change_join_game_request(attrs \\ %{}) do

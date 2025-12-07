@@ -39,9 +39,11 @@
   ], size: 14, selected: [1,2,7,8,9,10,11,12,13,14,15,16,17,18]) %>
   <%= error_tag f, :element_groups %>
 
-  <%= label f, :alone, gettext("Alone") %>
-  <%= checkbox f, :alone %>
-  <%= error_tag f, :alone %>
+  <div style={if assigns[:play_alone], do: "display: none;"}>
+    <%= label f, :alone, gettext("Alone") %>
+    <%= checkbox f, :alone, checked: assigns[:play_alone] == "true" %>
+    <%= error_tag f, :alone %>
+  </div>
 
   <div>
     <%= submit gettext("New Game") %>
