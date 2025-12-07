@@ -14,12 +14,15 @@
     <% end %>
 <% end %>
 <%= if @status == :paused do %>
+    <Component.sentence game={@game} question={@question} />
     <%= if assigns[:answered] do %>
       <%= if @is_correct do %>
           <p><%= gettext("Your answer <strong>%{answer}</strong> is correct.", [answer: @answer]) |> raw() %></p>
       <% else %>
           <p><%= gettext("Your answer <strong>%{answer}</strong> is wrong. The correct one is <strong>%{correct_answer}</strong>.", [answer: @answer, correct_answer: inspect(@question.answer)]) |> raw() %></p>
       <% end %>
+    <% else %>
+          <p><%= gettext("The correct answer is <strong>%{correct_answer}</strong>.", [correct_answer: inspect(@question.answer)]) |> raw() %></p>
     <% end %>
     <%= if assigns[:player_score_and_position] do %>
         <p><%= gettext("You are in position %{position} (%{score} points).", [position: @player_score_and_position.position, score: @player_score_and_position.score]) %></p>
