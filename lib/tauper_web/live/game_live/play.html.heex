@@ -8,7 +8,7 @@
     <section class="game-status">
       <div><%= gettext("time") %>: <%=  @remaining_time %></div>
       <%= if assigns[:player_score_and_position] do %>
-        <div><%= gettext("Position: %{position} | Score: %{score} points", [position: @player_score_and_position.position, score: @player_score_and_position.score]) %></div>
+        <div title={gettext("Position %{position}", [position: @player_score_and_position.position])}><%= gettext("score: %{score}", [score: @player_score_and_position.score]) %></div>
       <% end %>
     </section>
     <Component.sentence game={@game} question={@question} />
@@ -29,8 +29,9 @@
 <% end %>
 <%= if @status == :paused do %>
     <section class="game-status">
+      <div></div>
       <%= if assigns[:player_score_and_position] do %>
-        <div><%= gettext("Position: %{position} | Score: %{score} points", [position: @player_score_and_position.position, score: @player_score_and_position.score]) %></div>
+        <div title={gettext("Position %{position}", [position: @player_score_and_position.position])}><%= gettext("score: %{score}", [score: @player_score_and_position.score]) %></div>
       <% end %>
     </section>
     <Component.sentence game={@game} question={@question} />
@@ -56,8 +57,9 @@
 
 <%= if @status == :game_over do %>
     <section class="game-status">
+      <div></div>
       <%= if assigns[:player_score_and_position] do %>
-        <div><%= gettext("Position: %{position} | Score: %{score} points", [position: @player_score_and_position.position, score: @player_score_and_position.score]) %></div>
+        <div title={gettext("Position %{position}", [position: @player_score_and_position.position])}><%= gettext("Score: %{score}", [score: @player_score_and_position.score]) %></div>
       <% end %>
     </section>
     <p><%= gettext("You finished in position %{position}.", [position: @player_score_and_position.position]) %></p>

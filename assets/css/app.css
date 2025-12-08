@@ -515,11 +515,23 @@ input {
   justify-content: space-between;
   align-items: center;
   margin: 10px 0 20px 0;
+  padding: 0.5rem 0;
 }
 
-.game-status > * {
+.game-status > div {
   margin: 0;
-  border: 0;
+  font-weight: 500;
+  font-size: 1rem;
+  color: #606c76;
+}
+
+.game-status > div[title] {
+  cursor: help;
+  position: relative;
+}
+
+.game-status > div[title]:hover {
+  color: #0069d9;
 }
 
 .game-over-actions {

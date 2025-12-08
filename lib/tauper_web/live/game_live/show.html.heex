@@ -18,7 +18,7 @@
     <div><%= gettext("time") %>: <%=  @remaining_time %></div>
     <%= if @game.alone do %>
       <%= if assigns[:player_score] do %>
-        <div><%= gettext("Score: %{score} points (%{correct} correct / %{answered} answered)", [score: @player_score.points, correct: @player_score.correct, answered: @player_score.num_answered]) %></div>
+        <div title={gettext("%{correct} correct / %{answered} answered", [correct: @player_score.correct, answered: @player_score.num_answered])}><%= gettext("score: %{score}", [score: @player_score.points]) %></div>
       <% end %>
     <% end %>
     <%= if !@game.alone do %>
@@ -55,7 +55,7 @@
     <%= if assigns[:player_score] do %>
       <section class="game-status">
         <div></div>
-        <div><%= gettext("Score: %{score} points (%{correct} correct / %{answered} answered)", [score: @player_score.points, correct: @player_score.correct, answered: @player_score.num_answered]) %></div>
+        <div title={gettext("%{correct} correct / %{answered} answered", [correct: @player_score.correct, answered: @player_score.num_answered])}><%= gettext("score: %{score}", [score: @player_score.points]) %></div>
       </section>
     <% end %>
   <% end %>
@@ -100,7 +100,7 @@
     <%= if assigns[:player_score] do %>
     <section class="game-status">
       <div></div>
-      <div><%= gettext("Score: %{score} points (%{correct} correct / %{answered} answered)", [score: @player_score.points, correct: @player_score.correct, answered: @player_score.num_answered]) %></div>
+      <div title={gettext("%{correct} correct / %{answered} answered", [correct: @player_score.correct, answered: @player_score.num_answered])}><%= gettext("score: %{score}", [score: @player_score.points]) %></div>
     </section>
     <% end %>
   <% end %>
