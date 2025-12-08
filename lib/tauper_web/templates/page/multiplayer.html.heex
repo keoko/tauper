@@ -1,0 +1,21 @@
+<main id="multiplayer-mode">
+  <section class="hero">
+    <h1><%= gettext("Multiplayer Mode") %></h1>
+    <p><%= gettext("Choose how you want to play with others") %></p>
+  </section>
+
+  <section class="game-actions">
+    <div class="action-item">
+      <%= link gettext("Create New Game"), to: Routes.game_path(@conn, :new, play_alone: "false"), class: "button" %>
+      <small class="action-help"><%= gettext("Set up a new game and share the code with friends") %></small>
+    </div>
+    <div class="action-item">
+      <%= link gettext("Join Game"), to: Routes.game_path(@conn, :join), class: "button" %>
+      <small class="action-help"><%= gettext("Enter a friend's game code to play together") %></small>
+    </div>
+  </section>
+
+  <section class="back-action">
+    <%= link gettext("← Back to Home"), to: Routes.page_path(@conn, :index), class: "button button-secondary" %>
+  </section>
+</main>

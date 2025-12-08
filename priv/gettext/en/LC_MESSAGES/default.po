@@ -444,3 +444,39 @@ msgstr ""
 #, elixir-autogen, elixir-format
 msgid "Answer Summary"
 msgstr ""
+
+#: lib/tauper_web/templates/page/index.html.heex:24
+#, elixir-autogen, elixir-format
+msgid "Solo Mode"
+msgstr ""
+
+#: lib/tauper_web/templates/page/index.html.heex:28
+#: lib/tauper_web/templates/page/multiplayer.html.heex:2
+#, elixir-autogen, elixir-format
+msgid "Multiplayer Mode"
+msgstr ""
+
+#: lib/tauper_web/templates/page/index.html.heex:29
+#, elixir-autogen, elixir-format
+msgid "Create or join a game with friends"
+msgstr ""
+
+#: lib/tauper_web/templates/page/multiplayer.html.heex:3
+#, elixir-autogen, elixir-format
+msgid "Choose how you want to play with others"
+msgstr ""
+
+#: lib/tauper_web/templates/page/multiplayer.html.heex:8
+#, elixir-autogen, elixir-format
+msgid "Create New Game"
+msgstr ""
+
+#: lib/tauper_web/templates/page/multiplayer.html.heex:9
+#, elixir-autogen, elixir-format
+msgid "Set up a new game and share the code with friends"
+msgstr ""
+
+#: lib/tauper_web/templates/page/multiplayer.html.heex:17
+#, elixir-autogen, elixir-format
+msgid "← Back to Home"
+msgstr ""

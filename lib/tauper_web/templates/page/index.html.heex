@@ -4,27 +4,6 @@
     <p><%= gettext("Play solo or compete with friends in real-time chemistry quizzes!") %></p>
   </section>
 
-  <section class="game-actions">
-    <div class="action-item">
-      <%= link gettext("Play Alone"), to: Routes.game_path(@conn, :new, play_alone: "true"), class: "button" %>
-      <small class="action-help"><%= gettext("Practice and learn at your own pace") %></small>
-    </div>
-    <div class="action-item">
-      <%= link gettext("Play with Friends"), to: Routes.game_path(@conn, :new, play_alone: "false"), class: "button" %>
-      <small class="action-help"><%= gettext("Create a game and share the code to compete") %></small>
-    </div>
-    <div class="action-item">
-      <%= link gettext("Join Game"), to: Routes.game_path(@conn, :join), class: "button" %>
-      <small class="action-help"><%= gettext("Enter a friend's game code to play together") %></small>
-    </div>
-    <%= if @current_code != nil do %>
-      <div class="action-item">
-        <%= link gettext("Rejoin Game %{code}", [code: @current_code]), to: Routes.game_path(@conn, :rejoin), class: "button button-secondary" %>
-        <small class="action-help"><%= gettext("Continue your previous game") %></small>
-      </div>
-    <% end %>
-  </section>
-
   <section class="features">
     <div class="feature">
       <h3>⚡ <%= gettext("Real-time") %></h3>
@@ -37,6 +16,17 @@
     <div class="feature">
       <h3>🧪 <%= gettext("Master Chemistry") %></h3>
       <p><%= gettext("Learn symbols, names, and valences") %></p>
+    </div>
+  </section>
+
+  <section class="game-actions">
+    <div class="action-item">
+      <%= link gettext("Solo Mode"), to: Routes.game_path(@conn, :new, play_alone: "true"), class: "button" %>
+      <small class="action-help"><%= gettext("Practice and learn at your own pace") %></small>
+    </div>
+    <div class="action-item">
+      <%= link gettext("Multiplayer Mode"), to: Routes.page_path(@conn, :multiplayer), class: "button" %>
+      <small class="action-help"><%= gettext("Create or join a game with friends") %></small>
     </div>
   </section>
 </main>

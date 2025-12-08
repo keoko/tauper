@@ -7,6 +7,10 @@ defmodule TauperWeb.PageController do
     render(conn, "index.html", changeset: changeset)
   end
 
+  def multiplayer(conn, _params) do
+    render(conn, "multiplayer.html")
+  end
+
   # def index(conn, params) do
   #   game_code = Map.get(params, "game_code", "001")
   #   IO.puts "params:#{inspect(params)}"

@@ -20,6 +20,7 @@ defmodule TauperWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/multiplayer", PageController, :multiplayer
 
     resources "/games", GameController, only: [:index, :new, :create]
     get "/games/join", GameController, :new_join
