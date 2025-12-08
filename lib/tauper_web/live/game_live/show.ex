@@ -28,8 +28,9 @@ defmodule TauperWeb.GameLive.Show do
       # current_game_code != game.code ->
       #   {:error, %{message: "invalid game code"}}
 
-      Presence.is_player_already_in_game(code, player_name) ->
-        {:error, %{message: "player already in game"}}
+      # Note: Removed the presence check here to allow reconnections
+      # Phoenix Presence will automatically handle duplicate tracking
+      # and clean up stale entries when players reconnect
 
       true ->
         {:ok, "player can join the game"}
