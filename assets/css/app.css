@@ -1,6 +1,48 @@
 /* This file is for your main application CSS */
 @import "./phoenix.css";
 
+/* Design System - Type Scale */
+:root {
+  /* Font sizes - mobile first */
+  --font-xs: 0.875rem;    /* 14px - small labels, help text */
+  --font-sm: 1rem;        /* 16px - body text, secondary info */
+  --font-base: 1.125rem;  /* 18px - primary body text */
+  --font-lg: 1.25rem;     /* 20px - emphasized text */
+  --font-xl: 1.5rem;      /* 24px - section headings */
+  --font-2xl: 2rem;       /* 32px - page headings */
+  --font-3xl: 2.5rem;     /* 40px - hero headings */
+
+  /* Periodic table - uses vw for responsive scaling */
+  --table-number: 0.5vw;
+  --table-valences: 0.5vw;
+  --table-symbol: 2.5vw;
+  --table-name: 0.8vw;
+  --table-box-number: 1vw;
+  --table-box-valences: 1vw;
+  --table-box-symbol: 5vw;
+  --table-box-name: 1.5vw;
+}
+
+/* Tablet and up - scale up the type system */
+@media (min-width: 641px) {
+  :root {
+    --font-xs: 0.875rem;    /* 14px */
+    --font-sm: 1rem;        /* 16px */
+    --font-base: 1.125rem;  /* 18px */
+    --font-lg: 1.5rem;      /* 24px */
+    --font-xl: 2rem;        /* 32px */
+    --font-2xl: 2.5rem;     /* 40px */
+    --font-3xl: 3rem;       /* 48px */
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  :root {
+    --font-3xl: 3.6rem;     /* 58px - larger hero on desktop */
+  }
+}
+
 /* Mobile-first header improvements */
 header {
   padding: 0.5rem 1rem;
@@ -9,7 +51,7 @@ header {
 }
 
 header h1 {
-  font-size: 1.8rem;
+  font-size: var(--font-xl);
   margin: 0;
   padding: 0;
   flex-shrink: 0;
@@ -59,7 +101,7 @@ header section.container {
 
 header nav ul {
   margin: 0.5rem 0;
-  font-size: 0.9rem;
+  font-size: var(--font-xs);
 }
 
 header nav li {
@@ -73,24 +115,12 @@ header nav li {
     gap: 1rem;
   }
 
-  header h1 {
-    font-size: 2.4rem;
-  }
-
   header nav ul {
     margin: 1rem;
-    font-size: 1rem;
   }
 
   header nav li {
     padding: 0;
-  }
-}
-
-/* Desktop */
-@media (min-width: 1024px) {
-  header h1 {
-    font-size: 2.8rem;
   }
 }
 
@@ -284,7 +314,7 @@ input {
 
 .number {
   float: left;
-  font-size: 0.5vw;
+  font-size: var(--table-number);
   position: absolute;
 }
 
@@ -292,7 +322,7 @@ input {
 .valences {
     float: right;
     text-align: right;
-    font-size: 0.5vw;
+    font-size: var(--table-valences);
     position: relative;
     width: 100%;
 }
@@ -300,30 +330,30 @@ input {
 .symbol {
   font-weight: bold;
   text-align: center;
-  font-size: 2.5vw;
+  font-size: var(--table-symbol);
   width: 100%;
 }
 
 .element-name {
-  font-size: 0.8vw;
+  font-size: var(--table-name);
   text-align: center;
   width: 100%;
 }
 
 #element-box .symbol {
-  font-size: 5vw;
+  font-size: var(--table-box-symbol);
 }
 
 #element-box .number {
-  font-size: 1vw;
+  font-size: var(--table-box-number);
 }
 
 #element-box .valences {
-    font-size: 1vw;
+    font-size: var(--table-box-valences);
 }
 
 #element-box .element-name {
-  font-size: 1.5vw;
+  font-size: var(--table-box-name);
 }
 
 #element-box {
@@ -344,7 +374,7 @@ input {
   grid-row: 2/4;
   padding: 0.5vw;
   padding-top: 0;
-  font-size: 1vw;
+  font-size: var(--font-sm);
   max-height: 10vw;
   overflow-y: scroll;
 }
@@ -521,7 +551,7 @@ input {
 .game-status > div {
   margin: 0;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: var(--font-base);
   color: #606c76;
 }
 
@@ -546,7 +576,7 @@ input {
   margin: 1rem 0;
   border-radius: 8px;
   border: 2px solid;
-  font-size: 1.1rem;
+  font-size: var(--font-base);
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -571,11 +601,8 @@ input {
 }
 
 /* Mobile-first question display */
-#sentence {
-}
-
 #sentence > * {
-  font-size: 1.3rem;
+  font-size: var(--font-lg);
   line-height: 1.4;
   margin: 0;
 }
@@ -585,20 +612,12 @@ input {
   #sentence {
     padding: 1.5rem 1rem;
   }
-
-  #sentence > * {
-    font-size: 1.8rem;
-  }
 }
 
 /* Desktop */
 @media (min-width: 1024px) {
   #sentence {
     padding: 2rem 0;
-  }
-
-  #sentence > * {
-    font-size: 2rem;
   }
 }
 
@@ -615,13 +634,13 @@ input {
 }
 
 .hero h1 {
-  font-size: 2rem;
+  font-size: var(--font-3xl);
   margin-bottom: 1rem;
   line-height: 1.2;
 }
 
 .hero p {
-  font-size: 1.1rem;
+  font-size: var(--font-base);
   color: #606c76;
   margin-bottom: 0;
 }
@@ -641,7 +660,7 @@ input {
 }
 
 .action-help {
-  font-size: 0.85rem;
+  font-size: var(--font-xs);
   color: #606c76;
   text-align: center;
   margin: 0;
@@ -701,26 +720,18 @@ input {
 }
 
 .feature h3 {
-  font-size: 1.3rem;
+  font-size: var(--font-lg);
   margin-bottom: 0.5rem;
 }
 
 .feature p {
-  font-size: 0.9rem;
+  font-size: var(--font-sm);
   margin-bottom: 0;
   color: #606c76;
 }
 
 /* Tablet and up (641px) */
 @media (min-width: 641px) {
-  .hero h1 {
-    font-size: 3rem;
-  }
-
-  .hero p {
-    font-size: 1.3rem;
-  }
-
   .game-actions {
     flex-direction: row;
     justify-content: center;
@@ -750,10 +761,6 @@ input {
   .hero {
     padding: 3rem 2rem;
   }
-
-  .hero h1 {
-    font-size: 3.6rem;
-  }
 }
 
 /* Answer history styles */
@@ -767,7 +774,7 @@ input {
 .answer-history h3 {
   margin-top: 0;
   margin-bottom: 1rem;
-  font-size: 1.5rem;
+  font-size: var(--font-xl);
   color: #606c76;
 }
 
@@ -831,11 +838,11 @@ input {
 
 .answer-record .question-text {
   flex: 1;
-  font-size: 0.95rem;
+  font-size: var(--font-sm);
 }
 
 .answer-record .correct-answer {
-  font-size: 0.9rem;
+  font-size: var(--font-xs);
   color: #606c76;
   font-style: italic;
 }
@@ -843,7 +850,7 @@ input {
 .answer-record .points {
   font-weight: bold;
   color: #28a745;
-  font-size: 0.9rem;
+  font-size: var(--font-sm);
   min-width: 3rem;
   text-align: right;
 }
@@ -855,14 +862,14 @@ input {
 }
 
 .waiting-message p {
-  font-size: 1.5rem;
+  font-size: var(--font-xl);
   font-weight: 500;
   color: #0069d9;
   margin-bottom: 1rem;
 }
 
 .waiting-message p:last-child {
-  font-size: 1.1rem;
+  font-size: var(--font-base);
   color: #606c76;
   margin-bottom: 0;
 }
@@ -899,11 +906,11 @@ input {
 }
 
 .waiting-players p {
-  font-size: 1.2rem;
+  font-size: var(--font-lg);
 }
 
 .waiting-help {
-  font-size: 1rem !important;
+  font-size: var(--font-sm) !important;
   color: #606c76 !important;
   font-weight: 400 !important;
 }
