@@ -53,6 +53,13 @@
 <%= if @status == :paused do %>
   <section class="next-question">
     <div class="next-question-content">
+      <%= if @game.alone do %>
+        <%= if assigns[:player_score] do %>
+          <section class="game-status">
+            <div><%= gettext("Score: %{score} points (%{correct} correct / %{answered} answered)", [score: @player_score.points, correct: @player_score.correct, answered: @player_score.num_answered]) %></div>
+          </section>
+        <% end %>
+      <% end %>
       <Component.sentence game={@game} question={@question} />
       <%= if !@game.alone do %>
         <%= gettext("The answer is <strong>%{answer}</strong>", [answer: inspect(@question.answer)]) |> raw() %>
@@ -74,9 +81,6 @@
             <span class="answer-icon">⏱</span>
             <span><%= gettext("Time's up! The correct answer is <strong>%{correct_answer}</strong>.", [correct_answer: inspect(@question.answer)]) |> raw() %></span>
           </div>
-        <% end %>
-        <%= if assigns[:player_score_and_position] do %>
-          <p><%= gettext("Your score is %{score} points.", [score: @player_score_and_position.score]) %></p>
         <% end %>
       <% end %>
       <%= if !@game.alone do %>
@@ -114,9 +118,9 @@
   <% end %>
   <%= if @game.alone do %>
     <%= if assigns[:player_score] do %>
-    <div style="margin: 10px 0">
-      <%= ngettext("You have answered %{answered_number} and %{correct_number} are correct (%{points} points).", "You have answered %{answered_number} and %{correct_number} are correct (%{points} points).", @player_score.correct, [answered_number: @player_score.num_answered, correct_number: @player_score.correct, points: @player_score.points]) %>
-    </div>
+    <section class="game-status">
+      <div><%= gettext("Score: %{score} points (%{correct} correct / %{answered} answered)", [score: @player_score.points, correct: @player_score.correct, answered: @player_score.num_answered]) %></div>
+    </section>
     <% end %>
   <% end %>
   <div class="game-over-actions">

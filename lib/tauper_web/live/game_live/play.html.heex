@@ -26,6 +26,9 @@
     <% end %>
 <% end %>
 <%= if @status == :paused do %>
+    <%= if assigns[:player_score_and_position] do %>
+      <div><%= gettext("Position: %{position} | Score: %{score} points", [position: @player_score_and_position.position, score: @player_score_and_position.score]) %></div>
+    <% end %>
     <Component.sentence game={@game} question={@question} />
     <%= if assigns[:answered] do %>
       <div class={"answer-feedback #{if @is_correct, do: "answer-correct", else: "answer-incorrect"}"}>
@@ -44,14 +47,12 @@
         <span><%= gettext("Time's up! The correct answer is <strong>%{correct_answer}</strong>.", [correct_answer: inspect(@question.answer)]) |> raw() %></span>
       </div>
     <% end %>
-    <%= if assigns[:player_score_and_position] do %>
-        <p><%= gettext("You are in position %{position} (%{score} points).", [position: @player_score_and_position.position, score: @player_score_and_position.score]) %></p>
-    <% end %>
     <p><%= gettext("Waiting for next question ...") %></p>
 <% end %>
 
 <%= if @status == :game_over do %>
     <%= if assigns[:player_score_and_position] do %>
-        <p><%= gettext("You finished in position %{position} (%{score} points).", [position: @player_score_and_position.position, score: @player_score_and_position.score]) %></p>
+      <div><%= gettext("Position: %{position} | Score: %{score} points", [position: @player_score_and_position.position, score: @player_score_and_position.score]) %></div>
     <% end %>
+    <p><%= gettext("You finished in position %{position}.", [position: @player_score_and_position.position]) %></p>
 <% end %>
