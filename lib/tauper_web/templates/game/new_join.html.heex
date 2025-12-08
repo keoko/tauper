@@ -13,9 +13,8 @@
   <%= label f, :player_name, gettext("player") %>
   <%= text_input f, :player_name, autocomplete: "off" %>
   <%= error_tag f, :player_name %>
-  <div>
+  <div class="question-actions">
+    <%= link gettext("Back"), to: Routes.page_path(@conn, :index), class: "button button-outline" %>
     <%= submit gettext("Join Game"), class: "button" %>
   </div>
 </.form>
-
-<span><%= link gettext("Back"), to: Routes.page_path(@conn, :index), class: "button button-secondary" %></span>
