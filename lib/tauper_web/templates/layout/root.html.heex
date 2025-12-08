@@ -24,11 +24,15 @@
       <section class="container">
         <nav>
           <ul>
-            <%=  if assigns[:game_code] do %>
-              <li> <%= gettext("game") %>: <%=  @game_code %></li>
-            <% end %>
-            <%=  if assigns[:game_code] do %>
-              <li> <%= gettext("player") %>: <%=  @player_name %></li>
+            <%= if assigns[:game] && @game.alone do %>
+              <li><%= gettext("Practice Mode") %></li>
+            <% else %>
+              <%=  if assigns[:game_code] do %>
+                <li> <%= gettext("game") %>: <%=  @game_code %></li>
+              <% end %>
+              <%=  if assigns[:game_code] do %>
+                <li> <%= gettext("player") %>: <%=  @player_name %></li>
+              <% end %>
             <% end %>
           </ul>
       <!-- <nav role="navigation">

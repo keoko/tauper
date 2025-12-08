@@ -408,3 +408,8 @@ msgstr ""
 #, elixir-autogen, elixir-format
 msgid "Score Points"
 msgstr ""
+
+#: lib/tauper_web/templates/layout/root.html.heex:28
+#, elixir-autogen, elixir-format
+msgid "Practice Mode"
+msgstr ""
