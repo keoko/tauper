@@ -413,7 +413,7 @@ msgstr "Puntuació: %{score}"
 #: lib/tauper_web/live/game_live/play.html.heex:65
 #, elixir-autogen, elixir-format, fuzzy
 msgid "You finished in position %{position}."
-msgstr "Has acabat en la posició %{position} (%{score} punts)."
+msgstr "Has acabat en la posició %{position}."
 
 #: lib/tauper_web/live/game_live/play.html.heex:11
 #: lib/tauper_web/live/game_live/play.html.heex:34
