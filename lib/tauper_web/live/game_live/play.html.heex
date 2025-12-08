@@ -1,6 +1,8 @@
 <%= if @status == :not_started do %>
-<div>
-    <%= gettext("Waiting to start the game ...") %>
+<div class="waiting-message">
+    <div class="loading-atom">⚛</div>
+    <p><%= gettext("Waiting for the game to start...") %></p>
+    <p><%= gettext("The game host will start the game when everyone is ready.") %></p>
 </div>
 <% end %>
 
@@ -52,7 +54,10 @@
         <span><%= gettext("Time's up! The correct answer is <strong>%{correct_answer}</strong>.", [correct_answer: inspect(@question.answer)]) |> raw() %></span>
       </div>
     <% end %>
-    <p><%= gettext("Waiting for next question ...") %></p>
+    <div class="waiting-message">
+      <div class="loading-atom">⚛</div>
+      <p><%= gettext("Waiting for next question...") %></p>
+    </div>
 <% end %>
 
 <%= if @status == :game_over do %>

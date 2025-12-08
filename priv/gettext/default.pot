@@ -177,14 +177,19 @@ msgstr ""
 msgid "Return Home"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/play.html.heex:55
+#: lib/tauper_web/live/game_live/play.html.heex:57
 #, elixir-autogen, elixir-format
-msgid "Waiting for next question ..."
+msgid "Waiting for next question..."
 msgstr ""
 
 #: lib/tauper_web/live/game_live/play.html.heex:3
 #, elixir-autogen, elixir-format
-msgid "Waiting to start the game ..."
+msgid "Waiting for the game to start..."
+msgstr ""
+
+#: lib/tauper_web/live/game_live/play.html.heex:4
+#, elixir-autogen, elixir-format
+msgid "The game host will start the game when everyone is ready."
 msgstr ""
 
 #: lib/tauper_web/live/game_live/show.html.heex:4

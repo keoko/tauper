@@ -1,13 +1,14 @@
 #+title: Tasks
 * Tasks
-** TODO email
-** TODO stop game on solo mode, maybe translated to continue button?
+** join page button actions not aligned
+** KILL email
+** DONE stop game on solo mode, maybe translated to continue button?
 ** DONE styling
 ** DONE Score: X points ( answered ) not translated to catalan
 ** DONE Style game-status section
 ** DONE score alignment
 ** TODO review CSS (add variables)
-** TODO buttons actions always aligned to the right?
+** DONE buttons actions always aligned to the right?
 ** DONE replace jugador: owner with something alone.
 ** DONE beril.li
 ** TODO build properly periodic table
