@@ -130,10 +130,15 @@ msgstr "Símbol"
 msgid "Next Question"
 msgstr "Següent pregunta"
 
-#: lib/tauper_web/live/game_live/component.ex:24
-#, elixir-autogen, elixir-format, fuzzy
-msgid "No players yet"
-msgstr "Encara no hi ha cap jugador"
+#: lib/tauper_web/live/game_live/component.ex:26
+#, elixir-autogen, elixir-format
+msgid "Waiting for players to join..."
+msgstr "Esperant que s'afegeixen jugadors..."
+
+#: lib/tauper_web/live/game_live/component.ex:27
+#, elixir-autogen, elixir-format
+msgid "Share the game code with your students so they can join."
+msgstr "Comparteix el codi de joc amb els teus alumnes perquè puguin unir-se."
 
 #: lib/tauper_web/live/game_live/component.ex:45
 #: lib/tauper_web/templates/email/score_email.html.eex:5

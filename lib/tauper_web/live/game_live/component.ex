@@ -21,7 +21,11 @@ defmodule TauperWeb.GameLive.Component do
       <header><h3><%= gettext("Players") %></h3></header>
 
     <%= if Enum.count(@players) == 0 do %>
-    <p><%= gettext("No players yet") %></p>
+    <div class="waiting-message waiting-players">
+      <div class="loading-atom">⚛</div>
+      <p><%= gettext("Waiting for players to join...") %></p>
+      <p class="waiting-help"><%= gettext("Share the game code with your students so they can join.") %></p>
+    </div>
     <% else %>
      <ul>
      <%= for player <- @players do %>

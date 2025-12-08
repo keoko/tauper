@@ -130,9 +130,14 @@ msgstr ""
 msgid "Next Question"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/component.ex:24
+#: lib/tauper_web/live/game_live/component.ex:26
 #, elixir-autogen, elixir-format
-msgid "No players yet"
+msgid "Waiting for players to join..."
+msgstr ""
+
+#: lib/tauper_web/live/game_live/component.ex:27
+#, elixir-autogen, elixir-format
+msgid "Share the game code with your students so they can join."
 msgstr ""
 
 #: lib/tauper_web/live/game_live/component.ex:45
