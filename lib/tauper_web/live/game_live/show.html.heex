@@ -27,7 +27,16 @@
 
     <%= if @game.alone do %>
       <%= if assigns[:answered] do %>
-              <%= gettext("Your answer (%{answer}) is %{correct_or_wrong}.", [answer: Map.get(@answers, @game.current_question), correct_or_wrong: (if @is_correct, do: gettext("correct"), else: gettext("wrong"))]) %>
+        <div class={"answer-feedback #{if @is_correct, do: "answer-correct", else: "answer-incorrect"}"}>
+          <span class="answer-icon"><%= if @is_correct, do: "✓", else: "✗" %></span>
+          <span>
+            <%= if @is_correct do %>
+              <%= gettext("Correct! Your answer: %{answer}", [answer: Map.get(@answers, @game.current_question)]) %>
+            <% else %>
+              <%= gettext("Wrong! Your answer: %{answer}", [answer: Map.get(@answers, @game.current_question)]) %>
+            <% end %>
+          </span>
+        </div>
       <% else %>
         <Component.question_form changeset={@changeset} game={@game} />
       <% end %>
@@ -45,13 +54,21 @@
       <% end %>
       <%= if @game.alone do %>
         <%= if assigns[:answered] do %>
-          <%= if @is_correct do %>
-          <p><%= gettext("Your answer <strong>%{answer}</strong> is correct.", [answer: @answer]) |> raw() %></p>
-          <% else %>
-          <p><%= gettext("Your answer <strong>%{answer}</strong> is wrong. The correct one is <strong>%{correct_answer}</strong>.", [answer: @answer, correct_answer: inspect(@question.answer)]) |> raw() %></p>
-          <% end %>
+          <div class={"answer-feedback #{if @is_correct, do: "answer-correct", else: "answer-incorrect"}"}>
+            <span class="answer-icon"><%= if @is_correct, do: "✓", else: "✗" %></span>
+            <span>
+              <%= if @is_correct do %>
+                <%= gettext("Correct! Your answer: <strong>%{answer}</strong>", [answer: @answer]) |> raw() %>
+              <% else %>
+                <%= gettext("Wrong! Your answer: <strong>%{answer}</strong>. Correct answer: <strong>%{correct_answer}</strong>", [answer: @answer, correct_answer: inspect(@question.answer)]) |> raw() %>
+              <% end %>
+            </span>
+          </div>
         <% else %>
-          <p><%= gettext("The correct answer is <strong>%{correct_answer}</strong>.", [correct_answer: inspect(@question.answer)]) |> raw() %></p>
+          <div class="answer-feedback answer-incorrect">
+            <span class="answer-icon">⏱</span>
+            <span><%= gettext("Time's up! The correct answer is <strong>%{correct_answer}</strong>.", [correct_answer: inspect(@question.answer)]) |> raw() %></span>
+          </div>
         <% end %>
         <%= if assigns[:player_score_and_position] do %>
           <p><%= gettext("Your score is %{score} points.", [score: @player_score_and_position.score]) %></p>

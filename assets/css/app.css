@@ -528,6 +528,36 @@ input {
   margin-top: 2rem;
 }
 
+/* Answer feedback styles */
+.answer-feedback {
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+  border: 2px solid;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.answer-feedback.answer-correct {
+  background-color: #d4edda;
+  border-color: #28a745;
+  color: #155724;
+}
+
+.answer-feedback.answer-incorrect {
+  background-color: #f8d7da;
+  border-color: #dc3545;
+  color: #721c24;
+}
+
+.answer-icon {
+  font-size: 1.5em;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
 /* Mobile-first question display */
 #sentence {
 }
