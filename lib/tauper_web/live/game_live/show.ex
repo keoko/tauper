@@ -3,7 +3,6 @@ defmodule TauperWeb.GameLive.Show do
   alias Tauper.Games
   alias TauperWeb.{Presence, Endpoint}
   alias TauperWeb.GameLive.Component
-  alias Tauper.Email.{Recipient, ScoreEmail}
   alias Ecto.Changeset
 
   @podium_places 5
@@ -83,8 +82,7 @@ defmodule TauperWeb.GameLive.Show do
 
     {:ok,
      socket
-     |> assign(:players_answers, nil)
-     |> assign(:email_recipient, %Recipient{})}
+     |> assign(:players_answers, nil)}
   end
 
   @impl true
@@ -239,42 +237,6 @@ defmodule TauperWeb.GameLive.Show do
     Games.stop_game(code)
 
     {:noreply, redirect(socket, to: Routes.page_path(socket, :index))}
-  end
-
-  def handle_event(
-        "validate_score_email",
-        %{"score-email-form" => recipient_params},
-        %{assigns: %{email_recipient: recipient}} = socket
-      ) do
-    changeset =
-      recipient
-      |> Recipient.changeset(recipient_params)
-      |> Map.put(:action, :validate)
-
-    {:noreply,
-     socket
-     |> assign(:changeset, changeset)}
-  end
-
-  def handle_event("send_score_email", %{"score-email-form" => recipient_params}, socket) do
-    email = recipient_params["email"]
-    code = socket.assigns.code
-    podium = Games.podium(code)
-
-    socket =
-      case ScoreEmail.send_score_email(email, code, podium) do
-        {:ok, _} ->
-          socket |> put_flash(:info, gettext("Email sent"))
-
-        _ ->
-          socket
-          |> put_flash(
-            :error,
-            gettext("Email cannot be sent. There has been an unexpected error.")
-          )
-      end
-
-    {:noreply, socket}
   end
 
   def change_answer(answer, attrs \\ %{}) do

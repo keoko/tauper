@@ -10,9 +10,6 @@ config :tauper, TauperWeb.Endpoint,
   secret_key_base: "mXQdDgkNnr7KDVisU04ekF1GSIOCHkcq2gxr8EZMeWnmkTUmZvfgp+Xpylea+esK",
   server: false
 
-# In test we don't send emails.
-config :tauper, Tauper.Mailer, adapter: Swoosh.Adapters.Test
-
 # Print only warnings and errors during test
 config :logger, level: :warn
 

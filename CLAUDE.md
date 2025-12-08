@@ -21,7 +21,6 @@ mix phx.server        # Start Phoenix server on localhost:4000
 
 Development tools available at:
 - LiveDashboard: http://localhost:4000/dashboard
-- Swoosh mailbox preview: http://localhost:4000/dev/mailbox
 
 ### Testing
 ```bash
@@ -109,12 +108,11 @@ Custom plugs handle user state:
 lib/tauper/
 ├── application.ex              # OTP application entry point
 ├── games.ex                    # Context module - public API for game operations
-├── games/
-│   ├── server.ex               # GenServer managing individual game state
-│   ├── supervisor.ex           # DynamicSupervisor for game processes
-│   └── tables/
-│       └── educemfar_table.ex  # Periodic table data source
-└── email/                      # Email functionality (score reports)
+└── games/
+    ├── server.ex               # GenServer managing individual game state
+    ├── supervisor.ex           # DynamicSupervisor for game processes
+    └── tables/
+        └── educemfar_table.ex  # Periodic table data source
 
 lib/tauper_web/
 ├── router.ex                   # Route definitions
@@ -146,5 +144,4 @@ Questions are localized via `gettext/1` calls in `Tauper.Games.Server.build_sent
 - No database - game state is entirely in-memory via GenServer processes
 - Phoenix LiveView 0.17.5 for real-time UI updates
 - Bcrypt for password hashing (if auth added later)
-- Swoosh + Phoenix.Swoosh for email functionality
 - esbuild for asset compilation

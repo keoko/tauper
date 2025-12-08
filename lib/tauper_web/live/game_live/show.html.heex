@@ -138,24 +138,6 @@
   <% end %>
   <%= if !@game.alone do %>
   <Component.podium podium={@podium} title={gettext("Final Podium")}/>
-  <div>
-    <.form
-      let={f}
-      for={@changeset}
-      id="score-email-form"
-      as="score-email-form"
-      phx-change="validate_score_email"
-      phx-submit="send_score_email">
-
-    <%= label f, :email %>
-    <%= text_input f, :email, phx_debounce: "blur" %>
-    <%= error_tag f, :email %>
-
-    <div>
-      <%= submit gettext("Send Score Email"), phx_disable_with: gettext("Sending email..."), class: "button" %>
-    </div>
-  </.form>
-  </div>
   <% end %>
   <div class="game-over-actions">
     <button phx-click="stop" class="button button-secondary"><%= gettext("Stop Game") %></button>
