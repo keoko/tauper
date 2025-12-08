@@ -887,6 +887,17 @@ input {
   font-size: 3rem;
 }
 
+/* Waiting for next question specific styles */
+.waiting-next-question {
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.waiting-next-question .loading-atom {
+  font-size: 3rem;
+}
+
 .waiting-players p {
   font-size: 1.2rem;
 }

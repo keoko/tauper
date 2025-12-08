@@ -54,9 +54,10 @@
         <span><%= gettext("Time's up! The correct answer is <strong>%{correct_answer}</strong>.", [correct_answer: inspect(@question.answer)]) |> raw() %></span>
       </div>
     <% end %>
-    <div class="waiting-message">
+    <div class="waiting-message waiting-next-question">
       <div class="loading-atom">⚛</div>
       <p><%= gettext("Waiting for next question...") %></p>
+      <p class="waiting-help"><%= gettext("The game host will continue to the next question when ready.") %></p>
     </div>
 <% end %>
 

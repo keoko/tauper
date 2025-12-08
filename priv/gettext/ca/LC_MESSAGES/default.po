@@ -183,10 +183,15 @@ msgstr "Començar a jugar"
 msgid "Return Home"
 msgstr "Tornar a l'inici"
 
-#: lib/tauper_web/live/game_live/play.html.heex:57
+#: lib/tauper_web/live/game_live/play.html.heex:59
 #, elixir-autogen, elixir-format
 msgid "Waiting for next question..."
 msgstr "Esperant la següent pregunta..."
+
+#: lib/tauper_web/live/game_live/play.html.heex:60
+#, elixir-autogen, elixir-format
+msgid "The game host will continue to the next question when ready."
+msgstr "L'organitzador continuarà amb la següent pregunta quan estigui preparat."
 
 #: lib/tauper_web/live/game_live/play.html.heex:3
 #, elixir-autogen, elixir-format
