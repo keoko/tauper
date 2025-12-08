@@ -51,15 +51,16 @@
 <% end %>
 
 <%= if @status == :paused do %>
+  <%= if @game.alone do %>
+    <%= if assigns[:player_score] do %>
+      <section class="game-status">
+        <div></div>
+        <div><%= gettext("Score: %{score} points (%{correct} correct / %{answered} answered)", [score: @player_score.points, correct: @player_score.correct, answered: @player_score.num_answered]) %></div>
+      </section>
+    <% end %>
+  <% end %>
   <section class="next-question">
     <div class="next-question-content">
-      <%= if @game.alone do %>
-        <%= if assigns[:player_score] do %>
-          <section class="game-status">
-            <div><%= gettext("Score: %{score} points (%{correct} correct / %{answered} answered)", [score: @player_score.points, correct: @player_score.correct, answered: @player_score.num_answered]) %></div>
-          </section>
-        <% end %>
-      <% end %>
       <Component.sentence game={@game} question={@question} />
       <%= if !@game.alone do %>
         <%= gettext("The answer is <strong>%{answer}</strong>", [answer: inspect(@question.answer)]) |> raw() %>
@@ -95,6 +96,14 @@
 <% end %>
 
 <%= if @status == :game_over do %>
+  <%= if @game.alone do %>
+    <%= if assigns[:player_score] do %>
+    <section class="game-status">
+      <div></div>
+      <div><%= gettext("Score: %{score} points (%{correct} correct / %{answered} answered)", [score: @player_score.points, correct: @player_score.correct, answered: @player_score.num_answered]) %></div>
+    </section>
+    <% end %>
+  <% end %>
   <%= if !@game.alone do %>
   <Component.podium podium={@podium} title={gettext("Final Podium")}/>
   <div>
@@ -115,13 +124,6 @@
     </div>
   </.form>
   </div>
-  <% end %>
-  <%= if @game.alone do %>
-    <%= if assigns[:player_score] do %>
-    <section class="game-status">
-      <div><%= gettext("Score: %{score} points (%{correct} correct / %{answered} answered)", [score: @player_score.points, correct: @player_score.correct, answered: @player_score.num_answered]) %></div>
-    </section>
-    <% end %>
   <% end %>
   <div class="game-over-actions">
     <button phx-click="stop" class="button button-secondary"><%= gettext("Stop Game") %></button>
