@@ -755,3 +755,95 @@ input {
     font-size: 3.6rem;
   }
 }
+
+/* Answer history styles */
+.answer-history {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #f4f5f6;
+  border-radius: 8px;
+}
+
+.answer-history h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #606c76;
+}
+
+.answer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.answer-record {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-radius: 6px;
+  background: white;
+  border: 1px solid #d1d1d1;
+}
+
+.answer-record.answer-correct {
+  border-left: 4px solid #28a745;
+  background-color: #f1f9f3;
+}
+
+.answer-record.answer-incorrect {
+  border-left: 4px solid #dc3545;
+  background-color: #fef5f6;
+}
+
+.answer-record.answer-unanswered {
+  border-left: 4px solid #9b9b9b;
+  background-color: #f8f8f8;
+  opacity: 0.7;
+}
+
+.answer-record .question-number {
+  font-weight: bold;
+  color: #606c76;
+  min-width: 2rem;
+}
+
+.answer-record .answer-icon {
+  font-size: 1.2em;
+  font-weight: bold;
+  flex-shrink: 0;
+  width: 1.5rem;
+  text-align: center;
+}
+
+.answer-record.answer-correct .answer-icon {
+  color: #28a745;
+}
+
+.answer-record.answer-incorrect .answer-icon {
+  color: #dc3545;
+}
+
+.answer-record.answer-unanswered .answer-icon {
+  color: #9b9b9b;
+}
+
+.answer-record .question-text {
+  flex: 1;
+  font-size: 0.95rem;
+}
+
+.answer-record .correct-answer {
+  font-size: 0.9rem;
+  color: #606c76;
+  font-style: italic;
+}
+
+.answer-record .points {
+  font-weight: bold;
+  color: #28a745;
+  font-size: 0.9rem;
+  min-width: 3rem;
+  text-align: right;
+}

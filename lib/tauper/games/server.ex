@@ -27,6 +27,7 @@ defmodule Tauper.Games.Server do
     answer: nil,
     status: :not_started,
     score: %{},
+    player_answers: %{},
     timer: nil,
     remaining_time: @default_question_max_time,
     question_max_time: @default_question_max_time,
@@ -70,6 +71,10 @@ defmodule Tauper.Games.Server do
 
   def get_player_score(process_name, player_name) do
     call_server(process_name, {:get_player_score, player_name})
+  end
+
+  def get_player_answers(process_name, player_name) do
+    call_server(process_name, {:get_player_answers, player_name})
   end
 
   ## Defining GenServer callbacks
@@ -131,7 +136,7 @@ defmodule Tauper.Games.Server do
       {:reply, {:error, :already_answered}, state}
     else
       is_correct = is_correct(question, answer)
-      state = state |> update_score(player, is_correct)
+      state = state |> update_score(player, is_correct) |> store_player_answer(player, answer)
 
       Endpoint.broadcast(
         Presence.topic(state.code),
@@ -176,6 +181,11 @@ defmodule Tauper.Games.Server do
   @impl true
   def handle_call({:get_player_score, player_name}, _from, state) do
     {:reply, calculate_player_score(state, player_name), state}
+  end
+
+  @impl true
+  def handle_call({:get_player_answers, player_name}, _from, state) do
+    {:reply, get_player_answer_history(state, player_name), state}
   end
 
   @impl true
@@ -334,8 +344,15 @@ defmodule Tauper.Games.Server do
       list_nils = Stream.repeatedly(fn -> nil end) |> Enum.take(length(state.questions))
       init_score = 0..length(list_nils) |> Stream.zip(list_nils) |> Enum.into(%{})
 
-      update_in(state, [:score], &Map.put(&1, player, init_score))
+      state
+      |> update_in([:score], &Map.put(&1, player, init_score))
+      |> update_in([:player_answers], &Map.put(&1, player, init_score))
     end
+  end
+
+  defp store_player_answer(state, player, answer) do
+    state
+    |> put_in([:player_answers, player, state.current_question], answer)
   end
 
   defp calculate_podium(state, num_players) do
@@ -370,6 +387,30 @@ defmodule Tauper.Games.Server do
           }
       end
     end)
+  end
+
+  defp get_player_answer_history(state, player_name) do
+    player_score = get_in(state, [:score, player_name])
+    player_answers = get_in(state, [:player_answers, player_name])
+
+    if player_score == nil do
+      []
+    else
+      state.questions
+      |> Enum.with_index()
+      |> Enum.map(fn {question, index} ->
+        score = Map.get(player_score, index)
+        user_answer = if player_answers, do: Map.get(player_answers, index), else: nil
+
+        %{
+          question: question,
+          answered: !is_nil(score),
+          correct: !is_nil(score) && score > 0,
+          points: score || 0,
+          user_answer: user_answer
+        }
+      end)
+    end
   end
 
   defp calculate_score(m) do

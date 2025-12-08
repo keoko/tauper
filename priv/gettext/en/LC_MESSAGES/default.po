@@ -173,7 +173,7 @@ msgstr ""
 msgid "Start Game"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:129
+#: lib/tauper_web/live/game_live/show.html.heex:158
 #, elixir-autogen, elixir-format
 msgid "Stop Game"
 msgstr ""
@@ -212,22 +212,22 @@ msgid_plural "%{count} players pending to answer"
 msgstr[0] ""
 msgstr[1] ""
 
-#: lib/tauper/games/server.ex:274
+#: lib/tauper/games/server.ex:283
 #, elixir-autogen, elixir-format
 msgid "What are the valences of %{element_name}?"
 msgstr ""
 
-#: lib/tauper/games/server.ex:269
+#: lib/tauper/games/server.ex:278
 #, elixir-autogen, elixir-format
 msgid "What is the name of %{element_symbol}?"
 msgstr ""
 
-#: lib/tauper/games/server.ex:264
+#: lib/tauper/games/server.ex:273
 #, elixir-autogen, elixir-format
 msgid "What is the symbol of %{element_name}?"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:108
+#: lib/tauper_web/live/game_live/show.html.heex:137
 #, elixir-autogen, elixir-format
 msgid "Final Podium"
 msgstr ""
@@ -242,22 +242,22 @@ msgstr ""
 msgid "The answer is <strong>%{answer}</strong>"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.ex:269
+#: lib/tauper_web/live/game_live/show.ex:273
 #, elixir-autogen, elixir-format
 msgid "Email cannot be sent. There has been an unexpected error."
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.ex:263
+#: lib/tauper_web/live/game_live/show.ex:267
 #, elixir-autogen, elixir-format
 msgid "Email sent"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:123
+#: lib/tauper_web/live/game_live/show.html.heex:152
 #, elixir-autogen, elixir-format
 msgid "Send Score Email"
 msgstr ""
 
-#: lib/tauper_web/live/game_live/show.html.heex:123
+#: lib/tauper_web/live/game_live/show.html.heex:152
 #, elixir-autogen, elixir-format, fuzzy
 msgid "Sending email..."
 msgstr ""
@@ -422,4 +422,10 @@ msgstr ""
 #: lib/tauper_web/live/game_live/show.html.heex:103
 #, elixir-autogen, elixir-format
 msgid "score: %{score}"
+msgstr ""
+
+#: lib/tauper_web/live/game_live/play.html.heex:69
+#: lib/tauper_web/live/game_live/show.html.heex:109
+#, elixir-autogen, elixir-format
+msgid "Answer Summary"
 msgstr ""

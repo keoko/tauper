@@ -63,4 +63,36 @@
       <% end %>
     </section>
     <p><%= gettext("You finished in position %{position}.", [position: @player_score_and_position.position]) %></p>
+
+    <%= if @answer_history != [] do %>
+      <div class="answer-history">
+        <h3><%= gettext("Answer Summary") %></h3>
+        <div class="answer-list">
+          <%= for {answer_record, idx} <- Enum.with_index(@answer_history, 1) do %>
+            <div class={"answer-record #{if answer_record.answered, do: (if answer_record.correct, do: "answer-correct", else: "answer-incorrect"), else: "answer-unanswered"}"}>
+              <span class="question-number"><%= idx %>.</span>
+              <span class="answer-icon">
+                <%= if answer_record.answered do %>
+                  <%= if answer_record.correct, do: "✓", else: "✗" %>
+                <% else %>
+                  ⊘
+                <% end %>
+              </span>
+              <span class="question-text"><%= answer_record.question.sentence %></span>
+              <span class="correct-answer">
+                <%= if answer_record.answered && !answer_record.correct do %>
+                  <%= gettext("Your answer: %{user_answer} | Correct: %{correct_answer}", user_answer: inspect(answer_record.user_answer), correct_answer: inspect(answer_record.question.answer)) %>
+                <% end %>
+                <%= if !answer_record.answered do %>
+                  <%= gettext("Correct: %{correct_answer}", correct_answer: inspect(answer_record.question.answer)) %>
+                <% end %>
+              </span>
+              <%= if answer_record.answered && answer_record.correct do %>
+                <span class="points">+<%= answer_record.points %></span>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
 <% end %>

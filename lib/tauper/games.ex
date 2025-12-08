@@ -58,6 +58,10 @@ defmodule Tauper.Games do
     Server.get_player_score(game_code, player_name)
   end
 
+  def get_player_answers(game_code, player_name) do
+    Server.get_player_answers(game_code, player_name)
+  end
+
   def list_game_codes() do
     Registry.select(@registry, [{{:"$1", :_, :_}, [], [:"$1"]}])
   end

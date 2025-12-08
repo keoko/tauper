@@ -59,7 +59,8 @@ defmodule TauperWeb.GameLive.Show do
          |> assign(:remaining_time, game.remaining_time)
          |> assign(:player_score, Games.get_player_score(code, player_name))
          |> assign(:player_score_and_position, nil)
-         |> assign(:player_name, player_name)}
+         |> assign(:player_name, player_name)
+         |> assign(:answer_history, [])}
 
       {:error, error} ->
         # add flash message
@@ -143,6 +144,8 @@ defmodule TauperWeb.GameLive.Show do
         do: Games.podium(game_code, @podium_places),
         else: []
 
+    answer_history = if new_status == :game_over, do: Games.get_player_answers(game_code, player_name), else: []
+
     {:noreply,
      socket
      |> assign(:question, game.question)
@@ -156,7 +159,8 @@ defmodule TauperWeb.GameLive.Show do
      |> assign(:status, new_status)
      |> assign(:podium, podium)
      |> assign(:player_score, player_score)
-     |> assign(:player_score_and_position, player_score_and_position)}
+     |> assign(:player_score_and_position, player_score_and_position)
+     |> assign(:answer_history, answer_history)}
   end
 
   def handle_info(_event, socket) do

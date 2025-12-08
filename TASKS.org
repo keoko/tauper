@@ -1,12 +1,12 @@
 #+title: Tasks
 * Tasks
 ** DONE styling
-** TODO Score: X points ( answered ) not translated to catalan
-** TODO Style game-status section
-** TODO score alignment
+** DONE Score: X points ( answered ) not translated to catalan
+** DONE Style game-status section
+** DONE score alignment
 ** TODO review CSS (add variables)
 ** TODO buttons actions always aligned to the right?
-** TODO replace jugador: owner with something alone.
+** DONE replace jugador: owner with something alone.
 ** DONE beril.li
 ** TODO build properly periodic table
 ** DONE improve UI how to play alone / how to create a game

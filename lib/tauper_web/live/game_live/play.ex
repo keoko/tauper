@@ -51,7 +51,8 @@ defmodule TauperWeb.GameLive.Play do
          |> assign(:status, game.status)
          |> assign(:remaining_time, game.remaining_time)
          |> assign(:player_score_and_position, nil)
-         |> assign(:player_name, player_name)}
+         |> assign(:player_name, player_name)
+         |> assign(:answer_history, [])}
 
       {:error, error} ->
         # add flash message
@@ -119,6 +120,7 @@ defmodule TauperWeb.GameLive.Play do
     player_score_and_position = get_player_score_and_position(player_name, podium)
     answered = if new_status in [:started, :game_over], do: false, else: socket.assigns.answered
     is_correct = if new_status in [:started, :game_over], do: nil, else: socket.assigns.is_correct
+    answer_history = if new_status == :game_over, do: Games.get_player_answers(game_code, player_name), else: []
 
     {:noreply,
      socket
@@ -131,7 +133,8 @@ defmodule TauperWeb.GameLive.Play do
      |> assign(:changeset, changeset)
      |> assign(:answered, answered)
      |> assign(:is_correct, is_correct)
-     |> assign(:player_score_and_position, player_score_and_position)}
+     |> assign(:player_score_and_position, player_score_and_position)
+     |> assign(:answer_history, answer_history)}
   end
 
   def handle_info(%{event: "question_tick", payload: payload}, socket) do
