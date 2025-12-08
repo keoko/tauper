@@ -133,8 +133,7 @@ defmodule TauperWeb.GameLive.Show do
     is_correct = if new_status in [:started, :game_over], do: nil, else: socket.assigns.is_correct
     podium = if new_status in [:paused, :game_over], do: Games.podium(game_code), else: []
 
-    player_score =
-      if new_status in [:game_over], do: Games.get_player_score(game_code, player_name), else: nil
+    player_score = Games.get_player_score(game_code, player_name)
 
     player_score_and_position =
       TauperWeb.GameLive.Play.get_player_score_and_position(player_name, podium)

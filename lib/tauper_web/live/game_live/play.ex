@@ -115,7 +115,7 @@ defmodule TauperWeb.GameLive.Play do
     game = Games.game(game_code)
     answer = if new_status in [:started, :game_over], do: %{}, else: socket.assigns.answer
     changeset = change_answer(%{})
-    podium = if new_status in [:paused, :game_over], do: Games.podium(game_code), else: []
+    podium = Games.podium(game_code)
     player_score_and_position = get_player_score_and_position(player_name, podium)
     answered = if new_status in [:started, :game_over], do: false, else: socket.assigns.answered
     is_correct = if new_status in [:started, :game_over], do: nil, else: socket.assigns.is_correct

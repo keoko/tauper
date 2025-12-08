@@ -6,6 +6,9 @@
 
 <%= if @status == :started do %>
     <div><%= gettext("time") %>: <%=  @remaining_time %></div>
+    <%= if assigns[:player_score_and_position] do %>
+      <div><%= gettext("Position: %{position} | Score: %{score} points", [position: @player_score_and_position.position, score: @player_score_and_position.score]) %></div>
+    <% end %>
     <Component.sentence game={@game} question={@question} />
     <%= if assigns[:answered] do %>
       <div class={"answer-feedback #{if @is_correct, do: "answer-correct", else: "answer-incorrect"}"}>

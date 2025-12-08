@@ -16,6 +16,11 @@
 <%= if @status == :started do %>
     <section class="game-status">
     <div><%= gettext("time") %>: <%=  @remaining_time %></div>
+    <%= if @game.alone do %>
+      <%= if assigns[:player_score] do %>
+        <div><%= gettext("Score: %{score} points (%{correct} correct / %{answered} answered)", [score: @player_score.points, correct: @player_score.correct, answered: @player_score.num_answered]) %></div>
+      <% end %>
+    <% end %>
     <%= if !@game.alone do %>
     <%=  if assigns[:players_answers] do %>
       <div><%= ngettext("only a player pending to answer", "%{count} players pending to answer", (@players_answers.total_players - @players_answers.num_answers)) %></div>
