@@ -173,10 +173,10 @@ msgstr "Saltar pregunta"
 msgid "Start Game"
 msgstr "Començar a jugar"
 
-#: lib/tauper_web/live/game_live/show.html.heex:158
+#: lib/tauper_web/live/game_live/show.html.heex:143
 #, elixir-autogen, elixir-format
-msgid "Stop Game"
-msgstr "Parar el joc"
+msgid "Return Home"
+msgstr "Tornar a l'inici"
 
 #: lib/tauper_web/live/game_live/play.html.heex:55
 #, elixir-autogen, elixir-format
