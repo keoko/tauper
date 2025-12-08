@@ -694,15 +694,8 @@ input {
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
-  justify-content: center;
+  justify-content: right;
   flex-wrap: wrap;
-}
-
-.question-actions .button,
-.question-actions input[type="submit"] {
-  flex: 1;
-  min-width: 150px;
-  max-width: 300px;
 }
 
 .features {
