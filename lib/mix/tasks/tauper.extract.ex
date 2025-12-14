@@ -26,6 +26,7 @@ defmodule Mix.Tasks.Tauper.Extract do
   ## Available data sources
 
     * game_codes - List all active game codes
+    * all_games - Full state of all active games
     * periodic_table - Full periodic table data
     * custom - Run custom Elixir code (use --eval flag)
 
@@ -41,6 +42,9 @@ defmodule Mix.Tasks.Tauper.Extract do
 
       # Extract game codes from running app
       mix tauper.extract game_codes --node tauper
+
+      # Extract all game states from remote
+      mix tauper.extract all_games --remote
 
       # Extract periodic table (static data, no running app needed)
       mix tauper.extract periodic_table -o elements.json
@@ -95,6 +99,7 @@ defmodule Mix.Tasks.Tauper.Extract do
   end
 
   defp build_expression("game_codes", _), do: "Tauper.Games.list_game_codes()"
+  defp build_expression("all_games", _), do: "Tauper.Games.list_game_codes() |> Enum.map(&Tauper.Games.game/1)"
   defp build_expression("periodic_table", _), do: "Tauper.Games.Tables.EducemFar.table()"
   defp build_expression("custom", eval) when is_binary(eval), do: eval
   defp build_expression("custom", nil) do
@@ -106,6 +111,7 @@ defmodule Mix.Tasks.Tauper.Extract do
 
   # Check if data source requires live application (GenServer, Registry, ETS, etc.)
   defp requires_live_data?("game_codes"), do: true
+  defp requires_live_data?("all_games"), do: true
   defp requires_live_data?("periodic_table"), do: false
   defp requires_live_data?("custom"), do: false  # Assume custom can be static, user can use --node if needed
 
