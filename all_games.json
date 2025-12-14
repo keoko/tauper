@@ -1,0 +1,142 @@
+[
+  {
+    "alone": true,
+    "answer": null,
+    "answers": {
+      "num_answers": 1,
+      "total_players": 1
+    },
+    "code": "227",
+    "current_question": 3,
+    "num_questions": 20,
+    "player_answers": {
+      "owner": {
+        "0": "foo",
+        "1": "bar",
+        "2": "",
+        "3": "quux",
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": null,
+        "8": null,
+        "9": null,
+        "10": null,
+        "11": null,
+        "12": null,
+        "13": null,
+        "14": null,
+        "15": null,
+        "16": null,
+        "17": null,
+        "18": null,
+        "19": null
+      }
+    },
+    "question": {
+      "answer": "Ne",
+      "atomic_number": 10,
+      "sentence": "Quin és el símbol de l'element Neó?",
+      "type": "symbol"
+    },
+    "question_max_time": 20,
+    "remaining_time": 16,
+    "score": {
+      "owner": {
+        "0": 0,
+        "1": 0,
+        "2": 0,
+        "3": 0,
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": null,
+        "8": null,
+        "9": null,
+        "10": null,
+        "11": null,
+        "12": null,
+        "13": null,
+        "14": null,
+        "15": null,
+        "16": null,
+        "17": null,
+        "18": null,
+        "19": null
+      }
+    },
+    "status": "paused",
+    "timer": null
+  },
+  {
+    "alone": true,
+    "answer": null,
+    "answers": {
+      "num_answers": 0,
+      "total_players": 1
+    },
+    "code": "885",
+    "current_question": 2,
+    "num_questions": 20,
+    "player_answers": {
+      "owner": {
+        "0": "",
+        "1": "",
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": null,
+        "8": null,
+        "9": null,
+        "10": null,
+        "11": null,
+        "12": null,
+        "13": null,
+        "14": null,
+        "15": null,
+        "16": null,
+        "17": null,
+        "18": null,
+        "19": null
+      }
+    },
+    "question": {
+      "answer": [
+        1
+      ],
+      "atomic_number": 47,
+      "sentence": "Quines són les valències de l'element Argent?",
+      "type": "valences"
+    },
+    "question_max_time": 20,
+    "remaining_time": 0,
+    "score": {
+      "owner": {
+        "0": 0,
+        "1": 0,
+        "2": null,
+        "3": null,
+        "4": null,
+        "5": null,
+        "6": null,
+        "7": null,
+        "8": null,
+        "9": null,
+        "10": null,
+        "11": null,
+        "12": null,
+        "13": null,
+        "14": null,
+        "15": null,
+        "16": null,
+        "17": null,
+        "18": null,
+        "19": null
+      }
+    },
+    "status": "paused",
+    "timer": null
+  }
+]
