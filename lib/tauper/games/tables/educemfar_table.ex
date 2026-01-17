@@ -46,7 +46,7 @@ defmodule Tauper.Games.Tables.EducemFar do
     55 => %{symbol: "Cs", name: "Cesi", valences: [1], group: 1},
     56 => %{symbol: "Ba", name: "Bari", valences: [2], group: 2},
     79 => %{symbol: "Au", name: "Or", valences: [1, 3], group: 11},
-    80 => %{symbol: "Hg", name: "Mercuri", valences: [1, 2, 4], group: 12},
+    80 => %{symbol: "Hg", name: "Mercuri", valences: [1, 2], group: 12},
     81 => %{symbol: "Tl", name: "Tal·li", valences: [1, 3], group: 13},
     82 => %{symbol: "Pb", name: "Plom", valences: [2, 4], group: 14},
     83 => %{symbol: "Bi", name: "Bismut", valences: [3, 5], group: 15},
